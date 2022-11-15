@@ -1,0 +1,442 @@
+{{block "entirepage" . -}}
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<!-- Google Tag Manager -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script >(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W8MVQXG');</script>
+  <!-- End Google Tag Manager -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#00add8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+<link rel="stylesheet" href="/css/styles.css">
+{{if strings.HasPrefix .URL "/blog/"}}
+<link rel="alternate" title="The Go Blog" type="application/atom+xml" href="/blog/feed.atom">
+{{end}}
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W8MVQXG');</script>
+  <!-- End Google Tag Manager -->
+<script src="/js/site.js"></script>
+<meta name="og:url" content="https://go.dev{{.URL}}">
+<meta name="og:title" content="{{.title}}{{if ne .URL "/"}} - The Go Programming Language{{end}}">
+<title>{{.title}}{{if ne .URL "/"}} - The Go Programming Language{{end}}</title>
+{{if .summary}}
+<meta name="og:description" content="{{.summary}}">
+<meta name="description" content="{{.summary}}">
+{{end}}
+<meta name="og:image" content="https://go.dev/doc/gopher/gopher5logo.jpg">
+<meta name="twitter:image" content="https://go.dev/doc/gopher/{{if strings.HasPrefix .URL "/blog/"}}runningsquare.jpg{{else}}gopherbelly300.jpg{{end}}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@golang">
+{{if .link -}}
+<meta http-equiv="refresh" content="0; url={{.link}}">
+{{end -}}
+</head>
+<body class="Site">
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8MVQXG"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+{{$menus := data "/menus.yaml"}}
+<header class="Site-header js-siteHeader">
+  <div class="Header Header--dark">
+    <nav class="Header-nav">
+      <a href="/">
+        <img
+          class="js-headerLogo Header-logo"
+          src="/images/go-logo-white.svg"
+          alt="Go">
+      </a>
+      <div class="Header-rightContent">
+        <ul class="Header-menu">
+          {{- $currentPage := .}}
+          {{- range $menus.main}}
+          <li class="Header-menuItem {{if strings.HasPrefix $currentPage.URL .url}} Header-menuItem--active{{end}}">
+            <a href="{{if .children}}#{{else}}{{.url}}{{end}}" {{if .children}}aria-haspopup="true" class="js-desktop-menu-hover"{{end}}>
+              {{.name}} {{if .children}}<i class="material-icons">arrow_drop_down</i>{{end}}
+            </a>
+            {{- if .children}}
+              <ul class="Header-submenu js-desktop-submenu-hover" aria-label="submenu">
+                {{- range .children}}
+                  <li class="Header-submenuItem">
+                    <div>
+                      {{- if .url}}
+                        <a href="{{.url}}">
+                          {{.name}}
+                          {{ if .external}} <i class="material-icons">open_in_new</i>{{end}}
+                        </a>
+                      {{- else}}
+                        {{.name}}
+                      {{- end}}
+                    </div>
+                    <p>{{.explanation}}</p>
+                    {{- if .socialIconsList}}
+                      <div class="Header-socialIcons">
+                        {{ range .socialIconsList }}
+                          <a class="Header-socialIcon" href="{{.url}}"><img src="/images/logos/social/{{.img}}" /></a>
+                        {{- end}}
+                      </div>
+                    {{- end}}
+                  </li>
+                {{- end}}
+              </ul>
+            {{- end}}
+          </li>
+          {{- end}}
+        </ul>
+        <button class="Header-navOpen js-headerMenuButton Header-navOpen--white" aria-label="Open navigation.">
+        </button>
+      </div>
+    </nav>
+    {{ if (eq .series "Use Cases") }}
+    <div class="UseCaseSubNav js-useCaseSubnav">
+      <button class="UseCaseSubNav-menuHeader js-useCaseSubnavHeader">
+        Jump to
+        <img
+          class="UseCaseSubNav-menuIcon js-useCaseSubnavMenuIcon"
+          alt="Open menu icon" src="/images/icons/chevron-down.svg">
+      </button>
+      <div class="UseCaseSubNav-menu js-useCaseSubnavMenu">
+        <div class="UseCaseSubNav-anchorLinks js-useCaseSubnavLinks">
+        </div>
+      </div>
+    </div>
+    {{end}}
+  </div>
+</header>
+<aside class="NavigationDrawer js-header">
+  <nav class="NavigationDrawer-nav">
+    <div class="NavigationDrawer-header">
+      <a href="/">
+        <img class="NavigationDrawer-logo" src="/images/go-logo-blue.svg" alt="Go.">
+      </a>
+    </div>
+    <ul class="NavigationDrawer-list">
+      {{- range $menus.main}}
+        {{ if .children }}
+          <li class="NavigationDrawer-listItem js-mobile-subnav-trigger {{if strings.HasPrefix $currentPage.URL .url}} NavigationDrawer-listItem--active{{end}} NavigationDrawer-hasSubnav">
+            <a href="#"><span>{{.name}}</span> <i class="material-icons">navigate_next</i></a>
+
+            <div class="NavigationDrawer NavigationDrawer-submenuItem">
+              <nav class="NavigationDrawer-nav">
+                <div class="NavigationDrawer-header">
+                  <a href="#"><i class="material-icons">navigate_before</i>{{.name}}</a>
+                </div>
+                <ul class="NavigationDrawer-list">
+                  {{- range .children}}
+                    <li class="NavigationDrawer-listItem">
+                      {{- if .url}}
+                        <a href="{{.url}}">
+                          {{.name}}
+                          {{ if .external}} <i class="material-icons">open_in_new</i>{{end}}
+                        </a>
+                      {{ else }}
+                        <div>{{.name}}</div>
+                      {{- end}}
+                      {{- if .socialIconsList}}
+                        <div class="Header-socialIcons">
+                          {{ range .socialIconsList }}
+                            <a class="Header-socialIcon" href="{{.url}}"><img src="/images/logos/social/{{.img}}" /></a>
+                          {{- end}}
+                        </div>
+                      {{- end}}
+                    </li>
+                  {{- end}}
+                </ul>
+              </div>
+            </div>
+          </li>
+
+        {{ else }}
+          <li class="NavigationDrawer-listItem {{if strings.HasPrefix $currentPage.URL .url}} NavigationDrawer-listItem--active{{end}}">
+            <a href="{{.url}}">{{.name}}</a>
+          </li>
+        {{ end }}
+      {{- end}}
+    </ul>
+  </nav>
+</aside>
+<div class="NavigationDrawer-scrim js-scrim" role="presentation"></div>
+<main class="SiteContent SiteContent--default">
+  {{block "layout" .}}{{.Content}}{{end}}
+</main>
+<footer class="Site-footer">
+  <div class="Footer">
+    <div class="Container">
+      <div class="Footer-links">
+        {{- range $menus.footer}}
+          <div class="Footer-linkColumn">
+            <a href="{{.url}}" class="Footer-link Footer-link--primary">
+              {{.name}}
+            </a>
+            {{- range .children}}
+              <a href="{{.url}}" class="Footer-link">
+                {{.name}}
+              </a>
+            {{- end}}
+          </div>
+        {{- end}}
+      </div>
+    </div>
+  </div>
+  <div class="Footer">
+    <div class="Container Container--fullBleed">
+      <div class="Footer-bottom">
+        <img class="Footer-gopher" src="/images/gophers/pilot-bust.svg" alt="The Go Gopher">
+        <ul class="Footer-listRow">
+          <li class="Footer-listItem">
+            <a href="/copyright">Copyright</a>
+          </li>
+          <li class="Footer-listItem">
+            <a href="/tos">Terms of Service</a>
+          </li>
+          <li class="Footer-listItem">
+            <a href="http://www.google.com/intl/en/policies/privacy/"
+              target="_blank"
+              rel="noopener">
+              Privacy Policy
+            </a>
+            </li>
+          <li class="Footer-listItem">
+            <a
+              href="/s/website-issue"
+              target="_blank"
+              rel="noopener"
+              >
+              Report an Issue
+            </a>
+          </li>
+          <li class="Footer-listItem go-Footer-listItem">
+            <button class="go-Button go-Button--text go-Footer-toggleTheme js-toggleTheme" aria-label="Toggle theme">
+              <img
+                data-value="auto"
+                class="go-Icon go-Icon--inverted"
+                height="24"
+                width="24"
+                src="/images/icons/brightness_6_gm_grey_24dp.svg"
+                alt="System theme">
+              <img
+                data-value="dark"
+                class="go-Icon go-Icon--inverted"
+                height="24"
+                width="24"
+                src="/images/icons/brightness_2_gm_grey_24dp.svg"
+                alt="Dark theme">
+              <img
+                data-value="light"
+                class="go-Icon go-Icon--inverted"
+                height="24"
+                width="24"
+                src="/images/icons/light_mode_gm_grey_24dp.svg"
+                alt="Light theme">
+            </button>
+          </li>
+        </ul>
+        <a class="Footer-googleLogo" target="_blank" href="https://google.com" rel="noopener">
+          <img class="Footer-googleLogoImg" src="/images/google-white.png" alt="Google logo">
+        </a>
+      </div>
+    </div>
+  </div>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/carousels.js"></script>
+  <script src="/js/searchBox.js"></script>
+  <script src="/js/misc.js"></script>
+  <script src="/js/hats.js"></script>
+  <script src="/js/playground.js"></script>
+  <script src="/js/godocs.js"></script>
+</footer>
+</body>
+</html>
+{{end}}
+
+{{define "breadcrumbnav p1 p2"}}
+{{- if ne .p1.URL "/"}}
+  {{- breadcrumbnav (page (path.Dir (strings.TrimRight .p1.URL "/"))) .p2}}
+{{- end}}
+{{- if not (eq .p1.title "go.dev")}}
+<li class="BreadcrumbNav-li {{if eq .p1.URL .p2.URL}}active{{end}}">
+  <a class="BreadcrumbNav-link" href="{{.p1.URL}}">
+  {{or .p1.company .p1.title}}
+  </a>
+</li>
+{{- end}}
+{{- end}}
+
+{{define "breadcrumbs"}}
+<div class="BreadcrumbNav">
+    <ol class="BreadcrumbNav-inner">
+      {{breadcrumbnav . .}}
+    </ol>
+</div>
+{{- end}}
+
+{{define "gopher info" -}}
+{{- with (yaml .info)}}
+{{- $src := "/images/gophers/wrench.svg"}}
+{{- $alt := "Go gophers with wrench"}}
+{{- $size := "Large"}}
+{{- $align := "Left"}}
+{{- $gopher := .color}}
+{{- $sizeIn := (or .size "")}}
+{{- if eq (.align) "right" "Right"}}
+   {{- $align = "Right"}}
+{{- end}}
+{{- if eq $sizeIn "XLarge" "xl" "xlarge"}}
+    {{- $size = "XLarge"}}
+{{- end}}
+{{- if eq $gopher "plane"}}
+    {{- $src = "/images/gophers/biplane.svg"}}
+    {{- $alt = "Go gopher in a plane"}}
+{{- end}}
+{{- if eq $gopher "blue"}}
+    {{- $src = "/images/gophers/blue.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "front" "sticker1"}}
+    {{- $src = "/images/gophers/front.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "graduate"}}
+    {{- $src = "/images/gophers/graduate.svg"}}
+    {{- $alt = "Go gopher graduating"}}
+{{- end}}
+{{- if eq $gopher "graduate-colorized"}}
+    {{- $src = "/images/gophers/graduate-colorized.svg"}}
+    {{- $alt = "Go gopher graduating"}}
+{{- end}}
+{{- if eq $gopher "green"}}
+    {{- $src = "/images/gophers/green.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "grey" "gray"}}
+    {{- $src = "/images/gophers/grey.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "happy" "sticker2"}}
+    {{- $src = "/images/gophers/happy.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "headlamp"}}
+    {{- $src = "/images/gophers/headlamp.svg"}}
+    {{- $alt = "Go gopher with headlamp"}}
+{{- end}}
+{{- if eq $gopher "headlamp-colorized"}}
+    {{- $src = "/images/gophers/headlamp-colorized.svg"}}
+    {{- $alt = "Go gopher with headlamp"}}
+{{- end}}
+{{- if eq $gopher "ladder"}}
+    {{- $src = "/images/gophers/ladder.svg"}}
+    {{- $alt = "Go gopher with ladder"}}
+{{- end}}
+{{- if eq $gopher "machine"}}
+    {{- $src = "/images/gophers/machine.svg"}}
+    {{- $alt = "Go gophers with a machine"}}
+{{- end}}
+{{- if eq $gopher "machine-colorized"}}
+    {{- $src = "/images/gophers/machine-colorized.svg"}}
+    {{- $alt = "Go gopher with a machine"}}
+{{- end}}
+{{- if eq $gopher "megaphone"}}
+    {{- $src = "/images/gophers/megaphone.svg"}}
+    {{- $alt = "Go gopher with a megaphone"}}
+{{- end}}
+{{- if eq $gopher "peach"}}
+    {{- $src = "/images/gophers/peach.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "pilot-bust"}}
+    {{- $src = "/images/gophers/pilot-bust.svg"}}
+    {{- $alt = "Go gopher pilot"}}
+{{- end}}
+{{- if eq $gopher "pink"}}
+    {{- $src = "/images/gophers/pink.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "running"}}
+    {{- $src = "/images/gophers/running.svg"}}
+    {{- $alt = "Go gopher running"}}
+{{- end}}
+{{- if eq $gopher "slate"}}
+    {{- $src = "/images/gophers/slate.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "wrench"}}
+    {{- $src = "/images/gophers/wrench.svg"}}
+    {{- $alt = "gopher with a wrench"}}
+{{- end}}
+{{- if eq $gopher "yellow"}}
+    {{- $src = "/images/gophers/yellow.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "violet"}}
+    {{- $src = "/images/gophers/violet.svg"}}
+    {{- $alt = "Go gopher"}}
+{{- end}}
+{{- if eq $gopher "factory"}}
+    {{- $src = "/images/gophers/factory.png"}}
+    {{- $alt = "Go gopher factory"}}
+{{- end}}
+<img
+  loading="lazy"
+  class="{{$size}}Media-image {{$align}}"
+  alt="{{$alt}}"
+  src="{{$src}}">
+{{- end}}
+{{- end}}
+
+{{define "pkg path name?" -}}
+<a href="https://pkg.go.dev/{{.path}}?tab=overview">{{or .name .path}}</a>
+{{- end}}
+
+
+{{define "breadcrumb"}}
+{{$elems := strings.Split (strings.Trim . "/") "/"}}
+{{$prefix := slice $elems 0 (sub (len $elems) 1)}}
+{{range $i, $elem := $prefix -}}
+<a href="/{{strings.Join (slice $prefix 0 (add $i 1)) "/"}}/">{{$elem}}</a>/
+{{- end -}}
+<span class="text-muted">{{strings.Join (slice $elems (len $prefix) (len $elems)) "/"}}</span>
+{{end}}
+
+{{define "doclayout"}}
+{{/* used from various subdirectory default.tmpl */}}
+<article class="Doc Article">
+
+{{if .title}}
+<h1>{{.title}}</h1>
+{{else if eq .layout "error"}}
+<h1>Error</h1>
+{{else if eq .layout "dir"}}
+<h1>Directory {{breadcrumb .URL}}</h1>
+{{else if and (eq .layout "texthtml") (strings.HasSuffix .URL ".go")}}
+<h1>Source file {{breadcrumb .URL}}</h1>
+{{else if eq .layout "texthtml"}}
+<h1>Text file {{breadcrumb .URL}}</h1>
+{{end}}
+
+{{with .subtitle}}
+<h2 class="subtitle">{{.}}</h2>
+{{end}}
+
+{{/* The Table of Contents is automatically inserted in this <div>.
+     Do not delete this <div>. */}}
+{{if not .hidetoc}}
+<div id="nav" class="TOC"></div>
+{{end}}
+
+{{.Content}}
+
+</article>
+
+{{end}}

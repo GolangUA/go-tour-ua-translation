@@ -1,0 +1,2 @@
+service: google
+runtime: go112

@@ -1,0 +1,6 @@
+{{define "layout"}}
+  <article class="Article {{with section .}}Article--{{strings.Trim . "/"}}{{end}}">
+    <h1>{{.title}}</h1>
+    {{.Content}}
+  </article>
+{{end}}

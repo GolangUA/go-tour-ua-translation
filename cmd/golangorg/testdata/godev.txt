@@ -1,0 +1,102 @@
+GET https://go.dev/
+body contains Go is an open source programming language supported by Google
+body contains <h2 class="WhoUses-headerH2">Companies using Go</h2>
+
+GET https://go.dev/about
+redirect == https://pkg.go.dev/about
+
+GET https://go.dev/solutions/
+body contains Using Go at Google
+
+GET https://go.dev/solutions/dropbox
+body contains About Dropbox
+
+GET https://go.dev/solutions/google/
+body ~ it\s+has\s+powered\s+many\s+projects\s+at\s+Google.
+
+GET https://go.dev/solutions/chrome
+redirect == /solutions/google/chrome
+
+GET https://go.dev/solutions/coredata
+redirect == /solutions/google/coredata
+
+GET https://go.dev/solutions/firebase
+redirect == /solutions/google/firebase
+
+GET https://go.dev/solutions/sitereliability
+redirect == /solutions/google/sitereliability
+
+GET https://go.dev/solutions/americanexpress
+body contains <div class="Article-date">19 December 2019</div>
+
+GET https://go.dev/play/
+body contains The Go Playground
+body contains About the Playground
+body contains Hello, 世界
+
+GET https://golang.google.cn/play/
+body contains The Go Playground
+body contains About the Playground
+body contains Hello, 世界
+
+GET https://go.dev/play/p/asdfasdf
+body contains The Go Playground
+body contains About the Playground
+
+GET https://golang.google.cn/play/p/asdfasdf
+code == 500
+body contains Sorry, but shared playground snippets are not visible in China.
+body !contains The Go Playground
+body !contains About the Playground
+
+GET https://golang.google.cn/play/p/asdfasdf.go
+code == 500
+body contains Sorry, but shared playground snippets are not visible in China.
+
+# These $GOROOT/*.md files should not serve.
+GET https://go.dev/CONTRIBUTING
+code == 404
+
+GET https://go.dev/README
+code == 404
+
+# $GOROOT/SECURITY.md should not serve either,
+# but on a case-insensitive file system,
+# https://go.dev/SECURITY is served from _content/security.html,
+# so we can't assert a 404.
+
+GET https://blog.go.dev/
+redirect == https://go.dev/blog/
+
+GET https://blog.go.dev/any
+redirect == https://go.dev/blog/any
+
+GET https://talks.go.dev/
+redirect == https://go.dev/talks/
+
+GET https://talks.go.dev/any
+redirect == https://go.dev/talks/any
+
+GET https://tour.go.dev/
+redirect == https://go.dev/tour/
+
+GET https://tour.go.dev/any
+redirect == https://go.dev/tour/any
+
+GET https://play.go.dev/
+redirect == https://go.dev/play/
+
+GET https://play.go.dev/any
+redirect == https://go.dev/play/any
+
+GET https://go.dev/play/foo
+redirect == /play/
+
+GET https://go.dev/play
+redirect == /play/
+
+GET https://go.dev/play/p
+redirect == /play/
+
+GET https://go.dev/play/p/
+redirect == /play/

@@ -1,0 +1,36 @@
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+{{define "layout"}}
+
+<article class="Dir Article">
+
+<h1>Directory {{breadcrumb .URL}}</h1>
+
+<p>
+<table class="layout">
+<tr>
+	<th align="left">File</th>
+	<td width="25">&nbsp;</td>
+	<th align="right">Bytes</th>
+</tr>
+<tr>
+	<td><a href="../">../</a><td><td>
+</tr>
+
+{{range .dir}}{{if .IsDir}}
+	<tr><td align="left"><a href="{{.Name}}/">{{.Name}}/</a><td><td></tr>
+{{end}}{{end}}
+{{range .dir}}{{if not .IsDir}}
+	<tr><td align="left"><a href="{{.Name}}">{{.Name}}</a><td><td align="right">{{.Size}}</tr>
+{{end}}{{end}}
+
+</table>
+</p>
+
+</article>
+
+{{end}}
