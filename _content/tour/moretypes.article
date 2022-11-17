@@ -1,150 +1,149 @@
-More types: structs, slices, and maps.
-Learn how to define types based on existing ones: this lesson covers structs, arrays, slices, and maps.
+Додаткові типи: структури, зрізи та карти.
+Навчіться визначати типи на основі вже існуючих: в цьому уроці розглядаються структури, масиви, зрізи та карти.
 
-The Go Authors
+Автори Go
 https://golang.org
 
-* Pointers
+* Вказнівники
 
-Go has pointers.
-A pointer holds the memory address of a value.
+В Go є вказівники (також використовуються терміни "поінтери" та "покажчики").
+Вказівник містить адресу пам'яті значення. ?????
 
-The type `*T` is a pointer to a `T` value. Its zero value is `nil`.
+Тип *T є вказівником на значення типу T. Його нульове значення nil.
 
 	var p *int
 
-The `&` operator generates a pointer to its operand.
+Оператор `&` генерує вказівник на свій операнд.
 
 	i := 42
 	p = &i
 
-The `*` operator denotes the pointer's underlying value.
+Оператор `*` відображає значення, на яке посилається вказівник.
 
-	fmt.Println(*p) // read i through the pointer p
-	*p = 21         // set i through the pointer p
+	fmt.Println(*p) // читання i через вказівник p
+	*p = 21         // задати i через вказівник p
 
-This is known as "dereferencing" or "indirecting".
+Це відомо як розіменування.
 
-Unlike C, Go has no pointer arithmetic.
+На відміну від C, Go не має арифметики вказівників.
 
 .play moretypes/pointers.go
 
-* Structs
+* структури
 
-A `struct` is a collection of fields.
+Структура `struct` це набір полів.
 
 .play moretypes/structs.go
 
-* Struct Fields
+* Поля структури
 
-Struct fields are accessed using a dot.
+Доступ до полів структури здійснюється за допомогою крапки.
 
 .play moretypes/struct-fields.go
 
-* Pointers to structs
+* Вказівник на структури
 
-Struct fields can be accessed through a struct pointer.
+Доступ до полів структури можна отримати через поінтер структури.
 
-To access the field `X` of a struct when we have the struct pointer `p` we could
-write `(*p).X`.
-However, that notation is cumbersome, so the language permits us instead to
-write just `p.X`, without the explicit dereference.
+Щоб отримати доступ до поля `X` структури, коли ми маємо вказівник структури `p`, ми можемо 
+написати `(*p).X`.
+Однак ця нотація є громіздкою, тому мова дозволяє нам натомість писати лише `p.X` без явного 
+розіменування.
 
 .play moretypes/struct-pointers.go
 
-* Struct Literals
+* Літерали структури
 
-A struct literal denotes a newly allocated struct value by listing the values of its fields.
+Літерал структури позначає щойно виділене значення структури шляхом переліку значень її полів.
 
-You can list just a subset of fields by using the `Name:` syntax. (And the order of named fields is irrelevant.)
+Ви можете перерахувати лише підмножину полів, використовуючи синтаксис `Name:`. (І порядок іменованих полів не має значення.)
 
-The special prefix `&` returns a pointer to the struct value.
+Спеціальний префікс `&` повертає вказівник на значення структури.
 
 .play moretypes/struct-literals.go
 
 
-* Arrays
+* Масиви
 
-The type `[n]T` is an array of `n` values of type `T`.
+Тип `[n]T` — це масив із `n` значень типу `T`.
 
-The expression
+Вираз
 
 	var a [10]int
 
-declares a variable `a` as an array of ten integers.
+оголошує змінну `a` як масив із десяти цілих чисел.
 
-An array's length is part of its type, so arrays cannot be resized.
-This seems limiting, but don't worry;
-Go provides a convenient way of working with arrays.
+Довжина масиву є частиною його типу, тому розмір масиву не можна змінити.
+Це здається обмеженим, але не хвилюйтеся;
+Go забезпечує зручний спосіб роботи з масивами.
 
 .play moretypes/array.go
 
 
-* Slices
+* Зрізи (слайси)
 
-An array has a fixed size.
-A slice, on the other hand, is a dynamically-sized,
-flexible view into the elements of an array.
-In practice, slices are much more common than arrays.
+Масив має фіксований розмір.
+З іншого боку, зріз — це гнучке представлення елементів 
+масиву динамічного розміру.
+На практиці зрізи зустрічаються набагато частіше, ніж масиви.
 
-The type `[]T` is a slice with elements of type `T`.
+Тип '[]T' є зрізом з елементами типу 'T'.
 
-A slice is formed by specifying two indices, a low and
-high bound, separated by a colon:
+Зріз формується шляхом зазначення двох індексів, нижньої 
+та верхньої меж, розділених двокрапкою:
 
-	a[low : high]
+	a[нижня : верхня]
 
-This selects a half-open range which includes the first
-element, but excludes the last one.
+Це вибирає напіввідкритий діапазон, який включає перший 
+елемент, але виключає останній.
 
-The following expression creates a slice which includes
-elements 1 through 3 of `a`:
+Наступний вираз створює фрагмент, який включає елементи з 1 по 3 масиву 'a':
 
 	a[1:4]
 
 .play moretypes/slices.go
 
 
-* Slices are like references to arrays
+* Зрізи схожі на посилання на масиви
 
-A slice does not store any data,
-it just describes a section of an underlying array.
+Фрагмент не зберігає жодних даних, 
+він просто описує розділ основного масиву.
 
-Changing the elements of a slice modifies the
-corresponding elements of its underlying array.
+Зміна елементів фрагмента змінює відповідні 
+елементи його основного масиву.
 
-Other slices that share the same underlying array will see those changes.
+Інші фрагменти, які мають той самий базовий масив, побачать ці зміни.
 
 .play moretypes/slices-pointers.go
 
 
-* Slice literals
+* Літерали зрізів
 
-A slice literal is like an array literal without the length.
+Літерал слайсу схожий на літерал масиву без довжини.
 
-This is an array literal:
+Це літерал масиву:
 
 	[3]bool{true, true, false}
 
-And this creates the same array as above,
-then builds a slice that references it:
+І це створює той самий масив, що й вище, а 
+потім будує фрагмент, який посилається на нього:
 
 	[]bool{true, true, false}
 
 .play moretypes/slice-literals.go
 
 
-* Slice defaults
+* Зріз за замовчуваням
 
-When slicing, you may omit the high or low bounds to use their defaults instead.
+Під час створення зрізу ви можете опустити верхню або нижню межі, щоб замість них використовувати стандартні значення.
 
-The default is zero for the low bound and the length of the slice for the high bound.
+За замовчуванням для нижньої межі встановлено нуль, а для верхньої – довжина зрізу.
 
-For the array
+Для масиву
 
 	var a [10]int
 
-these slice expressions are equivalent:
+ці вирази зрізу еквівалентні:
 
 	a[0:10]
 	a[:10]
@@ -154,22 +153,22 @@ these slice expressions are equivalent:
 .play moretypes/slice-bounds.go
 
 
-* Slice length and capacity
+* Довжина і ємність зрізу
 
-A slice has both a _length_ and a _capacity_.
+Зріз має як _довжину_, так і _ємність_.
 
-The length of a slice is the number of elements it contains.
+Довжина слайсу - це кількість елементів, які він містить.
 
-The capacity of a slice is the number of elements in the underlying array,
-counting from the first element in the slice.
+Ємність слайсу — це кількість елементів у базовому масиві, 
+починаючи з першого елемента фрагмента.
 
-The length and capacity of a slice `s` can be obtained using the expressions
-`len(s)` and `cap(s)`.
+Довжину та ємність слайсу `s` можна отримати за допомогою виразів 
+`len(s)` і `cap(s)`.
 
-You can extend a slice's length by re-slicing it,
-provided it has sufficient capacity.
-Try changing one of the slice operations in the example program to extend it
-beyond its capacity and see what happens.
+Ви можете збільшити довжину слайсу, зробивши слайс повторно, 
+за умови, що він має достатню ємність. 
+Спробуйте змінити одну з операцій слайсу в прикладі програми, щоб розширити його 
+за межі його можливостей, і подивіться, що станеться.
 
 .play moretypes/slice-len-cap.go
 
