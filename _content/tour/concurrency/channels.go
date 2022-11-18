@@ -1,4 +1,3 @@
-//go:build OMIT
 // +build OMIT
 
 package main
@@ -10,7 +9,7 @@ func sum(s []int, c chan int) {
 	for _, v := range s {
 		sum += v
 	}
-	c <- sum // надсилаємо суму в канал c
+	c <- sum // надсилаємо данні зі змінної `sum` в канал `c`
 }
 
 func main() {
@@ -19,7 +18,7 @@ func main() {
 	c := make(chan int)
 	go sum(s[:len(s)/2], c)
 	go sum(s[len(s)/2:], c)
-	x, y := <-c, <-c // отримуємо від каналу c
+	x, y := <-c, <-c // отримуємо з каналу `c`
 
 	fmt.Println(x, y, x+y)
 }
