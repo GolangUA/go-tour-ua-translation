@@ -13,7 +13,7 @@ type rot13Reader struct {
 }
 
 func main() {
-	s := strings.NewReader("Lbh penpxrq gur pbqr!")
+	s := strings.NewReader("Створюємо нову структуру Reader зі строки")
 	r := rot13Reader{s}
 	io.Copy(os.Stdout, &r)
 }

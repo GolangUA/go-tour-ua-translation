@@ -12,13 +12,14 @@ type T struct {
 	S string
 }
 
-// This method means type T implements the interface I,
-// but we don't need to explicitly declare that it does so.
+// Додаючи функцію-метод M() до структурного типу даних T означає,
+// що даний тип реалізовує інтерфейс I; зауважте, що ніяким чином
+// не потрібно ЯВНО вказувати, що тип T реалізує конкретний інтерфейс I.
 func (t T) M() {
 	fmt.Println(t.S)
 }
 
 func main() {
-	var i I = T{"hello"}
+	var i I = T{"вітаю"}
 	i.M()
 }

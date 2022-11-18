@@ -5,7 +5,7 @@ package main
 import "fmt"
 
 func main() {
-	var i interface{} = "hello"
+	var i interface{} = "вітаю"
 
 	s := i.(string)
 	fmt.Println(s)
@@ -16,6 +16,6 @@ func main() {
 	f, ok := i.(float64)
 	fmt.Println(f, ok)
 
-	f = i.(float64) // panic
+	f = i.(float64) // паніка!
 	fmt.Println(f)
 }
