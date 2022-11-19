@@ -7,15 +7,15 @@ import "fmt"
 func main() {
 	m := make(map[string]int)
 
-	m["Answer"] = 42
-	fmt.Println("The value:", m["Answer"])
+	m["Відповідь"] = 42
+	fmt.Println("Значення:", m["Відповідь"])
 
-	m["Answer"] = 48
-	fmt.Println("The value:", m["Answer"])
+	m["Відповідь"] = 48
+	fmt.Println("Значення:", m["Відповідь"])
 
-	delete(m, "Answer")
-	fmt.Println("The value:", m["Answer"])
+	delete(m, "Відповідь")
+	fmt.Println("Значення:", m["м"])
 
-	v, ok := m["Answer"]
-	fmt.Println("The value:", v, "Present?", ok)
+	v, ok := m["Відповідь"]
+	fmt.Println("Значення:", v, "Присутнє?", ok)
 }
