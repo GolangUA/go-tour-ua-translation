@@ -29,7 +29,7 @@ https://golang.org
 
 .play moretypes/pointers.go
 
-* структури
+* Структури
 
 Структура `struct` це набір полів.
 
