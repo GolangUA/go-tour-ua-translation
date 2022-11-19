@@ -255,106 +255,106 @@ Go забезпечує зручний спосіб роботи з масива
 
 .play moretypes/range-continued.go
 
-* Exercise: Slices
+* Вправа: зрізи
 
-Implement `Pic`. It should return a slice of length `dy`, each element of which is a slice of `dx` 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+Реалізуйте `Pic`. Вона повинна повертати відрізок довжини `dy`, кожен елемент якого є відрізком `dx` 8-бітних цілих беззнакових чисел. Коли ви запустите програму, вона виведе на екран вашу картинку, інтерпретуючи цілі числа як значення у відтінках сірого (ну, або синього).
 
-The choice of image is up to you. Interesting functions include `(x+y)/2`, `x*y`, and `x^y`.
+TВибір зображення залишається за вами. Цікавими функціями є `(x+y)/2`, `x*y` та `x^y`.
 
-(You need to use a loop to allocate each `[]uint8` inside the `[][]uint8`.)
+(Для виділення кожного []uint8 всередині [][]uint8 потрібно використовувати цикл).
 
-(Use `uint8(intValue)` to convert between types.)
+(Використовуйте `uint8(intValue)` для конвертації між типами.)
 
 .play moretypes/exercise-slices.go
 
-* Maps
+* Мапи (карти або хеш-таблиці)
 
-A map maps keys to values.
+Мапа відображає ключі на значення.
 
-The zero value of a map is `nil`.
-A `nil` map has no keys, nor can keys be added.
+Нульовим значенням мапи є `nil`.
+Така мапа не має ключів і не може додавати ключі.
 
-The `make` function returns a map of the given type,
-initialized and ready for use.
+Функція `make` повертає мапу заданого типу, 
+ініціалізовану та готову до використання.
 
 .play moretypes/maps.go
 
-* Map literals
+* Літерали мап
 
-Map literals are like struct literals, but the keys are required.
+Літерали мапи подібні до структурних літералів, але з обов'язковим використанням ключів.
 
 .play moretypes/map-literals.go
 
-* Map literals continued
+* Літерали мап (продовження)
 
-If the top-level type is just a type name, you can omit it from the elements of the literal.
+Якщо тип верхнього рівня є просто ім'ям типу, то його можна не включати в елементи літералу.
 
 .play moretypes/map-literals-continued.go
 
-* Mutating Maps
+* Зміна мап
 
-Insert or update an element in map `m`:
+Вставка або оновлення елементу в мапі `m`:
 
 	m[key] = elem
 
-Retrieve an element:
+Отримати елемент:
 
 	elem = m[key]
 
-Delete an element:
+Видалити елемент:
 
 	delete(m, key)
 
-Test that a key is present with a two-value assignment:
+Перевірити наявність ключа з допомогою присвоєння двох значень:
 
 	elem, ok = m[key]
 
-If `key` is in `m`, `ok` is `true`. If not, `ok` is `false`.
+Якщо `key` є в `m`, то `ok` рівне `true`. Якщо ні, то `ok` рівне `false`.
 
-If `key` is not in the map, then `elem` is the zero value for the map's element type.
+Якщо `key` відсутній у мапі, то `elem` є нульовим значенням для типу елементу карти.
 
-*Note:* If `elem` or `ok` have not yet been declared you could use a short declaration form:
+*Зауваження:* якщо `elem` або `ok` ще не були оголошені, можна використати коротку форму оголошення:
 
 	elem, ok := m[key]
 
 .play moretypes/mutating-maps.go
 
-* Exercise: Maps
+* Вправа: Мапи
 
-Implement `WordCount`.  It should return a map of the counts of each “word” in the string `s`. The `wc.Test` function runs a test suite against the provided function and prints success or failure.
+Реалізуйте функцію `WordCount`.  Вона повинна повертати карту підрахунку кожного "слова" у рядку `s`. Функція `wc.Test` виконує набір тестів для заданої функції і виводить успіх або невдачу.
 
-You might find [[/pkg/strings/#Fields][strings.Fields]] helpful.
+Вам може бути корисною функція [[/pkg/strings/#Fields][strings.Fields]].
 
 .play moretypes/exercise-maps.go
 
-* Function values
+* Значення функцій
 
-Functions are values too. They can be passed around just like other values.
+Функції - це теж значення. Їх можна передавати так само, як і інші значення.
 
-Function values may be used as function arguments and return values.
+Значення функції можуть використовуватися як аргументи функції та як значення, що повертаються.
 
 .play moretypes/function-values.go
 
-* Function closures
+* Закриття функцій
 
-Go functions may be closures. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+Функції в Go можуть бути закриттями. Закриття - це значення функції, яке посилається на змінні ззовні її тіла. Функція може отримувати доступ до змінних, на які вона посилається, і присвоювати їм значення; в цьому сенсі функція "прив'язана" до змінних.
 
-For example, the `adder` function returns a closure. Each closure is bound to its own `sum` variable.
+Наприклад, функція `adder` повертає замикання. Кожне закриття пов'язане з власною змінною `sum`.
 
 .play moretypes/function-closures.go
 
-* Exercise: Fibonacci closure
+* Вправа: Замикання Фібоначчі
 
-Let's have some fun with functions.
+Нумо пограємось з функціями.
 
-Implement a `fibonacci` function that returns a function (a closure) that
-returns successive [[https://en.wikipedia.org/wiki/Fibonacci_number][fibonacci numbers]]
+Реалізуйте функцію `fibonacci`, яка повертає функцію (замикання), що 
+що повертає послідовні [[https://en.wikipedia.org/wiki/Fibonacci_number][числа Фібоначчі]]
 (0, 1, 1, 2, 3, 5, ...).
 
 .play moretypes/exercise-fibonacci-closure.go
 
-* Congratulations!
+* Вітаємо!
 
-You finished this lesson!
+Ви закінчили цей урок!
 
-You can go back to the list of [[/tour/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].
+Ви можете повернутись назад до списку [[/tour/list][модулів]] щоб вибрати що вчити далі, або продовдити навчання з [[javascript:click('.next-page')][наступним уроком]].
