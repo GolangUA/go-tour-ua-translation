@@ -137,72 +137,73 @@ _goroutine_ - це легковагий потік виконання керов
 
 * sync.Mutex
 
-We've seen how channels are great for communication among goroutines.
+Ми бачили, як канали чудово працюють для спілкування між goroutine.
 
-But what if we don't need communication? What if we just want to make sure only
-one goroutine can access a variable at a time to avoid conflicts?
+А що, якщо нам не потрібне спілкування? Що, якщо ми просто хочемо, щоб тільки
+одна goroutine могла одночасно отримати доступ до змінної, щоб уникнути конфліктів?
 
-This concept is called _mutual_exclusion_, and the conventional name for the data structure that provides it is _mutex_.
+Ця концепція називається _взаємовиключенням_, а звичайна назва для структури даних, яка надає її, - _mutex_ (мʼютекс).
 
-Go's standard library provides mutual exclusion with
-[[/pkg/sync/#Mutex][`sync.Mutex`]] and its two methods:
+Стандартна бібліотека Go надає взаємовиключення за допомогою структури
+[[/pkg/sync/#Mutex][`sync.Mutex`]] та її двох методів:
 
 - `Lock`
 - `Unlock`
 
-We can define a block of code to be executed in mutual exclusion by surrounding it
-with a call to `Lock` and `Unlock` as shown on the `Inc` method.
+Ми можемо визначити блок коду, який буде виконуватися з взаємовиключенням, огорнувши
+його викликом `Lock` та `Unlock`, як показано в методі `Inc`.
 
-We can also use `defer` to ensure the mutex will be unlocked as in the `Value` method.
+Ми також можемо використовувати `defer`, щоб впевнитися, що мʼютекс буде розблокований, як в методі `Value`.
 
 .play concurrency/mutex-counter.go
 
-* Exercise: Web Crawler
+* Вправа: Веб-краулер
 
-In this exercise you'll use Go's concurrency features to parallelize a web crawler.
+В цій вправі ви використаєте можливості конкурентності Go для паралельного веб-краулера.
 
-Modify the `Crawl` function to fetch URLs in parallel without fetching the same URL twice.
+Змініть функцію `Crawl` так, щоб вона паралельно завантажувала URL-адреси без повторного завантаження однієї та тієї ж URL-адреси.
 
-_Hint_: you can keep a cache of the URLs that have been fetched on a map, but maps alone are not
-safe for concurrent use!
+_Підказка_: ви можете зберігати кеш URL-адрес, які вже були завантажені, в словнику, але словники самі по собі
+не є безпечними для конкурентного використання!
 
 .play concurrency/exercise-web-crawler.go
 
-* Where to Go from here...
+* Що робити далі...
 
-#appengine: You can get started by
-#appengine: [[/dl/][installing Go]].
+#appengine: Ви можете почати з
+#appengine: [[/dl/][встановлення Go]].
 
-#appengine: Once you have Go installed, the
-The
-[[/doc/][Go Documentation]] is a great place to
-#appengine: continue.
-start.
-It contains references, tutorials, videos, and more.
+#appengine: Щойно ви встановите Go, ви можете
+[[/doc/][документація Go]] - чудове місце для
+#appengine: продовження.
+починати.
+Вона містить посилання, посібники, відео та багато іншого.
 
-To learn how to organize and work with Go code, read [[/doc/code][How to Write Go Code]].
+Для того, щоб дізнатися, як організувати та працювати з кодом Go, прочитайте [[/doc/code][Як писати код Go]].
 
-If you need help with the standard library, see the [[/pkg/][package reference]]. For help with the language itself, you might be surprised to find the [[/ref/spec][Language Spec]] is quite readable.
+Якщо вам потрібна допомога зі стандартною бібліотекою, перегляньте [[/pkg/][посібник по пакетам]]. Якщо вам потрібна допомога з самою мовою, ви можете бути здивовані, коли зрозумієте, що [[/ref/spec][Специфікація мови]] досить зрозуміла.
 
 To further explore Go's concurrency model, watch
+Для подальшого ознайомлення з моделлю конкурентності Go, дивіться
 [[https://www.youtube.com/watch?v=f6kdp27TYZs][Go Concurrency Patterns]]
 ([[/talks/2012/concurrency.slide][slides]])
-and
+та
 [[https://www.youtube.com/watch?v=QDDwwePbDtw][Advanced Go Concurrency Patterns]]
 ([[/talks/2013/advconc.slide][slides]])
-and read the
+та прочитайте
 [[/doc/codewalk/sharemem/][Share Memory by Communicating]]
-codewalk.
+огляд коду.
 
 To get started writing web applications, watch
+Для початку розробки веб-додатків, дивіться
 [[https://vimeo.com/53221558][A simple programming environment]]
 ([[/talks/2012/simple.slide][slides]])
-and read the
-[[/doc/articles/wiki/][Writing Web Applications]] tutorial.
+та прочитайте
+[[/doc/articles/wiki/][Writing Web Applications]] посібник.
 
-The [[/doc/codewalk/functions/][First Class Functions in Go]] codewalk gives an interesting perspective on Go's function types.
+[[/doc/codewalk/functions/][First Class Functions in Go]] - це цікавий огляд типів функцій Go.
 
 The [[/blog/][Go Blog]] has a large archive of informative Go articles.
+[[/blog/][Go Blog]] містить великий архів інформативних статей про Go.
 
-Visit [[/][the Go home page]] for more.
-
+Відвідайте [[/][домашню сторінку Go]] для отримання додаткової інформації.
