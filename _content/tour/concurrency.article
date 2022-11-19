@@ -1,43 +1,43 @@
-Concurrency
-Go provides concurrency constructions as part of the core language. This lesson presents them and gives some examples on how they can be used.
+Конкурентність
+Go надає конструкції для побудови конкурентності як чистину ядра мови програмування. Цей урок демонструє їх та дає приклади використання.
 
-The Go Authors
+Автори Go
 https://golang.org
 
-* Goroutines
+* Горутини
 
-A _goroutine_ is a lightweight thread managed by the Go runtime.
+Горутина (_goroutine_) - це легковагий потік виконання керований середовищем виконання Go.
 
 	go f(x, y, z)
 
-starts a new goroutine running
+стартує нову горутину що виконує
 
 	f(x, y, z)
 
-The evaluation of `f`, `x`, `y`, and `z` happens in the current goroutine and the execution of `f` happens in the new goroutine.
+Обрахунок `f`, `x`, `y`, та `z` відбувається в поточній горутині, а виконання `f` відбувається вже в новій.
 
-Goroutines run in the same address space, so access to shared memory must be synchronized. The [[/pkg/sync/][`sync`]] package provides useful primitives, although you won't need them much in Go as there are other primitives. (See the next slide.)
+Виронання горутин відбувається в єдиному адресному просторі, тому доступ до смільної памʼяті має бути синхронізовано. Пакет [[/pkg/sync/][`sync`]] надає корисні примітиви для цього, проте вони не так часто потрібні, бо в Go вже існують прімітиви. (Докладніше на наступному слайді.)
 
 .play concurrency/goroutines.go
 
-* Channels
+* Канали
 
-Channels are a typed conduit through which you can send and receive values with the channel operator, `<-`.
+Канали це типізовані провідники через які можна передавати та отримувати значення за допомогою канального оператора, `<-`.
 
-	ch <- v    // Send v to channel ch.
-	v := <-ch  // Receive from ch, and
-	           // assign value to v.
+	ch <- v    // Відправляє значення v в канал ch.
+	v := <-ch  // Отримуємо значення з каналу ch, та
+	           // присвоюємо його змінній v.
 
-(The data flows in the direction of the arrow.)
+(Данні рухаються в напрямку стрілки.)
 
-Like maps and slices, channels must be created before use:
+Так само як словники та зрізи, канали мають бути створені перед використанням:
 
 	ch := make(chan int)
 
-By default, sends and receives block until the other side is ready. This allows goroutines to synchronize without explicit locks or condition variables.
+За замовчуванням, відсилання та отримання блокують виконання поточної горутини до готовності іншої сторони каналу. Це дає змогу горутинам синхронізуватися без явного використання локів або умовних змінних.
 
-The example code sums the numbers in a slice, distributing the work between two goroutines.
-Once both goroutines have completed their computation, it calculates the final result.
+Цей приклад сумує значення в зрізі, розподіляючи роботу між двома горутинами.
+Остаточний результат обчислюється щойно обидві горутини закінчують свої підрахунки.
 
 .play concurrency/channels.go
 
