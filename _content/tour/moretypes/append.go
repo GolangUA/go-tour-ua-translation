@@ -8,15 +8,15 @@ func main() {
 	var s []int
 	printSlice(s)
 
-	// append works on nil slices.
+	// append працює на 'nil' зрізах.
 	s = append(s, 0)
 	printSlice(s)
 
-	// The slice grows as needed.
+	//  Зріз росте в міру необхідного.
 	s = append(s, 1)
 	printSlice(s)
 
-	// We can add more than one element at a time.
+	// Одночасно можливо додати більше одного елементу.
 	s = append(s, 2, 3, 4)
 	printSlice(s)
 }
