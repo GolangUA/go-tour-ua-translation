@@ -173,27 +173,27 @@ Go забезпечує зручний спосіб роботи з масива
 .play moretypes/slice-len-cap.go
 
 
-* Nil slices
+* Нульові зрізи
 
-The zero value of a slice is `nil`.
+Нульове значення зрізу дорівнює nil.
 
-A nil slice has a length and capacity of 0
-and has no underlying array.
+Нульовий фрагмент має довжину та ємність 0
+і не має під собою масиву.
 
 .play moretypes/nil-slices.go
 
 
-* Creating a slice with make
+* Створення зрізу за допомогою make
 
-Slices can be created with the built-in `make` function;
-this is how you create dynamically-sized arrays.
+Зрізи можна створювати за допомогою вбудованої функції `make`;
+таким чином ви створюєте масиви динамічного розміру.
 
-The `make` function allocates a zeroed array
-and returns a slice that refers to that array:
+Функція `make` виділяє обнулений масив 
+і повертає зріз, який посилається на цей масив:
 
 	a := make([]int, 5)  // len(a)=5
 
-To specify a capacity, pass a third argument to `make`:
+Щоб указати ємність, передайте третій аргумент функції `make`:
 
 	b := make([]int, 0, 5) // len(b)=0, cap(b)=5
 
@@ -203,53 +203,53 @@ To specify a capacity, pass a third argument to `make`:
 .play moretypes/making-slices.go
 
 
-* Slices of slices
+* Зрізи зрізів
 
-Slices can contain any type, including other slices.
+Зрізи можуть вміщати будь-який тип, включаючи інші зрізи
 
 .play moretypes/slices-of-slice.go
 
 
-* Appending to a slice
+* Додавання до зрізу
 
-It is common to append new elements to a slice, and so Go provides a built-in
-`append` function. The [[/pkg/builtin/#append][documentation]]
-of the built-in package describes `append`.
+Зазвичай до слайсу додаються нові елементи, тому Go надає вбудовану
+функцію `append`. [[/pkg/builtin/#append][Документація]]
+вбудованого пакета описує `append`.
 
 	func append(s []T, vs ...T) []T
 
-The first parameter `s` of `append` is a slice of type `T`, and the rest are
-`T` values to append to the slice.
+Перший параметр `s` функції `append` це зріз типу `T`, а решта - це значення
+`T`, які необхідно додати до зрізу.
 
-The resulting value of `append` is a slice containing all the elements of the
-original slice plus the provided values.
+Отримане значення функції `append` це зріз, який вміщає всі елементи
+вихідного слайса плюс додані значення.
 
-If the backing array of `s` is too small to fit all the given values a bigger
-array will be allocated. The returned slice will point to the newly allocated
-array.
+Якщо масив, на який посилається зріз `s` занадто малий, щоб вмістити додані елементи, виділяється 
+більший масив. Зріз, який повертається функцією, буде посилатись на щойно виділений 
+масив.
 
-(To learn more about slices, read the [[/blog/go-slices-usage-and-internals][Slices: usage and internals]] article.)
+(Щоб дізнатись більше про зрізи, прочитайте статтю [[/blog/go-slices-usage-and-internals][Slices: usage and internals]].)
 
 .play moretypes/append.go
 
 
-* Range
+* Діапазон (range)
 
-The `range` form of the `for` loop iterates over a slice or map.
+Форма `range` з циклу `for` дозволяє пройти (ітерутватись) по елементам зрізу чи мапи.
 
-When ranging over a slice, two values are returned for each iteration.
-The first is the index, and the second is a copy of the element at that index.
+Під час застосування range до зрізу для кожної ітерації повертаються два значення.
+Перше — це індекс, а друге — копія елемента за цим індексом.
 
 .play moretypes/range.go
 
-* Range continued
+* Діапазон (range) продовження
 
-You can skip the index or value by assigning to `_`.
+Ви можете пропустити індекс або значення, призначивши `_` замість змінної.
 
     for i, _ := range pow
     for _, value := range pow
 
-If you only want the index, you can omit the second variable.
+Якщо вам потрібен лише індекс, ви можете опустити другу змінну.
 
     for i := range pow
 
