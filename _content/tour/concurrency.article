@@ -173,37 +173,34 @@ _Підказка_: ви можете зберігати кеш URL-адрес, 
 #appengine: Ви можете почати з
 #appengine: [[/dl/][встановлення Go]].
 
-#appengine: Щойно ви встановите Go, ви можете
+#appengine: Якщо ви встановили Go,
+The
 [[/doc/][документація Go]] - чудове місце для
 #appengine: продовження.
-починати.
+start.
 Вона містить посилання, посібники, відео та багато іншого.
 
 Для того, щоб дізнатися, як організувати та працювати з кодом Go, прочитайте [[/doc/code][Як писати код Go]].
 
-Якщо вам потрібна допомога зі стандартною бібліотекою, перегляньте [[/pkg/][посібник по пакетам]]. Якщо вам потрібна допомога з самою мовою, ви можете бути здивовані, коли зрозумієте, що [[/ref/spec][Специфікація мови]] досить зрозуміла.
+Якщо вам потрібна допомога зі стандартною бібліотекою, перегляньте [[/pkg/][посібник по пакетам]]. Якщо вам потрібна допомога з самою мовою, ви будете здивовані, бо [[/ref/spec][Специфікацію мови]] досить легко зрозуміти.
 
-To further explore Go's concurrency model, watch
 Для подальшого ознайомлення з моделлю конкурентності Go, дивіться
-[[https://www.youtube.com/watch?v=f6kdp27TYZs][Go Concurrency Patterns]]
-([[/talks/2012/concurrency.slide][slides]])
+[[https://www.youtube.com/watch?v=f6kdp27TYZs][Шаблони конкурентності в Go]]
+([[/talks/2012/concurrency.slide][слайди]])
 та
-[[https://www.youtube.com/watch?v=QDDwwePbDtw][Advanced Go Concurrency Patterns]]
-([[/talks/2013/advconc.slide][slides]])
-та прочитайте
-[[/doc/codewalk/sharemem/][Share Memory by Communicating]]
-огляд коду.
+[[https://www.youtube.com/watch?v=QDDwwePbDtw][Просунуті шаблони конкурентності в Go]]
+([[/talks/2013/advconc.slide][слайди]]),
+а також прочитайте огляд коду
+[[/doc/codewalk/sharemem/][Спілкування зі спільною памʼяттю]].
 
-To get started writing web applications, watch
-Для початку розробки веб-додатків, дивіться
-[[https://vimeo.com/53221558][A simple programming environment]]
-([[/talks/2012/simple.slide][slides]])
-та прочитайте
-[[/doc/articles/wiki/][Writing Web Applications]] посібник.
+Для початку розробки веб-застосунків, дивіться
+[[https://vimeo.com/53221558][Просте оточення для програмування]]
+([[/talks/2012/simple.slide][слайди]])
+та прочитайте посібник
+[[/doc/articles/wiki/][Написання веб застосунків]].
 
-[[/doc/codewalk/functions/][First Class Functions in Go]] - це цікавий огляд типів функцій Go.
+[[/doc/codewalk/functions/][Функції першого порядку в Go]] - це цікавий огляд типів функцій Go.
 
-The [[/blog/][Go Blog]] has a large archive of informative Go articles.
-[[/blog/][Go Blog]] містить великий архів інформативних статей про Go.
+[[/blog/][Блог Go]] містить великий архів інформативних статей про Go.
 
 Відвідайте [[/][домашню сторінку Go]] для отримання додаткової інформації.
