@@ -1,106 +1,106 @@
-Concurrency
-Go provides concurrency constructions as part of the core language. This lesson presents them and gives some examples on how they can be used.
+Конкурентність
+Go надає конструкції для побудови конкурентності як чистину ядра мови програмування. Цей урок демонструє їх та дає приклади використання.
 
-The Go Authors
+Автори Go
 https://golang.org
 
 * Goroutines
 
-A _goroutine_ is a lightweight thread managed by the Go runtime.
+_goroutine_ - це легковагий потік виконання керований середовищем виконання Go.
 
 	go f(x, y, z)
 
-starts a new goroutine running
+стартує нову goroutine що виконує
 
 	f(x, y, z)
 
-The evaluation of `f`, `x`, `y`, and `z` happens in the current goroutine and the execution of `f` happens in the new goroutine.
+Обрахунок `f`, `x`, `y`, та `z` відбувається в поточній goroutine, а виконання `f` відбувається вже в новій.
 
-Goroutines run in the same address space, so access to shared memory must be synchronized. The [[/pkg/sync/][`sync`]] package provides useful primitives, although you won't need them much in Go as there are other primitives. (See the next slide.)
+Виронання goroutine відбувається в єдиному адресному просторі, тому доступ до смільної памʼяті має бути синхронізовано. Пакет [[/pkg/sync/][`sync`]] надає корисні примітиви для цього, проте вони не так часто потрібні, бо в Go вже існують прімітиви. (Докладніше на наступному слайді.)
 
 .play concurrency/goroutines.go
 
-* Channels
+* Канали
 
-Channels are a typed conduit through which you can send and receive values with the channel operator, `<-`.
+Канали це типізовані провідники через які можна передавати та отримувати значення за допомогою канального оператора, `<-`.
 
-	ch <- v    // Send v to channel ch.
-	v := <-ch  // Receive from ch, and
-	           // assign value to v.
+	ch <- v    // Відправляє значення v в канал ch.
+	v := <-ch  // Отримуємо значення з каналу ch, та
+	           // присвоюємо його змінній v.
 
-(The data flows in the direction of the arrow.)
+(Данні рухаються в напрямку стрілки.)
 
-Like maps and slices, channels must be created before use:
+Так само як словники та зрізи, канали мають бути створені перед використанням:
 
 	ch := make(chan int)
 
-By default, sends and receives block until the other side is ready. This allows goroutines to synchronize without explicit locks or condition variables.
+За замовчуванням, відсилання та отримання блокують виконання поточної goroutine до готовності іншої сторони каналу. Це дає змогу goroutine синхронізуватися без явного використання локів або умовних змінних.
 
-The example code sums the numbers in a slice, distributing the work between two goroutines.
-Once both goroutines have completed their computation, it calculates the final result.
+Цей приклад сумує значення в зрізі, розподіляючи роботу між двома goroutine.
+Остаточний результат обчислюється щойно обидві goroutine закінчують свої підрахунки.
 
 .play concurrency/channels.go
 
-* Buffered Channels
+* Буферизовані канали
 
-Channels can be _buffered_.  Provide the buffer length as the second argument to `make` to initialize a buffered channel:
+Канали можуть бути буферизовані. Для ініціалізації буферизованого каналу, передайте довжину буфера як другий аргумент до `make`:
 
 	ch := make(chan int, 100)
 
-Sends to a buffered channel block only when the buffer is full. Receives block when the buffer is empty.
+Відсилання в буферизований канал блокується тільки коли буфер заповнений. Отримання блокується тільки коли буфер порожній.
 
-Modify the example to overfill the buffer and see what happens.
+Змініть приклад так, щоб переповнити буфер і подивіться що відбудеться.
 
 .play concurrency/buffered-channels.go
 
-* Range and Close
+* Range та Close
 
-A sender can `close` a channel to indicate that no more values will be sent. Receivers can test whether a channel has been closed by assigning a second parameter to the receive expression: after
+Посилальник може закрити канал, щоб вказати, що більше значень не буде відправлено. Отримувачі можуть перевірити, чи був канал закритий, присвоєнням другого параметра до виразу отримання: after
 
 	v, ok := <-ch
 
-`ok` is `false` if there are no more values to receive and the channel is closed.
+`ok` буде `false` якщо більше немає значень для отримання і канал закритий.
 
-The loop `for`i`:=`range`c` receives values from the channel repeatedly until it is closed.
+Цикл `for`i`:=`range`c` отримує значення з каналу поки він не буде закритий.
 
-*Note:* Only the sender should close a channel, never the receiver. Sending on a closed channel will cause a panic.
+*Примітка:* Тільки відсилальник повинен закривати канал, а не отримувач. Відсилання в закритий канал призведе до паніки.
 
-*Another*note:* Channels aren't like files; you don't usually need to close them. Closing is only necessary when the receiver must be told there are no more values coming, such as to terminate a `range` loop.
+*Ще*одна*примітка:* Канали не схожі на файли; ви зазвичай не потребуєте їх закривати. Закриття потрібне тільки коли отримувач повинен бути повідомлений, що більше значень не буде відправлено, наприклад для завершення циклу `range`.
 
 .play concurrency/range-and-close.go
 
 * Select
 
-The `select` statement lets a goroutine wait on multiple communication operations.
+Вираз `select` дозволяє goroutine чекати на декілька операцій комунікації.
 
-A `select` blocks until one of its cases can run, then it executes that case.  It chooses one at random if multiple are ready.
+Вираз `select` блокується, поки один з випадків не може бути виконаний, а потім виконує цей випадок. Він вибирає один випадок випадково, якщо декілька випадків готові.
 
 .play concurrency/select.go
 
-* Default Selection
+* Вибір за замовчуванням
 
-The `default` case in a `select` is run if no other case is ready.
+Випадок `default` в `select` виконується, якщо жоден інший випадок не готовий.
 
-Use a `default` case to try a send or receive without blocking:
+Використовуйте випадок `default` для спроби відсилання або отримання без блокування:
 
 	select {
 	case i := <-c:
-		// use i
+		// виконується, якщо отримання з c не блокує
 	default:
-		// receiving from c would block
+		// виконується, якщо отримання з c блокує
 	}
 
 .play concurrency/default-selection.go
 
-* Exercise: Equivalent Binary Trees
+* Вправа: Еквівалентні Бінарні Дерева
 
-There can be many different binary trees with the same sequence of values stored in it. For example, here are two binary trees storing the sequence 1, 1, 2, 3, 5, 8, 13.
+Може бути багато різних бінарних дерев з однаковою послідовністю значень, що зберігаються в них. Наприклад, тут два бінарних дерева, що зберігають послідовність 1, 1, 2, 3, 5, 8, 13.
 
 .image /tour/static/img/tree.png
 
-A function to check whether two binary trees store the same sequence is quite complex in most languages. We'll use Go's concurrency and channels to write a simple solution.
+Функція для перевірки, чи два бінарних дерева зберігають однакову послідовність, досить складна у більшості мов. Ми використаємо конкурентність та канали Go для написання простого рішення.
 
-This example uses the `tree` package, which defines the type:
+Цей приклад використовує пакет `tree`, який визначає тип:
 
 	type Tree struct {
 		Left  *Tree
@@ -109,29 +109,29 @@ This example uses the `tree` package, which defines the type:
 	}
 
 
-Continue description on [[javascript:click('.next-page')][next page]].
+Опис продовжується на [[javascript:click('.next-page')][наступній сторінці]].
 
-* Exercise: Equivalent Binary Trees
+* Вправа: Еквівалентні Бінарні Дерева
 
-*1.* Implement the `Walk` function.
+*1.* Реалізуйте функцію `Walk`.
 
-*2.* Test the `Walk` function.
+*2.* Протестуйте функцію `Walk`.
 
-The function `tree.New(k)` constructs a randomly-structured (but always sorted) binary tree holding the values `k`, `2k`, `3k`, ..., `10k`.
+Функція `tree.New(k)` створює бінарне дерево з випадковою структурою (але завжди відсортованою), що зберігає значення `k`, `2k`, `3k`, ..., `10k`.
 
-Create a new channel `ch` and kick off the walker:
+Створіть новий канал `ch` та запустіть walker:
 
 	go Walk(tree.New(1), ch)
 
-Then read and print 10 values from the channel. It should be the numbers 1, 2, 3, ..., 10.
+Тоді прочитайте та виведіть 10 значень з каналу. Це повинні бути числа 1, 2, 3, ..., 10.
 
-*3.* Implement the `Same` function using `Walk` to determine whether `t1` and `t2` store the same values.
+*3.* Реалізуйте функцію `Same`, використовуючи `Walk` для визначення, чи зберігають `t1` та `t2` однакові значення.
 
-*4.* Test the `Same` function.
+*4.* Протестуйте функцію `Same`.
 
-`Same(tree.New(1),`tree.New(1))` should return true, and `Same(tree.New(1),`tree.New(2))` should return false.
+`Same(tree.New(1),`tree.New(1))` повинна повернути true, а `Same(tree.New(1),`tree.New(2))` повинна повернути false.
 
-The documentation for `Tree` can be found [[https://godoc.org/golang.org/x/tour/tree#Tree][here]].
+Документація для `Tree` можна знайти [[https://godoc.org/golang.org/x/tour/tree#Tree][тут]].
 
 .play concurrency/exercise-equivalent-binary-trees.go
 
