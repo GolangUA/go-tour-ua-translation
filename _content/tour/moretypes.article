@@ -348,7 +348,7 @@ Go забезпечує зручний спосіб роботи з масива
 Нумо пограємось з функціями.
 
 Реалізуйте функцію `fibonacci`, яка повертає функцію (замикання), що 
-що повертає послідовні [[https://en.wikipedia.org/wiki/Fibonacci_number][числа Фібоначчі]]
+повертає послідовні [[https://en.wikipedia.org/wiki/Fibonacci_number][числа Фібоначчі]]
 (0, 1, 1, 2, 3, 5, ...).
 
 .play moretypes/exercise-fibonacci-closure.go
