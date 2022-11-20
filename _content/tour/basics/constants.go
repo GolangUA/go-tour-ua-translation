@@ -8,7 +8,7 @@ import "fmt"
 const Pi = 3.14
 
 func main() {
-	const World = "світ"
+	const World = "World"
 	fmt.Println("Привіт", World)
 	fmt.Println("Добрий", Pi, "день")
 
