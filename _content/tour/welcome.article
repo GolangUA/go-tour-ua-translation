@@ -39,7 +39,7 @@ https://golang.org
 інструменту [[/cmd/gofmt/][gofmt]]. Ви можете вмикати та вимикати підсвічування синтаксису,
 натиснувши на кнопку [[javascript:highlightAndClick(".syntax-checkbox")][syntax]].
 
-Коли ви готові рушити далі, натисніть на кнопку [[javascript:highlightAndClick(".next-page")][right arrow]] нище або натисніть кнопку `PageDown`.
+Коли ви готові рушити далі, натисніть на кнопку [[javascript:highlightAndClick(".next-page")][right arrow]] нижче або натисніть кнопку `PageDown`.
 
 .play welcome/hello.go
 
@@ -70,10 +70,10 @@ https://golang.org
 #appengine:
 #appengine:   go install golang.org/x/website/tour@latest
 #appengine:
-#appengine: Це розмістить бінарний файл `tour` в папці `bin`,
+#appengine: Ця команда розмістить бінарний файл `tour` в папці `bin`,
 #appengine: що знаходиться в [[/cmd/go/#hdr-GOPATH_and_Modules][GOPATH]].
-#appengine: При запуску програми відкривається веб-браузер, в якому відображається
-#appengine: ваша локальну версію туру.
+#appengine: При запуску програми відкриється веб-браузер, в якому відобразиться
+#appengine: ваша локальна версія туру.
 #appengine:
 #appengine: Звичайно, ви можете продовжити тур на цьому сайті.
 
