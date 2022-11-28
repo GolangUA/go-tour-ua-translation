@@ -182,7 +182,7 @@ Go не має класів.
 
 .play methods/empty-interface.go
 
-* Твердження типу
+* Твердження типу (type assestions)
 
 _Твердження_типу_ дає можливість доступу до базового значення інтерфейса.
 
@@ -202,7 +202,7 @@ _Твердження_типу_ дає можливість доступу до 
 
 .play methods/type-assertions.go
 
-* Перемикач (switch) типів
+* Перемикач типів (type switches)
 
 Перемикач_типів - це конструкція, яка дозволяє виконувати килька операцій утвердження типу.
 
@@ -225,7 +225,7 @@ _Твердження_типу_ дає можливість доступу до 
 
 .play methods/type-switches.go
 
-* Stringers
+* Інтерфейси строки (Stringers)
 
 Один з найвсюдісущих інтерфейсів в Go - це Stringer [[/pkg/fmt/#Stringer][`Stringer`]] визначений у пакеті [[/pkg/fmt/][`fmt`]] 
 
@@ -245,8 +245,54 @@ _Твердження_типу_ дає можливість доступу до 
 
 .play methods/exercise-stringer.go
 
-* Помилки
+* Помилки (Errors)
 
+Програми на Go визначають помилковий стан значенням `error`.
+
+Тип `error` являє собою встроєний інтерфейс, подібний до `fmt.Stringer`:
+
+	type error interface {
+		Error() string
+	}
+
+(Як і з інтерфейсом `fmt.Stringer`, пакет `fmt` очикуює інтерфейс `error`, коли виводить на друг полмилку)
+
+Функції часто повертають значення `error` і код, який викликає ці функції, повинен обробляти помилки порівнюючи їх з `nil`.
+
+  i, err := strconv.Atoi("42")
+	if err != nil {
+		fmt.Printf("couldn't convert number: %v\n", err)
+		return
+	}
+	fmt.Println("Converted integer:", i)
+
+Нульове значення `error` вказує на відсутність помилки; не-нульове значення `error` вказує на наявність помилки.
+
+.play methods/errors.go
+
+* Вправа: Errors
+
+Скопіюйте функцію `Sqrt` з [[/tour/flowcontrol/8][earlier exercise]] і змініть її, щоб вона повертала `error`.
+
+`Sqrt` повинна повертати не-нульову значення помилки при негативному значенні аргумента.
+
+Визначте новий тип
+
+	type ErrNegativeSqrt float64
+
+та визначте для нього метод з наступною сігнатурою - Error() string:
+
+  func (e ErrNegativeSqrt) Error() string
+
+Викликаючи цей метод `ErrNegativeSqrt(-2).Error()` - він повинен повертати `"cannot`Sqrt`negative`number:`-2"`.
+
+*Примітка:* Якщо викликати `fmt.Sprint(e)` всередині `Error` - програма увійде в бескінечний цикл. Ви можете запобігти цьому  приводячи `e` до типу float64: `fmt.Sprint(float64(e))`. Чьому так?
+
+Змініть функцію `Sqrt`, щоб вона повертала `ErrNegativeSqrt`, при виклику функції з негативним аргументом.
+
+.play methods/exercise-errors.go
+
+* Інтерфейс Readers
 
 
 
