@@ -22,7 +22,7 @@ func main() {
 	si := []int{10, 20, 15, -10}
 	fmt.Println(Index(si, 15))
 
-	// 'Index' також працює зі слайсом типу string
+	// Index також працює зі слайсом типу string
 	ss := []string{"foo", "bar", "baz"}
 	fmt.Println(Index(ss, "hello"))
 }
