@@ -1,3 +1,4 @@
+//go:build OMIT
 // +build OMIT
 
 package main
@@ -5,14 +6,15 @@ package main
 import "fmt"
 
 const (
-	// Create a huge number by shifting a 1 bit left 100 places.
-	// In other words, the binary number that is 1 followed by 100 zeroes.
+	// Створіть величезне число, зсунувши на 1 біт вліво на 100 позицій.
+	// Іншими словами число 1, за яким слідує 100 нулів.
 	Big = 1 << 100
-	// Shift it right again 99 places, so we end up with 1<<1, or 2.
+	// Зсуваємо його знову вправо на 99 позицій, так що отримуємо 1<<1, або просто 2.
 	Small = Big >> 99
 )
 
 func needInt(x int) int { return x*10 + 1 }
+
 func needFloat(x float64) float64 {
 	return x * 0.1
 }
