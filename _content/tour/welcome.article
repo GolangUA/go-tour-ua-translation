@@ -39,7 +39,7 @@ https://golang.org
 інструменту [[/cmd/gofmt/][gofmt]]. Ви можете вмикати та вимикати підсвічування синтаксису,
 натиснувши на кнопку [[javascript:highlightAndClick(".syntax-checkbox")][syntax]].
 
-Коли ви готові рушити далі, натисніть на кнопку [[javascript:highlightAndClick(".next-page")][right arrow]] нижче або натисніть кнопку `PageDown`.
+Коли будете готові рушати далі, натисніть на кнопку [[javascript:highlightAndClick(".next-page")][right arrow]] нижче або натисніть кнопку `PageDown`.
 
 .play welcome/hello.go
 
