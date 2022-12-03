@@ -12,7 +12,7 @@ func main() {
 	s = append(s, 0)
 	printSlice(s)
 
-	//  Зріз росте в міру необхідного.
+	//  Зріз росте за потреби.
 	s = append(s, 1)
 	printSlice(s)
 
