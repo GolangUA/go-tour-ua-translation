@@ -4,7 +4,7 @@ package main
 
 import "fmt"
 
-// fibonacci це функція, яка повертає
+// fibonacci це функція, що повертає
 // функцію, яка повертає int.
 func fibonacci() func() int {
 }
