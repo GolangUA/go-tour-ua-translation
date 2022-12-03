@@ -12,7 +12,7 @@ func main() {
 	s = s[:0]
 	printSlice(s)
 
-	// Збільшити його довжину
+	// Збільшити його довжину.
 	s = s[:4]
 	printSlice(s)
 
