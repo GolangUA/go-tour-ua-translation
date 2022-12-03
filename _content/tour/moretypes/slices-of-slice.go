@@ -8,14 +8,14 @@ import (
 )
 
 func main() {
-	// Create a tic-tac-toe board.
+	// Створення дошки для гри в хрестики-нулики.
 	board := [][]string{
 		[]string{"_", "_", "_"},
 		[]string{"_", "_", "_"},
 		[]string{"_", "_", "_"},
 	}
 
-	// The players take turns.
+	// Гравці ходять по черзі.
 	board[0][0] = "X"
 	board[2][2] = "O"
 	board[1][2] = "X"
