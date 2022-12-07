@@ -6,7 +6,7 @@ import "fmt"
 
 type IPAddr [4]byte
 
-// TODO: Створіть функцію-метод "String() string" для структурного типу IPAddr.
+// TODO: Створіть метод "String() string" для структурного типу IPAddr.
 
 func main() {
 	hosts := map[string]IPAddr{
