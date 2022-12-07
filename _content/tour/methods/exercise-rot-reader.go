@@ -1,4 +1,5 @@
-// +build no-build OMIT
+//go:build ignore || OMIT
+// +build ignore OMIT
 
 package main
 
@@ -13,7 +14,7 @@ type rot13Reader struct {
 }
 
 func main() {
-	s := strings.NewReader("Створюємо нову структуру Reader зі строки")
+	s := strings.NewReader("Створюємо нову структуру Reader з рядка")
 	r := rot13Reader{s}
 	io.Copy(os.Stdout, &r)
 }
