@@ -20,7 +20,7 @@ func (e *MyError) Error() string {
 func run() error {
 	return &MyError{
 		time.Now(),
-		"Упс, це не працює!",
+		"Упс, не спрацювало!",
 	}
 }
 
