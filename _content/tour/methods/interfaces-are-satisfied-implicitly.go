@@ -1,3 +1,4 @@
+//go:build OMIT
 // +build OMIT
 
 package main
@@ -12,13 +13,13 @@ type T struct {
 	S string
 }
 
-// This method means type T implements the interface I,
-// but we don't need to explicitly declare that it does so.
+// Наявність метода M() означає, що даний тип T реалізовує інтерфейс I;
+// зауважте, що ніяким чином не потрібно ЯВНО вказувати, що тип T реалізує конкретний інтерфейс I.
 func (t T) M() {
 	fmt.Println(t.S)
 }
 
 func main() {
-	var i I = T{"hello"}
+	var i I = T{"вітаю"}
 	i.M()
 }
