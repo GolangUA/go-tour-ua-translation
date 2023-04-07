@@ -11,7 +11,6 @@ import (
 
 func main() {
 	r := strings.NewReader("Привіт, Reader!")
-
 	b := make([]byte, 8)
 	for {
 		n, err := r.Read(b)
