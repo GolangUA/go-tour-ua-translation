@@ -1,3 +1,4 @@
+//go:build OMIT
 // +build OMIT
 
 package main
@@ -14,7 +15,7 @@ var (
 )
 
 func main() {
-	fmt.Printf("Type: %T Value: %v\n", ToBe, ToBe)
-	fmt.Printf("Type: %T Value: %v\n", MaxInt, MaxInt)
-	fmt.Printf("Type: %T Value: %v\n", z, z)
+	fmt.Printf("Тип: %T Значення: %v\n", ToBe, ToBe)
+	fmt.Printf("Тип: %T Значення: %v\n", MaxInt, MaxInt)
+	fmt.Printf("Тип: %T Значення: %v\n", z, z)
 }
