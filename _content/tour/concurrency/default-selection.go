@@ -13,9 +13,9 @@ func main() {
 	for {
 		select {
 		case <-tick:
-			fmt.Println("tick.")
+			fmt.Println("клац.")
 		case <-boom:
-			fmt.Println("BOOM!")
+			fmt.Println("БАБАХ!")
 			return
 		default:
 			fmt.Println("    .")

@@ -1,131 +1,128 @@
-Packages, variables, and functions.
-Learn the basic components of any Go program.
+Пакети, змінні та функції.
+Вивчіть основні компоненти будь-якої програми на Go.
 
-The Go Authors
+Автори Go
 https://golang.org
 
-* Packages
+* Пакети
 
-Every Go program is made up of packages.
+Кожна Go програма складається з пакетів.
 
-Programs start running in package `main`.
+Програми починають працювати з пакета `main`.
 
-This program is using the packages with import paths `"fmt"` and `"math/rand"`.
+Ця програма використовує пакети зі шляхами імпорту `"fmt"` та `"math/rand"`.
 
-By convention, the package name is the same as the last element of the import path. For instance, the `"math/rand"` package comprises files that begin with the statement `package`rand`.
+За домовленістю, назва пакету така ж сама, як і останній елемент шляху імпорту. Наприклад, пакет `"math/rand"` містить файли, що починаються зі слів `package rand`.
 
-#appengine: *Note:* The environment in which these programs are executed is
-#appengine: deterministic, so each time you run the example program
-#appengine: `rand.Intn` will return the same number.
-#appengine:
-#appengine: (To see a different number, seed the number generator; see [[/pkg/math/rand/#Seed][`rand.Seed`]].
-#appengine: Time is constant in the playground, so you will need to use something else as the seed.)
+#appengine: *Примітка:* Середовище, в якому виконуються ці программи, є детермінованим (не змінюється), тому кожен раз виконання прикладів з `rand.Intn` будуть повертати однакові числа.
+
+#appengine: Щоб побачити інші числа, потрібно встановити сид для генерації (дивіться [[pkg/math/rand/#Seed][`rand.Seed`]]). В цьому середовищі час не змінюється, тому для встановлення сиду вам потрібно використовувати щось інше замість [[pkg/time#Now][`time.Now`]].
 
 .play basics/packages.go
 
-* Imports
+* Імпорти
 
-This code groups the imports into a parenthesized, "factored" import statement.
+Цей код групує імпорт у спільні дужки.
 
-You can also write multiple import statements, like:
+Ви також можете написати їх окремо, наприклад:
 
 	import "fmt"
 	import "math"
 
-But it is good style to use the factored import statement.
+Але хорошим стилем є групування імпортів.
 
 .play basics/imports.go
 
-* Exported names
+* Експортовані найменування
 
-In Go, a name is exported if it begins with a capital letter.
-For example, `Pizza` is an exported name, as is `Pi`, which is exported from
-the `math` package.
+У мові Go ім'я експортується, якщо воно починається з великої літери.
+Наприклад, `Pizza` є експортованим ім'ям, так само як і `Pi`, що експортується з
+пакета `math`.
 
-`pizza` and `pi` do not start with a capital letter, so they are not exported.
+Слова "pizza" та "pi" починаються з маленької літери, тому вони не експортуються.
 
-When importing a package, you can refer only to its exported names.
-Any "unexported" names are not accessible from outside the package.
+При імпорті пакета можна звертатися тільки до його експортованих імен.
+Будь-які не експортовані імена не доступні ззовні пакету.
 
-Run the code. Notice the error message.
+Запустіть код. Зверніть увагу на повідомлення про помилку.
 
-To fix the error, rename `math.pi` to `math.Pi` and try it again.
+Щоб виправити помилку перейменуйте `math.pi` на `math.Pi` і повторіть спробу.
 
 .play basics/exported-names.go
 
-* Functions
+* Функції
 
-A function can take zero or more arguments.
+Функція може приймати нуль або більше аргументів.
 
-In this example, `add` takes two parameters of type `int`.
+У даному прикладі функція `add` приймає два параметри типу `int`.
 
-Notice that the type comes _after_ the variable name.
+Зверніть увагу, що тип йде _після_ назви змінної.
 
-(For more about why types look the way they do, see the [[https://blog.golang.org/gos-declaration-syntax][article on Go's declaration syntax]].)
+(Докладніше про те, чому типи виглядають таким чином, дивіться [[https://blog.golang.org/gos-declaration-syntax][статтю про синтаксис мови Go]].)
 
 .play basics/functions.go
 
-* Functions continued
+* Функції, продовження 
 
-When two or more consecutive named function parameters share a type, you can omit the type from all but the last.
+Якщо двоє або більше параметрів функції мають спільний тип, то його можна не вказувати для всіх параметрів, окрім останнього.
 
-In this example, we shortened
+У цьому прикладі ми скоротили
 
 	x int, y int
 
-to
+до
 
 	x, y int
 
 .play basics/functions-continued.go
 
-* Multiple results
+* Кілька результатів
 
-A function can return any number of results.
+Функція може повертати будь-яку кількість результатів.
 
-The `swap` function returns two strings.
+Функція `swap` повертає два значення типу строка (string).
 
 .play basics/multiple-results.go
 
-* Named return values
+* Іменовані результати функції
 
-Go's return values may be named. If so, they are treated as variables defined at the top of the function.
+Значення, що повертаються функцією Go, можуть бути іменованими. Вони розглядаються як змінні, визначені у верхній частині функції.
 
-These names should be used to document the meaning of the return values.
+Ці імена повинні використовуватися для значень, що повертаються.
 
-A `return` statement without arguments returns the named return values. This is known as a "naked" return.
+Вираз `return` без аргументів повертає іменовані значення, що повертаються. Це називається "голе" повернення.
 
-Naked return statements should be used only in short functions, as with the example shown here. They can harm readability in longer functions.
+Голі вирази повернення слід використовувати тільки в коротких функціях, як у наведеному прикладі. У довших функціях вони можуть погіршити читабельність.
 
 .play basics/named-results.go
 
-* Variables
+* Змінні
 
-The `var` statement declares a list of variables; as in function argument lists, the type is last.
+Інструкція `var` оголошує список змінних. Як і в списках аргументів функції, тип - в кінці.
 
-A `var` statement can be at package or function level. We see both in this example.
+Оператор `var` може бути на рівні пакету або функції. У даному прикладі ми бачимо обидва варіанти.
 
 .play basics/variables.go
 
-* Variables with initializers
+* Змінні ініціалізовані значеннями
 
-A var declaration can include initializers, one per variable.
+Оголошення `var` може включати ініціалізатори (тобто значення), по одному на змінну.
 
-If an initializer is present, the type can be omitted; the variable will take the type of the initializer.
+Якщо присутній ініціалізатор, то тип можна не вказувати, змінна прийме тип ініціалізатора.
 
 .play basics/variables-with-initializers.go
 
-* Short variable declarations
+* Скорочене оголошення змінних
 
-Inside a function, the `:=` short assignment statement can be used in place of a `var` declaration with implicit type.
+Усередині функції замість оголошення `var` з неявним типом може використовуватись короткий оператор присвоювання `:=`.
 
-Outside a function, every statement begins with a keyword (`var`, `func`, and so on) and so the `:=` construct is not available.
+Поза функцією кожен оператор починається з ключового слова (`var`, `func` і так далі), тому конструкція `:=` недоступна.
 
 .play basics/short-variable-declarations.go
 
-* Basic types
+* Базові типи
 
-Go's basic types are
+Основними типами Go є
 
 	bool
 
@@ -134,102 +131,103 @@ Go's basic types are
 	int  int8  int16  int32  int64
 	uint uint8 uint16 uint32 uint64 uintptr
 
-	byte // alias for uint8
+	byte // псевдонім для uint8
 
-	rune // alias for int32
-	     // represents a Unicode code point
+	rune // псевдонім для int32
+	     // представляє символ Юнікоду (Unicode)
 
 	float32 float64
 
 	complex64 complex128
 
-The example shows variables of several types,
-and also that variable declarations may be "factored" into blocks,
-as with import statements.
+У прикладі показані змінні декількох типів,
+а також те, що оголошення цих змінних може бути "об'єднане" в групи,
+як і в операторах імпорту.
 
-The `int`, `uint`, and `uintptr` types are usually 32 bits wide on 32-bit systems and 64 bits wide on 64-bit systems.
-When you need an integer value you should use `int` unless you have a specific reason to use a sized or unsigned integer type.
+Типи `int`, `uint` та `uintptr` зазвичай мають розмір 32 біти на 32-бітних системах та 64 біти на 64-бітних системах.
+Якщо вам потрібне ціле значення, ви повинні використовувати тип `int`, якщо тільки у вас немає особливих причин для використання змінної конкретного розміру.
 
 .play basics/basic-types.go
 
-* Zero values
+* Нульові значення
 
-Variables declared without an explicit initial value are given their
-_zero_value_.
+Змінним, оголошеним без явного початкового значення, присвоюється їх
+_нульове_значення_
 
-The zero value is:
+Нульовим значенням є:
 
-- `0` for numeric types,
-- `false` for the boolean type, and
-- `""` (the empty string) for strings.
+- `0` для числових типів,
+- `false` для булевого типу
+- `""` (порожня строка) для строк.
 
 .play basics/zero.go
 
-* Type conversions
+* Конвертація типів
 
-The expression `T(v)` converts the value `v` to the type `T`.
+Вираз `T(v)` конвертує значення `v` в тип `T`.
 
-Some numeric conversions:
+Деякі числові перетворення:
 
 	var i int = 42
 	var f float64 = float64(i)
 	var u uint = uint(f)
 
-Or, put more simply:
+Або простіше:
 
 	i := 42
 	f := float64(i)
 	u := uint(f)
 
-Unlike in C, in Go assignment between items of different type requires an
-explicit conversion.
-Try removing the `float64` or `uint` conversions in the example and see what happens.
+На відміну від мови C, в Go присвоювання між елементами різних типів вимагає
+_явного_ приведення.
+
+Спробуйте прибрати перетворення `float64` або `uint` у прикладі і подивіться, що вийде.
 
 .play basics/type-conversions.go
 
-* Type inference
+* Визначення типу
 
-When declaring a variable without specifying an explicit type (either by using the `:=` syntax or `var`=` expression syntax), the variable's type is inferred from the value on the right hand side.
+При оголошенні змінної без задання явного типу (з використанням синтаксису `:=` або синтаксису виразу `var`=`), тип змінної визначається за значенням у правій частині.
 
-When the right hand side of the declaration is typed, the new variable is of that same type:
+Коли змінна створюється на основі не вказанного типу, то її тип визначається типом правої частини виразу.
 
 	var i int
-	j := i // j is an int
+	j := i // j також буде мати тип int
 
-But when the right hand side contains an untyped numeric constant, the new variable may be an `int`, `float64`, or `complex128` depending on the precision of the constant:
+Але коли права частина містить нетипізовану числову константу, нова змінна може бути `int`, `float64` або `complex128` в залежності від написання(точності) константи:
 
 	i := 42           // int
 	f := 3.142        // float64
 	g := 0.867 + 0.5i // complex128
 
-Try changing the initial value of `v` in the example code and observe how its type is affected.
+Спробуйте змінити початкове значення `v` у прикладі коду і подивіться, як це вплине на його тип.
 
 .play basics/type-inference.go
 
-* Constants
+* Константи
 
-Constants are declared like variables, but with the `const` keyword.
+Константи оголошуються як змінні, але з ключовим словом `const`.
 
-Constants can be character, string, boolean, or numeric values.
+Константи можуть бути символьними, рядковими, логічними або числовими значеннями.
 
-Constants cannot be declared using the `:=` syntax.
+Константи не можуть бути оголошені з використанням синтаксису `:=`.
 
 .play basics/constants.go
 
-* Numeric Constants
+* Числові константи
 
-Numeric constants are high-precision _values_.
+Числові константи є _високоточними_ значеннями.
 
-An untyped constant takes the type needed by its context.
+Нетипізована константа приймає тип, необхідний для її контексту (коду, де вона буде використовуватися).
 
-Try printing `needInt(Big)` too.
+Спробуйте також надрукувати `needInt(Big)`.
 
-(An `int` can store at maximum a 64-bit integer, and sometimes less.)
+(`int` може зберігати максимум 64-бітне ціле число, а іноді і менше).
 
 .play basics/numeric-constants.go
 
-* Congratulations!
+* Вітаємо!
 
-You finished this lesson!
+Ви закінчили цей урок!
 
-You can go back to the list of [[/tour/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].
+Ви можете повернутись до списку [[/tour/list][модулів]], щоб знайти, чому вчитися далі, або перейти до [[javascript:click('.next-page')][наступного уроку]].
