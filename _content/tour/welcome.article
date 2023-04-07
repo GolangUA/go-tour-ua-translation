@@ -4,6 +4,7 @@
 Автори Golang
 https://golang.org
 
+
 * Привіт, World
 
 Ласкаво просимо на тур з [[/][мови програмування Go]].
@@ -14,14 +15,14 @@ https://golang.org
 
 Ви також можете переглянути зміст у будь-який час, натиснувши на кнопку [[javascript:highlightAndClick(".nav")][Menu]] у верхньому правому куту сторінки.
 
-Впродовж туру на вас чекає низка слайдів та вправ, які ви маєте
-виконати.
+Впродовж туру на вас чекає низка слайдів та вправ, які ви маєте виконати.
 
 Орієнтуватися в них можна за допомогою
 
 - [[javascript:highlight(".prev-page")]["previous"]] або `PageUp`, щоб повернутись на минулий слайд,
 
 - [[javascript:highlight(".next-page")]["next"]] або `PageDown`, щоб перейти на наступний слайд.
+
 
 Тур - інтерактивний. Натисніть на
 кнопку [[javascript:highlightAndClick("#run")][Run]]
@@ -66,6 +67,7 @@ https://golang.org
 #appengine: вашому комп'ютері.
 #appengine:
 #appengine: Щоб запустити тур локально, вам потрібно спочатку
+
 #appengine: [[/doc/install][встановити Go]] а потім виконати:
 #appengine:
 #appengine:   go install golang.org/x/website/tour@latest
