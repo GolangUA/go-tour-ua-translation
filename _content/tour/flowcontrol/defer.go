@@ -1,3 +1,4 @@
+//go:build OMIT
 // +build OMIT
 
 package main
@@ -5,7 +6,7 @@ package main
 import "fmt"
 
 func main() {
-	defer fmt.Println("world")
+	defer fmt.Println("світ")
 
-	fmt.Println("hello")
+	fmt.Println("привіт")
 }

@@ -1,3 +1,4 @@
+//go:build OMIT
 // +build OMIT
 
 package main
@@ -5,11 +6,11 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("counting")
+	fmt.Println("рахуємо")
 
 	for i := 0; i < 10; i++ {
 		defer fmt.Println(i)
 	}
 
-	fmt.Println("done")
+	fmt.Println("завершено")
 }
