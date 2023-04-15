@@ -22,4 +22,4 @@ steps:
     args: ["go", "run", "./cmd/versionprune", "--dry_run=false", "--project=$PROJECT_ID", "--service=default"]
 
 options:
-  machineType: N1_HIGHCPU_8
+  machineType: E2_HIGHCPU_2
