@@ -8,6 +8,12 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"go/ast"
+	"go/doc"
+	"go/format"
+	"go/printer"
+	"go/token"
+	"html/template"
 	"io"
 	"log"
 	"path"
@@ -17,12 +23,6 @@ import (
 	"unicode/utf8"
 
 	"golang.org/x/website/internal/api"
-	"golang.org/x/website/internal/backport/go/ast"
-	"golang.org/x/website/internal/backport/go/doc"
-	"golang.org/x/website/internal/backport/go/format"
-	"golang.org/x/website/internal/backport/go/printer"
-	"golang.org/x/website/internal/backport/go/token"
-	"golang.org/x/website/internal/backport/html/template"
 	"golang.org/x/website/internal/texthtml"
 )
 

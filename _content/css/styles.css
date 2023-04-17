@@ -59,6 +59,7 @@
   --color-text-link: var(--turq-dark);
   --color-text-subtle: var(--gray-4);
   --color-text-inverted: var(--white);
+  --color-text-alert: #aa536c;
   --color-code-comment: var(--green);
 
   /* Interactive Colors */
@@ -102,6 +103,7 @@
   --color-text: var(--gray-9);
   --color-text-link: var(--turq-med);
   --color-text-subtle: var(--gray-7);
+  --color-text-alert: #e67193;
   --color-code-comment: var(--green-light);
 }
 @media (prefers-color-scheme: dark) {
@@ -131,6 +133,7 @@
     --color-text: var(--gray-9);
     --color-text-link: var(--turq-med);
     --color-text-subtle: var(--gray-7);
+    --color-text-alert: #e67193;
     --color-code-comment: var(--green-light);
   }
 }
@@ -758,10 +761,18 @@ a.Footer-link--primary {
 .Header-menuItem a.Header-socialIcon:not(:last-child) {
   margin-right: 0.75rem;
 }
-/* End nav */
+[data-theme='dark'] .Header-socialIcon img[src$='/github.svg'] {
+  filter: invert(1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .Header-socialIcon img[src$='/github.svg'] {
+    filter: invert(1);
+  }
+}
 .Article {
   color: var(--color-text);
   margin: 0 auto 1.875rem;
+
   max-width: 75.75rem;
   padding: 0 1.5rem;
 }
@@ -827,13 +838,102 @@ h1 + h2.subtitle {
 .Article pre,
 .Article code {
   color: var(--color-text);
+}
+.Article pre {
   background: var(--color-background-accented);
 }
 .Article pre {
+  padding: 0.5rem 1.75rem;
+  border-radius: 4px;
+}
+.CopyPaste {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1.75rem;
+  border-radius: 4px;
+}
+.TabSection .CopyPaste {
+  margin-right: 2.5rem;
+}
+.CopyPaste button {
+  display: flex;
+  padding: unset;
+  background: none;
+  border: none;
+  margin-left: auto;
+  cursor: copy;
+}
+.CopyPaste button img.CopyPaste-icon {
   margin-left: 1.5rem;
+  background-color: unset;
+}
+.CopyPaste .CopyPaste-icon-dark {
+  display: none;
+}
+[data-theme='dark'] .CopyPaste .CopyPaste-icon {
+  display: none;
+}
+[data-theme='dark'] .CopyPaste .CopyPaste-icon-dark {
+  display: block;
+}
+.Sidebar {
+  display: none;
+}
+.Sidebar a {
+  width: 7.5rem;
+}
+.Sidebar h4 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.Sidebar p, .Sidebar-faq .link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+.Sidebar-faq h4 {
+  font-size: 0.813rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.375rem;
+}
+.Sidebar-faq p {
+  margin-top: 0;
+  margin-bottom: 0.625rem;
+}
+.Sidebar-socialLinks {
+  display: flex;
+  align-items: center;
+}
+.Sidebar-socialLinks a {
+  display: flex;
+  width: unset;
+  margin-right: 0.675rem;
+}
+@media screen and (min-width: 78rem) {
+  .Article-columns {
+    display: flex;
+    gap: 10rem;
+  }
+  .Article-content {
+    flex: 3;
+  }
+  .Sidebar {
+    display: block;
+    flex: 1;
+  }
 }
 .Article.Doc img {
   background-color: var(--white);
+}
+.Article p.DownloadBtn {
+  margin-top: 1.5rem;
+  margin-bottom: 0.675rem;
+}
+.Article .DocInstall-footer {
+  padding-bottom: 1.5rem;
 }
 .BreadcrumbNav-inner {
   display: flex;
@@ -844,6 +944,13 @@ h1 + h2.subtitle {
   margin: 0 auto;
   max-width: 75.75rem;
   padding: 0 0 1rem;
+}
+.SiteBreadcrumb {
+  list-style:none;
+  display:flex;
+  align-items:center;
+  padding:0;
+  margin: 1.5rem 0;
 }
 .BreadcrumbNav-li {
   align-items: center;
@@ -882,11 +989,6 @@ a.BreadcrumbNav-link {
     height: 1rem;
     margin: 0 0.8125rem;
     width: 1rem;
-  }
-}
-@media only screen and (min-width: 57.7rem) {
-  .BreadcrumbNav-inner {
-    margin-top: 0;
   }
 }
 .SubHero-gridContainer,
@@ -1350,7 +1452,7 @@ a.GettingStartedGo-resourceItemTitle {
   }
   .Hero-blurb {
     grid-column: 1 / 2;
-    margin: 2.5rem auto 0;
+    margin: 2.5rem 0 0;
   }
   .Hero-gopher {
     grid-row: 1 / 3;
@@ -1732,6 +1834,21 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 .Solutions-forwardArrowIcon {
   font-size: 1rem;
 }
+.Solutions-header {
+  padding: 0 1.5rem;
+  margin: 2.5rem auto;
+  max-width: 75.75rem;
+}
+.Solutions-header .SiteBreadcrumb {
+  margin-bottom: 2rem;
+}
+.Solutions-useCase__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 32px;
+  color: var(--color-text);
+}
 @media only screen and (min-width: 57.7rem) {
   .WhyGo-reasons {
     grid-template-columns: repeat(2, 1fr);
@@ -2072,14 +2189,6 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 .Security-hero {
   background-color: var(--color-background-accented);
   color: var(--color-text);
-  background-image: radial-gradient(
-    60.0625rem 60.0625rem,
-    #bfeaf4 50%,
-    transparent 50%
-  );
-  background-position: top -50rem left -9rem;
-  background-repeat: no-repeat;
-  background-size: 75rem 75rem;
   padding: 0 2.25rem 0;
 }
 [data-theme='dark'] .Learn-hero .BreadcrumbNav-li:not(:last-child):after,
@@ -2101,7 +2210,6 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
     background: url('/images/icons/arrow-forward.svg') no-repeat;
   }
 }
-.Learn-hero .Container,
 .Security-hero .Container {
   max-width: 68.125rem;
   position: relative;
@@ -2113,17 +2221,20 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   display: flex;
   flex-direction: column-reverse;
 }
+.Learn-heroInner {
+  padding-bottom: 3.25rem;
+}
 
 .Learn-heroGopher,
 .Security-heroGopher {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding-top: 1.25rem;
 }
 
 .Learn-heroGopher img,
 .Security-heroGopher img {
-  height: 13.5625rem;
+  height: 8.25rem;
   width: auto;
 }
 
@@ -2131,7 +2242,7 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   padding-top: 1.125rem;
 }
 
-.Learn-heroContent a:not(.js-downloadBtn) {
+.Learn-heroContent a:not(.js-downloadBtn):not(.BreadcrumbNav-link) {
   text-decoration: underline;
 }
 
@@ -2148,6 +2259,9 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   color: var(--color-text);
   font-size: 0.875rem;
   max-width: 27.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
 }
 
 .Learn-heroAction,
@@ -2183,37 +2297,104 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 .LearnGo-gridContainer,
 .Security-gridContainer {
   display: flex;
-  justify-content: center;
   padding: 0rem 0rem 1rem;
 }
 
 .Learn-cardList,
 .Security-cardList {
-  column-gap: 3.313rem;
+  column-gap: 2.813rem;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   justify-content: space-between;
   list-style: none;
   padding-left: 0;
-  row-gap: 2rem;
+  row-gap: 2.813rem;
+}
+
+.Learn-columns {
+  display: flex;
+  max-width: 78.25rem;
+  margin: auto;
+  padding: 0 1.25rem;
+}
+
+.Learn-columns .Learn-sidebar {
+  display: none;
+  margin-top: 3.75rem;
+  width: 25%;
+  height: 100vh;
+  min-height: 12.5rem;
+  overflow: auto;
+  position: sticky;
+  top: 5%;
+}
+
+.Learn-columns .LearnNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.Learn-columns .LearnNav a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.875rem;
+  text-decoration: none;
+}
+
+.Learn-columns .LearnNav a span {
+  margin-left: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--color-text-subtle);
+}
+
+.Learn-columns .LearnNav a svg {
+  visibility: hidden;
+}
+
+.Learn-columns .LearnNav a.active svg {
+  visibility: visible;
+}
+
+.Learn-columns .LearnNav a.active span,
+.Learn-columns .LearnNav a span:hover {
+  color: var(--color-text);
+  font-weight: 500;
 }
 
 .Learn-card,
 .Security-card {
-  height: 23.375rem;
-  max-width: 40rem;
+  min-height: 13.25rem;
 }
 
 @media only screen and (min-width: 48rem) {
   .Learn-cardList,
   .Security-cardList {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .Learn-card {
+    max-width: 15.875rem;
+  }
+  .Learn-heroGopher img,
+  .Security-heroGopher img {
+    height: 13.25rem;
   }
 }
 @media only screen and (min-width: 72.75rem) {
+  .Learn-columns .Learn-sidebar {
+    display: block;
+  }
   .Learn-cardList,
   .Security-cardList {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .Learn-heroGopher,
+  .Security-heroGopher {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 3.25rem;
   }
 }
 
@@ -2273,28 +2454,33 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   .Learn-heroGopher,
   .Security-heroGopher {
     flex: 1;
-    justify-content: center;
-    padding-top: 2.625rem;
+    justify-content: flex-end;
+    align-items: center;
   }
 
-  .Learn-heroGopher img,
   .Security-heroGopher img {
     height: 21.0625rem;
   }
 
   .Learn-heroAction,
   .Security-heroAction {
-    height: 4rem;
-    width: 16.5625rem;
+    height: 2.5rem;
+    width: 10.25rem;
   }
 
-  .Learn-heroAction a,
-  .Learn-heroAction a:hover,
-  .Learn-heroAction a:visited,
   .Security-heroAction a,
   .Security-heroAction a:hover,
   .Security-heroAction a:visited {
     font-size: 1.5rem;
+  }
+
+  .Learn-heroAction a,
+  .Learn-heroAction a:hover,
+  .Learn-heroAction a:visited {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1rem;
   }
 
   .Learn-heroAction span,
@@ -2315,7 +2501,8 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 .Learn-selfPaced,
 .Learn-books,
 .Learn-inPersonTraining,
-.Learn-meetups {
+.Learn-meetups,
+.Learn-tutorials {
   margin-top: 3.75rem;
   padding: 0 1.5rem;
 }
@@ -2344,7 +2531,9 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 .Security-sectionHeader {
   color: var(--color-text);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .Learn-subHeader h2 {
@@ -2353,8 +2542,17 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 
 .Learn-learningResourcesHeader h3 {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-style: normal;
+  font-weight: 400;
   line-height: 2.25rem;
+}
+
+.Learn-learningResourcesHeader p {
+  color: var(--color-text-subtle);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.375rem;
 }
 
 .Learn-selfPaced .Learn-card .Card-content {
@@ -2368,16 +2566,7 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   height: 7.5625rem;
 }
 
-.Learn-selfPaced .Learn-card {
-  height: 20.3125rem;
-}
-
 @media only screen and (min-width: 48rem) {
-  .Learn-learningResourcesHeader {
-    display: flex;
-    justify-content: flex-start;
-  }
-
   .Learn-learningResourcesHeader h2,
   .Security-sectionHeader h2 {
     font-size: 2.25rem;
@@ -2388,63 +2577,39 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 .Learn-cardList.Learn-bookList {
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
+  grid-gap: 0;
 }
 
 .Learn-card.Learn-book {
   height: auto;
+  max-width: 26.5rem;
 }
 
 @media only screen and (min-width: 48rem) {
   .Learn-cardList.Learn-bookList {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .Learn-card.Learn-book {
-    max-width: 13.125rem;
-  }
-}
-
-@media only screen and (min-width: 57.7rem) {
-  .Learn-cardList.Learn-bookList {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media only screen and (min-width: 72.75rem) {
-  .Learn-cardList.Learn-bookList {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 .Learn-inPersonList {
-  display: flex;
-  flex: 1 0 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
   list-style: none;
-  margin: 1.875rem 0 1.875rem -1rem; /* Offset gutters for the leftmost and top cells in the grid. */
   padding-left: 0;
+  grid-template-columns: repeat(1, 1fr);
 }
 
 .Learn-inPerson {
-  border-bottom: var(--border);
   flex: 1 1 31.25rem;
-  margin: 0 0 0 1rem; /* Gutter between grid cells. */
-  max-width: 31rem;
+  max-width: 36.5rem;
   padding-bottom: 1.25rem;
 }
 
-.Learn-inPerson:nth-child(1),
-.Learn-inPerson:nth-child(2) {
-  border-top: var(--border);
-}
 .Learn-inPersonTitle {
   font-size: 1.25rem;
 }
 .Learn-inPersonBlurb {
   color: var(--color-text);
-  margin: 0;
+  line-height: 1.75rem;
 }
 
 .Learn-events {
@@ -2606,6 +2771,9 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   .Learn-tileList {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+  .Learn-inPersonBlurb {
+    margin-right: 10rem;
+  }
 }
 @media only screen and (min-width: 48rem) {
   .Learn-tileList {
@@ -2613,6 +2781,9 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   }
   .Learn-tileList {
     column-gap: 3rem;
+  }
+  .Learn-inPersonList {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 .Learn-tile {
@@ -2863,6 +3034,67 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
 .Solutions-useCasesHeader h2,
 .Solutions-caseStudiesHeader h2 {
 }
+.MarketingCardList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.75rem;
+  padding: unset;
+}
+.MarketingCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.75rem;
+  text-align: left;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  min-height: 24.625rem;
+  background: var(--color-background);
+  border: var(--border);
+  border-radius: 0.25rem;
+}
+.MarketingCard a:hover {
+  text-decoration: none;
+}
+.MarketingCard-section {
+  margin-top: 2.625rem;
+}
+.MarketingCard-section__bottom {
+  position: absolute;
+  bottom: 2.625rem;
+}
+.MarketingCard-section__spacer {
+  padding-bottom: 6.25rem;
+}
+.MarketingCard-title {
+  color: var(--color-text);
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  font-style: normal;
+}
+.MarketingCard-body {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.1px;
+  color: var(--color-text-subtle);
+}
+.MarketingCard-action {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.1px;
+  color: var(--color-text-link);
+  background: unset;
+  border: none;
+  padding: unset;
+  cursor: pointer;
+}
 .Solutions-cardList,
 .Solutions-caseStudyList {
   display: grid;
@@ -2885,7 +3117,7 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
   flex: 0 100%;
 }
 @media only screen and (min-width: 38rem) {
-  .Solutions-cardList {
+  .Solutions-cardList, .MarketingCardList {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -2898,7 +3130,7 @@ a.WhoUsesCaseStudy-librariesViewMoreLink {
     box-shadow: 0 0.125rem 0.5rem 0 rgba(0, 0, 0, 0.22);
     transition: all 0.2s ease-in-out;
   }
-  .Solutions-cardList {
+  .Solutions-cardList, .MarketingCardList {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -3546,7 +3778,7 @@ p.BackgroundQuote-body {
   flex-direction: column;
 }
 .UseCaseSubNav-anchorLinks--sticky {
-  position: fixed;
+  position: sticky;
   top: 2rem;
 }
 a.UseCase-anchorLink {
@@ -3725,7 +3957,78 @@ a.UseCase-anchorLink.selected::before {
 img.PullQuote-image {
   width: 2.625rem;
 }
-
+.FlatCard {
+  border: var(--border);
+  border-radius: 0.25rem;
+  padding: 0 1.5rem;
+  padding-bottom: 0.75rem;
+  width: 100%;
+  min-height: 11.25rem;
+}
+.FlatCard-wrapper {
+  display: grid;
+  grid-gap: 2rem;
+  grid-auto-flow: row;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 1rem;
+}
+.FlatCard-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+.FlatCard-bottom-spacer {
+  margin-bottom: 4rem;
+}
+.FlatCard-column .FlatCard {
+  width: 100%;
+}
+.FlatCard h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size:  1rem;
+  line-height: 1.5rem;
+}
+.Masonry {
+  column-count: 1;
+  column-gap: 3.5rem;
+  row-gap: 3.5rem;
+  column-fill: balance;
+}
+.BigCard {
+  border: var(--border);
+  border-radius: 0.25rem;
+  padding: 0 1.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+.Masonry .BigCard {
+  margin-bottom: unset;
+  margin-top: 1.5rem;
+  min-width: 33%;
+  height: max-content;
+  display: inline-block;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  width: 100%;
+}
+.BigCard h2 {
+  margin-top: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 2rem;
+  border-bottom: var(--border);
+  padding-bottom: 0.5rem;
+}
+@media only screen and (min-width: 48rem) {
+  .Masonry {
+    column-count: 2;
+  }
+}
 .Card {
   background-color: var(--white);
   border: var(--border);
@@ -3775,14 +4078,21 @@ img.PullQuote-image {
 
 .Card-contentBody {
   color: var(--color-text-subtle);
-  flex: auto;
   font-size: 0.875rem;
   margin-top: 1rem;
+}
+
+.Card-lineClamp {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
 }
 
 .Card-contentCta {
   align-items: center;
   display: flex;
+  margin-top: auto;
 }
 
 .Card-contentCta span {
@@ -3817,9 +4127,8 @@ img.PullQuote-image {
 }
 
 .Book-inner {
-  align-items: flex-start;
   display: flex;
-  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .Book-thumbnail {
@@ -3827,18 +4136,31 @@ img.PullQuote-image {
 }
 
 .Book-thumbnail img {
-  width: 100%;
+  width: 6.25rem;
+  height: 7.875rem;
+  border-radius: 0.625rem;
+  filter: drop-shadow(0 0.125rem 0.125rem rgba(200, 200, 200, 0.29458));
 }
 
 .Book-content {
-  flex: 1;
-  margin-left: 1.6875rem;
+  margin-left: 2rem;
+}
+
+.Book-eyebrow {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.688rem;
+  letter-spacing: 0.063rem;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  margin-top: 0;
 }
 
 .Book-title {
   color: var(--color-text);
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
   margin: 0 0 0.5rem;
 }
 
@@ -3855,20 +4177,11 @@ img.PullQuote-image {
 
 .Book-cta span {
   margin-right: 0.6875rem;
-}
-
-@media only screen and (min-width: 48rem) {
-  .Book-inner {
-    flex-direction: column;
-  }
-
-  .Book-thumbnail {
-    width: 100%;
-  }
-
-  .Book-content {
-    margin: 1rem 0 0;
-  }
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  letter-spacing: 0.016rem;
 }
 
 #blog h1.small {
@@ -4264,6 +4577,12 @@ a.error {
   padding: 0;
   border-radius: 0;
 }
+.Playground-output .stderr {
+  color: var(--color-text-alert);
+}
+.Playground-output .system {
+  color: var(--color-text-subtle);
+}
 .Playground-inputContainer,
 .Playground-input {
   background: var(--color-background-playground-input);
@@ -4443,6 +4762,43 @@ h2.Playground-about {
 }
 .toggleButton {
   cursor: pointer;
+  background-color: var(--color-background-accented);
+  padding: 0.5rem;
+}
+h3.toggleButton {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+}
+#archive h2.toggleButton {
+  background-color: var(--color-background);
+}
+.toggleButton span.toggleText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--color-text-link);
+  margin-left: 0.625rem;
+}
+.toggleButton-img {
+  display: block;
+}
+.toggleButton-img-dark {
+  display: none;
+}
+[data-theme='dark'] .toggleButton-img {
+  display: none;
+}
+[data-theme='dark'] .toggleButton-img-dark {
+  display: block;
+}
+.toggle .collapsed img {
+  transform: rotate(180deg);
 }
 .toggle > .collapsed {
   display: block;
@@ -4539,12 +4895,16 @@ div.play .buttons {
 div.play .buttons .Button {
   margin-left: 0.3125rem;
 }
+
+/* TODO(rsc): are these selectors stale? It looks like they were not ported to go.dev/play.
+ * See for example .Playground-output .stderr. */
 .output .stderr {
   color: #933;
 }
 .output .system {
   color: #999;
 }
+
 .permalink {
   display: none;
 }
@@ -4592,25 +4952,37 @@ th.pkg-name {
   border-bottom: var(--border);
 }
 .TabSection-tab {
-  background: var(--color-background-accented);
+  background: var(--color-background);
   border: none;
   color: var(--color-text);
   line-height: 3rem;
   padding: 0 1.125rem;
   position: relative;
+  border-radius: 0.3125rem;
+}
+.TabSection-underline {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.TabSection-tab[aria-selected='true'] .TabSection-underline {
+  display: block;
+  background-color: var(--color-background);
 }
 .TabSection-tab[aria-selected='true'] {
-  background-color: #e0ebf5;
-  color: black;
+  color: var(--color-text-link);
   outline: 0;
 }
 .TabSection-tab:focus {
-  background-color: #e0ebf5;
-  color: black;
+  color: var(--color-text-link);
   outline: 0;
 }
 .TabSection-tabPanel {
   font-size: 0.875rem;
+  padding: 1rem 0;
 }
 /* Tutorial previous and next links */
 .Navigation {
@@ -4658,11 +5030,14 @@ th.pkg-name {
   height: 3rem;
 }
 /* for doc/install */
-a#start {
-  background: #e0ebf5;
-  border: 0.0625rem solid #375eab;
+a.btn {
+  background: var(--deep-cerulian);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1rem;
   border-radius: 0.3125rem;
-  color: #222;
+  color: #FFF;
   display: block;
   padding: 0.625rem;
   text-align: center;
@@ -4680,19 +5055,38 @@ a#start .desc {
   margin-top: 0.3125rem;
 }
 .download {
-  width: 17.5rem;
+  width: 10.25rem;
+  height: 2.5rem;
 }
 table.downloadtable {
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 100%;
   border-collapse: collapse;
 }
-table.downloadtable tr {
-  background-color: var(--color-background-accented);
+table.downloadtable thead {
+  border: 2px solid var(--color-background-accented);
 }
 table.downloadtable tr:nth-child(2n),
-table.downloadtable tr.first {
+table.downloadtable tr.first,
+table.downloadtable tr {
   background-color: var(--color-background);
+  border: 2px solid var(--color-background-accented);
+}
+
+table.downloadtable tr.first th {
+  text-align: left;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+table.downloadtable td {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+table.downloadtable td.filename, table.downloadtable tr.first th:nth-child(1) {
+  padding-left: 4.5rem;
 }
 table.downloadtable td,
 table.downloadtable th {
@@ -4706,29 +5100,44 @@ table.downloadtable tr.highlight td {
   font-weight: bold;
 }
 a.downloadBox {
-  display: block;
-  color: #222;
-  border: 0.0625rem solid #375eab;
-  border-radius: 5px;
-  background: #e0ebf5;
-  width: 280px;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  background: var(--color-background-accented);
+  width: 13.875rem;
+  height: 8.375rem;
   float: left;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
+  padding: 1rem;
 }
 a.downloadBox:hover {
   text-decoration: none;
 }
 .downloadBox .platform {
   font-size: large;
+  margin-bottom: 0.75rem;
+}
+.downloadWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 .downloadBox .filename {
-  color: var(--color-text-link);
-  font-weight: bold;
-  line-height: 1.5em;
+  display: flex;
+  align-items: center;
+  margin-top: auto;
 }
-a.downloadBox:hover .filename {
+.downloadBox .filename img {
+  margin-right: 0.375rem;
+}
+.downloadBox .filename span {
+  color: var(--color-text-link);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+}
+a.downloadBox:hover .filename span {
   text-decoration: underline;
 }
 .downloadBox .size {
@@ -4736,8 +5145,11 @@ a.downloadBox:hover .filename {
   font-weight: normal;
 }
 .downloadBox .reqs {
-  font-size: small;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-text-subtle);
 }
 .downloadBox .checksum {
   font-size: 5pt;

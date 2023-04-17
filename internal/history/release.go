@@ -5,7 +5,7 @@
 // Package history stores historical data for the Go project.
 package history
 
-import "golang.org/x/website/internal/backport/html/template"
+import "html/template"
 
 // Releases summarizes the changes between official stable releases of Go.
 // It contains entries for all releases of Go, but releases older than Go 1.9
@@ -14,6 +14,101 @@ import "golang.org/x/website/internal/backport/html/template"
 //
 // The table is sorted by date, breaking ties with newer versions first.
 var Releases = []*Release{
+	{
+		Date: Date{2023, 4, 4}, Version: Version{1, 20, 3},
+		Security: &FixSummary{Packages: []string{"go/parser", "html/template", "mime/multipart", "net/http", "net/textproto"}},
+		Bug: &FixSummary{
+			// "the go command" omitted because its fix is test-only.
+			Components: []template.HTML{"the compiler", "the linker", "the runtime"},
+			// "math/big" omitted because its fix is documentation-only.
+			// "internal/testpty" omitted because its fix is test-only.
+			Packages: []string{"time"},
+		},
+	},
+	{
+		Date: Date{2023, 4, 4}, Version: Version{1, 19, 8},
+		Security: &FixSummary{Packages: []string{"go/parser", "html/template", "mime/multipart", "net/http", "net/textproto"}},
+		Bug: &FixSummary{
+			// "the go command" omitted because its fix is test-only.
+			Components: []template.HTML{"the linker", "the runtime"},
+			// "internal/testpty" omitted because its fix is test-only.
+			// "runtime/pprof" omitted because its fix is test-only.
+			Packages: []string{"time"},
+		},
+	},
+	{
+		Date: Date{2023, 3, 7}, Version: Version{1, 20, 2},
+		Security: &FixSummary{Quantifier: "a", Packages: []string{"crypto/elliptic"}},
+		Bug: &FixSummary{
+			Components: []template.HTML{"the compiler", "the <code>covdata</code> command", "the linker", "the runtime"},
+			Packages:   []string{"crypto/ecdh", "crypto/rsa", "crypto/x509", "os", "syscall"}, // "net" omitted because its fix is test-only.
+		},
+	},
+	{
+		Date: Date{2023, 3, 7}, Version: Version{1, 19, 7},
+		Security: &FixSummary{Quantifier: "a", Packages: []string{"crypto/elliptic"}},
+		Bug: &FixSummary{
+			Components: []template.HTML{"the linker", "the runtime"},
+			Packages:   []string{"crypto/x509", "syscall"}, // "net" omitted because its fix is test-only.
+		},
+	},
+	{
+		Date: Date{2023, 2, 14}, Version: Version{1, 20, 1},
+		Security: &FixSummary{
+			Packages: []string{"crypto/tls", "mime/multipart", "net/http", "path/filepath"},
+		},
+		Bug: &FixSummary{
+			Components: []template.HTML{"the compiler", "the <code>go</code> command", "the linker", "the runtime"},
+			Packages:   []string{"time"},
+		},
+	},
+	{
+		Date: Date{2023, 2, 14}, Version: Version{1, 19, 6},
+		Security: &FixSummary{
+			Packages: []string{"crypto/tls", "mime/multipart", "net/http", "path/filepath"},
+		},
+		Bug: &FixSummary{
+			Components: []template.HTML{"the <code>go</code> command", "the linker", "the runtime"},
+			Packages:   []string{"crypto/x509", "net/http", "time"},
+		},
+	},
+	{
+		Date: Date{2023, 2, 1}, Version: Version{1, 20, 0},
+	},
+	{
+		Date: Date{2023, 1, 10}, Version: Version{1, 19, 5},
+		Bug: &FixSummary{
+			Components: []template.HTML{"the compiler", "the linker"},
+			Packages:   []string{"crypto/x509", "net/http", "sync/atomic", "syscall"},
+		},
+	},
+	{
+		Date: Date{2023, 1, 10}, Version: Version{1, 18, 10},
+		Bug: &FixSummary{
+			Components: []template.HTML{"cgo", "the compiler", "the linker"},
+			Packages:   []string{"crypto/x509", "net/http", "syscall"},
+		},
+	},
+	{
+		Date: Date{2022, 12, 6}, Version: Version{1, 19, 4},
+		Security: &FixSummary{
+			Packages: []string{"net/http", "os"},
+		},
+		Bug: &FixSummary{
+			Components: []template.HTML{"the compiler", "the runtime"},
+			Packages:   []string{"crypto/x509", "os/exec", "sync/atomic"},
+		},
+	},
+	{
+		Date: Date{2022, 12, 6}, Version: Version{1, 18, 9},
+		Security: &FixSummary{
+			Packages: []string{"net/http", "os"},
+		},
+		Bug: &FixSummary{
+			Components: []template.HTML{"cgo", "the compiler", "the runtime"},
+			Packages:   []string{"crypto/x509", "os/exec"},
+		},
+	},
 	{
 		Date: Date{2022, 11, 1}, Version: Version{1, 19, 3},
 		Security: &FixSummary{

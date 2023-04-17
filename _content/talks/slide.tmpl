@@ -1,0 +1,194 @@
+{{define "entirepage" -}}
+{{with .doc -}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{.Title}}</title>
+    <meta charset='utf-8'>
+    <script>
+      var notesEnabled = {{$.NotesEnabled}};
+    </script>
+    <script src='/talks/static/slides.js'></script>
+
+    {{if $.NotesEnabled}}
+    <script>
+      var sections = {{.Sections}};
+      var titleNotes = {{.TitleNotes}}
+    </script>
+    <script src='/talks/static/notes.js'></script>
+    {{end}}
+
+    <script>
+      // Initialize Google Analytics tracking code on production site only.
+      if (window["location"] && window["location"]["hostname"] == "go.dev/talks") {
+        var _gaq = _gaq || [];
+        _gaq.push(["_setAccount", "UA-11222381-6"]);
+        _gaq.push(["b._setAccount", "UA-49880327-6"]);
+        window.trackPageview = function() {
+          _gaq.push(["_trackPageview", location.pathname+location.hash]);
+          _gaq.push(["b._trackPageview", location.pathname+location.hash]);
+        };
+        window.trackPageview();
+        window.trackEvent = function(category, action, opt_label, opt_value, opt_noninteraction) {
+          _gaq.push(["_trackEvent", category, action, opt_label, opt_value, opt_noninteraction]);
+          _gaq.push(["b._trackEvent", category, action, opt_label, opt_value, opt_noninteraction]);
+        };
+      }
+    </script>
+  </head>
+
+  <body style='display: none'>
+
+    <section class='slides layout-widescreen'>
+
+      <article>
+        <h1>{{.Title}}</h1>
+        {{with .Subtitle}}<h3>{{.}}</h3>{{end}}
+        {{if not .Time.IsZero}}<h3>{{.Time.Format "2 January 2006"}}</h3>{{end}}
+        {{range .Authors}}
+          <div class="presenter">
+            {{range .TextElem}}{{fmt .}}{{end}}
+          </div>
+        {{end}}
+      </article>
+
+  {{range $i, $s := .Sections}}
+  <!-- start of slide {{$s.Number}} -->
+      <article {{$s.HTMLAttributes}}>
+      {{if $s.Elem}}
+        <h3>{{$s.Title}}</h3>
+        {{range $s.Elem}}{{fmt .}}{{end}}
+      {{else}}
+        <h2>{{$s.Title}}</h2>
+      {{end}}
+      <span class="pagenumber">{{pagenum $s 1}}</span>
+      </article>
+  <!-- end of slide {{$s.Number}} -->
+  {{end}}{{/* of Slide block */}}
+
+      <article>
+        <h3>Thank you</h3>
+        {{range .Authors}}
+          <div class="presenter">
+            {{range .Elem}}{{fmt .}}{{end}}
+          </div>
+        {{end}}
+      </article>
+
+    </section>
+
+    <div id="help">
+      Use the left and right arrow keys or click the left and right
+      edges of the page to navigate between slides.<br>
+      (Press 'H' or navigate to hide this message.)
+    </div>
+
+    {{if $.PlayEnabled}}
+    <script src='/talks/static/play.js'></script>
+    {{end}}
+
+    <script>
+      (function() {
+        // Load Google Analytics tracking code on production site only.
+        if (window["location"] && window["location"]["hostname"] == "go.dev/talks") {
+          var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+          ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+          var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+        }
+      })();
+    </script>
+  </body>
+</html>
+{{end}}
+{{end}}
+
+{{define "newline"}}
+<br>
+{{end}}
+
+{{define "pagenum s offset" -}}
+  {{if len .s.Number -}}
+    {{add (index .s.Number 0) .offset -}}
+  {{else -}}
+    {{.offset -}}
+  {{end -}}
+{{end}}
+
+{{define "fmt" -}}
+  {{$kind := .TemplateName -}}
+  {{if eq $kind "section"}}{{section . -}}
+  {{else if eq $kind "list"}}{{list . -}}
+  {{else if eq $kind "text"}}{{text . -}}
+  {{else if eq $kind "code"}}{{code . -}}
+  {{else if eq $kind "image"}}{{image . -}}
+  {{else if eq $kind "video"}}{{video . -}}
+  {{else if eq $kind "background"}}{{background . -}}
+  {{else if eq $kind "iframe"}}{{iframe . -}}
+  {{else if eq $kind "link"}}{{link . -}}
+  {{else if eq $kind "html"}}{{template "html" . -}} {{/* Work around https://github.com/rsc/tmplfunc/issues/1. */ -}}
+  {{else if eq $kind "caption"}}{{caption . -}}
+  {{else}}???{{$kind}}???
+  {{- end -}}
+{{end}}
+
+{{define "section"}}
+  <h{{len .Number}} id="TOC_{{.FormattedNumber}}">{{.FormattedNumber}} {{.Title}}</h{{len .Number}}>
+  {{range .Elem}}{{fmt .}}{{end}}
+{{end}}
+
+{{define "list"}}
+  <ul>
+  {{range .Bullet}}
+    <li>{{style .}}</li>
+  {{end}}
+  </ul>
+{{end}}
+
+{{define "text"}}
+  {{if .Pre}}
+  <div class="code"><pre>{{range .Lines}}{{.}}{{end}}</pre></div>
+  {{else}}
+  <p>
+    {{range $i, $l := .Lines}}{{if $i}}{{template "newline"}}
+    {{end}}{{style $l}}{{end}}
+  </p>
+  {{end}}
+{{end}}
+
+{{define "code"}}
+  <div class="code{{if eq .Ext ".go"}} playground{{end}}" {{if .Edit}}contenteditable="true" spellcheck="false"{{end}}>{{raw .Text}}</div>
+{{end}}
+
+{{define "image"}}
+<div class="image">
+  <img src="{{.URL}}"{{with .Height}} height="{{.}}"{{end}}{{with .Width}} width="{{.}}"{{end}}>
+</div>
+{{end}}
+
+{{define "video"}}
+<div class="video">
+  <video {{with .Height}} height="{{.}}"{{end}}{{with .Width}} width="{{.}}"{{end}} controls>
+    <source src="{{.URL}}" type="{{.SourceType}}">
+  </video>
+</div>
+{{end}}
+
+{{define "background"}}
+<div class="background">
+  <img src="{{.URL}}">
+</div>
+{{end}}
+
+{{define "iframe"}}
+<iframe src="{{.URL}}"{{with .Height}} height="{{.}}"{{end}}{{with .Width}} width="{{.}}"{{end}}></iframe>
+{{end}}
+
+{{define "link"}}<p class="link"><a href="{{.URL}}" target="_blank">{{style .Label}}</a></p>{{end}}
+
+{{define "html"}}{{.HTML}}{{end}}
+
+{{define "caption"}}<figcaption>{{style .Text}}</figcaption>{{end}}
+
+{{define "style" -}}
+{{presentStyle . -}}
+{{end}}

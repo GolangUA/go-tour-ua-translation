@@ -4,7 +4,7 @@
 
 steps:
   - name: gcr.io/cloud-builders/git
-    args: ["clone", "--branch=master", "--depth=1", "https://go.googlesource.com/go", "_gotmp"]
+    args: ["clone", "--branch=release-branch.go1.20", "--depth=1", "https://go.googlesource.com/go", "_gotmp"]
   - name: gcr.io/cloud-builders/git
     args: ["archive", "--format=zip", "--output=../_goroot.zip", "HEAD"]
     dir: _gotmp
@@ -20,3 +20,6 @@ steps:
     args: ["./go-app-deploy.sh", "cmd/golangorg/app.yaml"]
   - name: golang
     args: ["go", "run", "./cmd/versionprune", "--dry_run=false", "--project=$PROJECT_ID", "--service=default"]
+
+options:
+  machineType: N1_HIGHCPU_8

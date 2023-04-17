@@ -11,10 +11,7 @@ The Go vulnerability database ([https://vuln.go.dev](https://vuln.go.dev))
 serves Go vulnerability information in the
 [Open Source Vulnerability (OSV) schema](https://ossf.github.io/osv-schema/).
 
-We recommend using
-[golang.org/x/vuln/client](https://pkg.go.dev/golang.org/x/vuln/client) to read
-data from the Go vulnerability database. You can also browse vulnerabilities
-in the database at [pkg.go.dev/vuln](https://pkg.go.dev/vuln).
+You can also browse vulnerabilities in the database at [pkg.go.dev/vuln](https://pkg.go.dev/vuln).
 
 **Do not** rely on the contents of the x/vulndb Git repository. The YAML files in that
 repository are maintained using an internal format that may change
@@ -56,16 +53,16 @@ The vulnerability database supports the endpoints listed below. For each path:
 - `$module` is a module path
 - `$vuln` is a Go vulnerability ID (for example, GO-2021-1234)
 
-To avoid various character set issues, the `$module` element is encoded
-using [module.EncodePath](https://pkg.go.dev/golang.org/x/mod/module/#EncodePath).
+To avoid various character set issues, the `$module` element is escaped
+using [module.EscapePath](https://pkg.go.dev/golang.org/x/mod/module#EscapePath).
 
 The endpoints are:
 
 - `$base/index.json`
-   List of module paths in the database mapped to its last modified timestamp ([link](https://vuln.go.dev/index.json)).
+   A map from module paths to their last modified timestamp ([link](https://vuln.go.dev/index.json)).
 
 - `$base/$module.json`
-   List of vulnerability entries for that module ([example](https://vuln.go.dev/golang.org/x/crypto.json)).
+   A list of all vulnerability reports for the escaped module path `$module` ([example](https://vuln.go.dev/golang.org/x/crypto.json), [escaped example](https://vuln.go.dev/github.com/!robots!and!pencils/go-saml.json)).
 
 - `$base/ID/$vuln.json`
    An individual Go vulnerability report ([example](https://vuln.go.dev/ID/GO-2022-0191.json)).
@@ -104,8 +101,7 @@ required fields:
 The
 [affected[].ecosystem_specific](https://ossf.github.io/osv-schema/#affectedecosystem_specific-field)
 field is a JSON object with additional information about the vulnerability,
-which is used by [package
-vulncheck](https://pkg.go.dev/golang.org/x/vuln/vulncheck).
+which is used by Go's vulnerability detection tools.
 
 For now, ecosystem specific will always be an object with a single field,
 `imports`.
@@ -120,6 +116,11 @@ array will have these two fields:
 - **symbols:** a string array with the names of the symbols (function or method) that contains the vulnerability
 - **goos**: a string array with the execution operating system where the symbols appear, if known
 - **goarch**: a string array with the architecture where the symbols appear, if known
+
+### database_specific.url
+
+The `database_specific.url` field is a string representing the fully-qualified
+URL of the Go vulnerability report, e.g, "https://pkg.go.dev/vuln/GO-2023-1621".
 
 For information on other fields in the schema, refer to the [OSV spec](https://ossf.github.io/osv-schema).
 
