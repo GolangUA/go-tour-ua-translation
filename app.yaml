@@ -4,7 +4,7 @@ default_expiration: "7d"
 
 handlers:
 
-# Keep these static file handlers in sync with local.go.
+# Keep these static file handlers in sync with main.go.
 # They're here for improved latency across global regions.
 - url: /favicon.ico
   static_files: static/img/favicon.ico
