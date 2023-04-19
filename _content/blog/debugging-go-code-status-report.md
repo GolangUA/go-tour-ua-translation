@@ -1,3 +1,0 @@
----
-redirect: /blog/debug-status
----

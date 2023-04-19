@@ -1,3 +1,0 @@
----
-redirect: /security/vuln/vulncheck
----

@@ -1,6 +1,0 @@
-GET https://any/
-redirect == /tour/
-
-GET https://any/tour/
-body contains >A Tour of Go<
-

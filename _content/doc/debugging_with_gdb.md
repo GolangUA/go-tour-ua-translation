@@ -1,3 +1,0 @@
-<!--{
-	"Redirect": "/doc/gdb"
-}-->
