@@ -10,7 +10,7 @@ angular.module('tour.values', []).
 value('tableOfContents', [{
     'id': 'mechanics',
     'title': 'Використання туру',
-    'description': '<p>Ласкаво просимо до <a href="https://golang.org">Go туру</a>. Цей інтерактивний посібник охоплює розгляд наголовніших компонентів мови, включаючи:</p>',
+    'description': '<p>Ласкаво просимо до <a href="https://golang.org">Go спільноти</a>. Цей інтерактивний посібник охоплює розгляд наголовніших компонентів мови, включаючи:</p>',
     'lessons': ['welcome']
 }, {
     'id': 'basics',
