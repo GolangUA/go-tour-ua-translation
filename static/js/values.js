@@ -9,23 +9,23 @@ angular.module('tour.values', []).
 // List of modules with description and lessons in it.
 value('tableOfContents', [{
     'id': 'mechanics',
-    'title': 'Using the tour',
-    'description': '<p>Welcome to a tour of the <a href="https://golang.org">Go programming language</a>. The tour covers the most important features of the language, mainly:</p>',
+    'title': 'Використання туру',
+    'description': '<p>Ласкаво просимо до <a href="https://golang.org">Go туру</a>. Цей інтерактивний посібник охоплює розгляд наголовніших компонентів мови, включаючи:</p>',
     'lessons': ['welcome']
 }, {
     'id': 'basics',
-    'title': 'Basics',
-    'description': '<p>The starting point, learn all the basics of the language.</p><p>Declaring variables, calling functions, and all the things you need to know before moving to the next lessons.</p>',
+    'title': 'Основи',
+    'description': '<p>Самий початок, вивчіть основні компоненти мови.</p><p>Оголошення змінних, виклик функцій та інші речі, знання котрих є необхідним для просування далі.</p>',
     'lessons': ['basics', 'flowcontrol', 'moretypes']
 }, {
     'id': 'methods',
-    'title': 'Methods and interfaces',
-    'description': '<p>Learn how to define methods on types, how to declare interfaces, and how to put everything together.</p>',
+    'title': 'Методи та інтерфейси',
+    'description': '<p>Дізнайтеся, як створювати методи для різних типів, як оголошувати інтерфейси та як це використовується разом.</p>',
     'lessons': ['methods']
 }, {
     'id': 'concurrency',
-    'title': 'Concurrency',
-    'description': '<p>Go provides concurrency features as part of the core language.</p><p>This module goes over goroutines and channels, and how they are used to implement different concurrency patterns.</p>',
+    'title': 'Конкурентність',
+    'description': '<p>Go надає інструменти для роботи з конкурентністю разом з основами мови.</p><p>В цьому модулі розглядаються горутини та канали, а також їх використання для побудови різноманітних конкурентних патернів</p>',
     'lessons': ['concurrency']
 }]).
 
