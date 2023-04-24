@@ -1,4 +1,5 @@
-// +build no-build OMIT
+//go:build ignore || OMIT
+// +build ignore OMIT
 
 package main
 
@@ -16,8 +17,8 @@ func main() {
 	f := MyFloat(-math.Sqrt2)
 	v := Vertex{3, 4}
 
-	a = f  // Тип MyFloat реалізовує інтерфейс Abser
-	a = &v // Тип *Vertex реалізовує інтерфейс Abser
+	a = f  // тип MyFloat реалізовує інтерфейс Abser
+	a = &v // тип *Vertex реалізовує інтерфейс Abser
 
 	// Наступний рядок коду є невірним, на що компілятор видасть помилку.
 	// Змінна v має тип Vertex (не *Vertex) і таким чином не реалізовує

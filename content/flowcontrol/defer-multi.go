@@ -6,11 +6,11 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("рахуємо")
+	fmt.Println("Рахуємо")
 
 	for i := 0; i < 10; i++ {
 		defer fmt.Println(i)
 	}
 
-	fmt.Println("завершено")
+	fmt.Println("Завершено")
 }
