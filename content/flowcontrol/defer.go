@@ -8,5 +8,5 @@ import "fmt"
 func main() {
 	defer fmt.Println("світ")
 
-	fmt.Println("привіт")
+	fmt.Println("Привіт")
 }
