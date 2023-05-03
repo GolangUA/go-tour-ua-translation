@@ -2,6 +2,13 @@ runtime: go120
 
 default_expiration: "7d"
 
+automatic_scaling:
+  min_idle_instances: automatic
+  max_idle_instances: 1
+  min_pending_latency: automatic
+  max_pending_latency: 0.030s
+  max_instances: 4
+
 handlers:
 
 # Keep these static file handlers in sync with main.go.
