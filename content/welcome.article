@@ -37,7 +37,7 @@ https://golang.org
 
 Коли ви натискаєте на [[javascript:highlightAndClick("#format")][Format]]
 (швидкий доступ: `Ctrl` + `Enter`), текст в редакторі форматується за допомогою
-інструменту [[/cmd/gofmt/][gofmt]]. Ви можете вмикати та вимикати підсвічування синтаксису,
+інструменту [[https://go.dev/cmd/gofmt/][gofmt]]. Ви можете вмикати та вимикати підсвічування синтаксису,
 натиснувши на кнопку [[javascript:highlightAndClick(".syntax-checkbox")][syntax]].
 
 Коли будете готові рушати далі, натисніть на кнопку [[javascript:highlightAndClick(".next-page")][right arrow]] нижче або натисніть кнопку `PageDown`.
@@ -52,7 +52,7 @@ https://golang.org
 - [[https://go-tour-ca.appspot.com/][Catalan — Català]]
 - [[https://tour.go-zh.org/][Simplified Chinese — 中文（简体）]]
 - [[https://go-tour-cz.appspot.com/][Czech — Česky]]
-- [[https://go.dev/tour//][English - English]]
+- [[https://go.dev/tour/][English - English]]
 - [[https://go-tour-id2.appspot.com/][Indonesian — Bahasa Indonesia]]
 - [[https://go-tour-jp.appspot.com/][Japanese — 日本語]]
 - [[https://go-tour-ko.appspot.com/][Korean — 한국어]]
@@ -68,7 +68,7 @@ https://golang.org
 #appengine: вашому комп'ютері.
 #appengine:
 #appengine: Щоб запустити тур локально, вам потрібно спочатку
-#appengine: [[/doc/install][встановити Go]] а потім виконати:
+#appengine: [[https://go.dev/doc/install][встановити Go]] а потім виконати:
 #appengine:
 #appengine:   go install golang.org/x/website/tour@latest
 #appengine:
@@ -94,7 +94,7 @@ https://golang.org
 #appengine:
 #appengine: На майданчику використовується остання стабільна версія Go.
 #appengine:
-#appengine: Щоб дізнатися більше, прочитайте "[[/blog/playground][Inside the Go Playground]]".
+#appengine: Щоб дізнатися більше, прочитайте "[[https://go.dev/blog/playground][Inside the Go Playground]]".
 #appengine:
 #appengine: .play welcome/sandbox.go
 
