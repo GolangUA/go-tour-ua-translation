@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -13,16 +12,13 @@ type T struct {
 	S string
 }
 
-
-// Додаючи функцію-метод M() до структурного типу даних T означає,
-// що даний тип реалізовує інтерфейс I; зауважте, що ніяким чином
-// не потрібно ЯВНО вказувати, що тип T реалізує конкретний інтерфейс I.
-
+// This method means type T implements the interface I,
+// but we don't need to explicitly declare that it does so.
 func (t T) M() {
 	fmt.Println(t.S)
 }
 
 func main() {
-	var i I = T{"вітаю"}
+	var i I = T{"hello"}
 	i.M()
 }

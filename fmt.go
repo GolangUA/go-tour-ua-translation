@@ -17,7 +17,7 @@ import (
 )
 
 func init() {
-	http.HandleFunc("/fmt", fmtHandler)
+	http.HandleFunc("/_/fmt", fmtHandler)
 }
 
 type fmtResponse struct {

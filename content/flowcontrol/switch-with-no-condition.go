@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -12,10 +11,10 @@ func main() {
 	t := time.Now()
 	switch {
 	case t.Hour() < 12:
-		fmt.Println("Доброго ранку!")
+		fmt.Println("Good morning!")
 	case t.Hour() < 17:
-		fmt.Println("Добрий день.")
+		fmt.Println("Good afternoon.")
 	default:
-		fmt.Println("Добрий вечір.")
+		fmt.Println("Good evening.")
 	}
 }

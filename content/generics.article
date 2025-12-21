@@ -1,40 +1,42 @@
-Параметризовані типи
-Go підтримує узагальнене програмування з використанням параметризованих типів. У цьому уроці наведено кілька прикладів використання узагальнень у вашому коді.
+Generics
+Go supports generic programming using type parameters. This lesson shows some examples for employing generics in your code.
 
-Автори Go
+The Go Authors
 https://golang.org
 
-* Параметризовані типи (англ. generics)
+* Type parameters
 
-Функції у Go можуть бути написані для роботи з декількома типами з використанням параметризованих типів. 
-Параметризовані типи у функції задаються у квадратних дужках, перед аргументами функції.
+Go functions can be written to work on multiple types using type parameters. The
+type parameters of a function appear between brackets, before the function's
+arguments.
 
   func Index[T comparable](s []T, x T) int
 
-Дане оголошення функції означає, що `s` - це слайс будь-якого типу `T`, який задовільняє
-вбудоване обмеження `comparable`. Також `x` є значенням того ж типу.
+This declaration means that `s` is a slice of any type `T` that fulfills the
+built-in constraint `comparable`. `x` is also a value of the same type.
 
-`comparable` - корисне обмеження, яке дає можливість використовувати оператори `==` та
-`!=` над значеннями типу. У даному прикладі ми використовуємо його для порівняння значення
-з усіма елементами слайсу до тих пір, доки не буде знайдено збіг. Ця функція `Index` працює
-для будь-якого типу, що підтримує порівняння.
+`comparable` is a useful constraint that makes it possible to use the `==` and
+`!=` operators on values of the type. In this example, we use it to compare a
+value to all slice elements until a match is found. This `Index` function works
+for any type that supports comparison.
 
 .play generics/index.go
 
-* Узагальнені типи
+* Generic types
 
-На додаток до узагальнених функцій, Go також підтримує загальні типи. Тип може бути параметризований `type` параметром,
-який може бути корисним для реалізації узагальнених структур даних.
+In addition to generic functions, Go also supports generic types. A type can
+be parameterized with a type parameter, which could be useful for implementing
+generic data structures.
 
-У даному прикладі демонструється просте оголошення типу для однозв'язного списку,
-що містить значення будь-якого типу.
+This example demonstrates a simple type declaration for a singly-linked list
+holding any type of value.
 
-В якості вправи завершіть реалізацію цього списку.
+As an exercise, add some functionality to this list implementation.
 
 .play generics/list.go
 
-* Вітаємо!
+* Congratulations!
 
-Ви закінчили цей урок!
+You finished this lesson!
 
-Ви можете повернутися до списку [[/tour/list][modules]], щоб знайти, що вивчати далі, або продовжити з [[javascript:click('.next-page')][next lesson]].
+You can go back to the list of [[/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].

@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -6,7 +6,7 @@ import "fmt"
 
 type IPAddr [4]byte
 
-// TODO: Створіть функцію-метод "String() string" для структурного типу IPAddr.
+// TODO: Add a "String() string" method to IPAddr.
 
 func main() {
 	hosts := map[string]IPAddr{

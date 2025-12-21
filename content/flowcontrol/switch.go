@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -9,10 +8,10 @@ import (
 )
 
 func main() {
-	fmt.Print("Go запущено на ")
+	fmt.Print("Go runs on ")
 	switch os := runtime.GOOS; os {
 	case "darwin":
-		fmt.Println("OS X.")
+		fmt.Println("macOS.")
 	case "linux":
 		fmt.Println("Linux.")
 	default:

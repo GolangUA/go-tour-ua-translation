@@ -74,12 +74,12 @@ directive('syntaxCheckbox', ['editor',
     }
 ]).
 
-// verticalSlide creates a sliding separator between the left and right elements.
+// vertical-slide creates a sliding separator between the left and right elements.
 // e.g.:
 // <div id="header">Some content</div>
 // <div vertical-slide top="#header" bottom="#footer"></div>
 // <div id="footer">Some footer</div>
-directive('verticalSlide', ['editor',
+directive('vertical-slide', ['editor',
     function(editor) {
         return function(scope, elm, attrs) {
             var moveTo = function(x) {
@@ -113,11 +113,11 @@ directive('verticalSlide', ['editor',
     }
 ]).
 
-// horizontalSlide creates a sliding separator between the top and bottom elements.
+// horizontal-slide creates a sliding separator between the top and bottom elements.
 // <div id="menu">Some menu</div>
 // <div vertical-slide left="#menu" bottom="#content"></div>
 // <div id="content">Some content</div>
-directive('horizontalSlide', ['editor',
+directive('horizontal-slide', ['editor',
     function(editor) {
         return function(scope, elm, attrs) {
             var moveTo = function(y) {
@@ -221,10 +221,16 @@ directive('feedbackButton', ['i18n', function(i18n) {
             scope.feedbackMessage = i18n.l('submit-feedback');
 
             elm.on('click', function() {
+                var customURL = i18n.l('custom-feedback-url');
+                if (customURL && customURL !== '(no translation for custom-feedback-url)') {
+                    window.open(customURL);
+                    return;
+                }
+
                 var context = window.location.pathname === '/list'
                     ? '/list'
                     : '/' + scope.params.lessonId + '/' + scope.params.pageNumber;
-	        context = window.location.protocol + '//' + window.location.host + context;
+                context = window.location.protocol + '//' + window.location.host + context;
                 var title = i18n.l('issue-title');
                 var body = i18n.l('context') + ': '+ context + '\n\n'+ i18n.l('issue-message');
                 var url = 'https://' + i18n.l('github-repo') + '/issues/new'

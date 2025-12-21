@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -20,7 +20,7 @@ func (e *MyError) Error() string {
 func run() error {
 	return &MyError{
 		time.Now(),
-		"Упс, не спрацювало!",
+		"it didn't work",
 	}
 }
 

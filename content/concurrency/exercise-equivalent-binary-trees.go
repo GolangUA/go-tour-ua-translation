@@ -1,15 +1,15 @@
-// +build no-build OMIT
+//go:build nobuild || OMIT
 
 package main
 
 import "golang.org/x/tour/tree"
 
-// Walk проходить по дереву `t` та надсилає всі значення
-// з дерева в канал `ch`.
+// Walk walks the tree t sending all values
+// from the tree to the channel ch.
 func Walk(t *tree.Tree, ch chan int)
 
-// Same визначає чи два дерева
-// `t1` та `t2` містять однакові значення.
+// Same determines whether the trees
+// t1 and t2 contain the same values.
 func Same(t1, t2 *tree.Tree) bool
 
 func main() {

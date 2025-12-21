@@ -1,149 +1,150 @@
-Додаткові типи: структури, зрізи та мапи
-Навчіться визначати типи на основі вже існуючих: в цьому уроці розглядаються структури (англ. structs), масиви (англ. arrays), зрізи (англ. slices) та мапи (англ. maps).
+More types: structs, slices, and maps.
+Learn how to define types based on existing ones: this lesson covers structs, arrays, slices, and maps.
 
-Автори Go
+The Go Authors
 https://golang.org
 
-* Вказівники (англ. pointers)
+* Pointers
 
-В Go є вказівники (також використовуються терміни "поінтери" та "покажчики").
-Вказівник містить адресу пам'яті значення.
+Go has pointers.
+A pointer holds the memory address of a value.
 
-Тип `*T` є вказівником на значення типу `T`. Його нульове значення `nil`.
+The type `*T` is a pointer to a `T` value. Its zero value is `nil`.
 
 	var p *int
 
-Оператор `&` генерує вказівник на свій операнд.
+The `&` operator generates a pointer to its operand.
 
 	i := 42
 	p = &i
 
-Оператор `*` відображає значення, на яке посилається вказівник.
+The `*` operator denotes the pointer's underlying value.
 
-	fmt.Println(*p) // читання i через вказівник p
-	*p = 21         // задати i через вказівник p
+	fmt.Println(*p) // read i through the pointer p
+	*p = 21         // set i through the pointer p
 
-Це відомо як розіменування (англ. dereferencing).
+This is known as "dereferencing" or "indirecting".
 
-На відміну від C, Go не має арифметики вказівників.
+Unlike C, Go has no pointer arithmetic.
 
 .play moretypes/pointers.go
 
-* Структури (англ. structs)
+* Structs
 
-Структура `struct` це набір полів.
+A `struct` is a collection of fields.
 
 .play moretypes/structs.go
 
-* Поля структури
+* Struct Fields
 
-Доступ до полів структури здійснюється за допомогою крапки.
+Struct fields are accessed using a dot.
 
 .play moretypes/struct-fields.go
 
-* Вказівник на структури
+* Pointers to structs
 
-Доступ до полів структури можна отримати через вказівник структури.
+Struct fields can be accessed through a struct pointer.
 
-Щоб отримати доступ до поля `X` структури, коли ми маємо вказівник структури `p`, ми можемо 
-написати `(*p).X`.
-Однак ця нотація є громіздкою, тому мова дозволяє нам натомість писати лише `p.X` без явного 
-розіменування.
+To access the field `X` of a struct when we have the struct pointer `p` we could
+write `(*p).X`.
+However, that notation is cumbersome, so the language permits us instead to
+write just `p.X`, without the explicit dereference.
 
 .play moretypes/struct-pointers.go
 
-* Літерали структури
+* Struct Literals
 
-Літерал структури позначає щойно виділене значення структури шляхом переліку значень її полів.
+A struct literal denotes a newly allocated struct value by listing the values of its fields.
 
-Ви можете перерахувати лише підмножину полів, використовуючи синтаксис `Name:`. (І порядок іменованих полів не має значення.)
+You can list just a subset of fields by using the `Name:` syntax. (And the order of named fields is irrelevant.)
 
-Спеціальний префікс `&` повертає вказівник на значення структури.
+The special prefix `&` returns a pointer to the struct value.
 
 .play moretypes/struct-literals.go
 
 
-* Масиви (англ. arrays)
+* Arrays
 
-Тип `[n]T` — це масив із `n` значень типу `T`.
+The type `[n]T` is an array of `n` values of type `T`.
 
-Вираз
+The expression
 
 	var a [10]int
 
-оголошує змінну `a` як масив із десяти цілих чисел.
+declares a variable `a` as an array of ten integers.
 
-Довжина масиву є частиною його типу, тому розмір масиву не можна змінити.
-Це здається обмеженим, але не хвилюйтеся;
-Go забезпечує зручний спосіб роботи з масивами.
+An array's length is part of its type, so arrays cannot be resized.
+This seems limiting, but don't worry;
+Go provides a convenient way of working with arrays.
 
 .play moretypes/array.go
 
 
-* Зрізи (англ. slices)
+* Slices
 
-Масив має фіксований розмір.
-З іншого боку, зріз — це гнучке представлення елементів 
-масиву динамічного розміру.
-На практиці зрізи зустрічаються набагато частіше, ніж масиви.
+An array has a fixed size.
+A slice, on the other hand, is a dynamically-sized,
+flexible view into the elements of an array.
+In practice, slices are much more common than arrays.
 
-Тип `[]T` є зрізом з елементами типу `T`.
+The type `[]T` is a slice with elements of type `T`.
 
-Зріз формується шляхом зазначення двох індексів, нижньої 
-та верхньої меж, розділених двокрапкою:
+A slice is formed by specifying two indices, a low and
+high bound, separated by a colon:
 
-	a[нижня : верхня]
+	a[low : high]
 
-Цей вираз вибирає напіввідкритий діапазон, який включає перший 
-елемент, але не включає останній.
+This selects a half-open range which includes the first
+element, but excludes the last one.
 
-Наступний вираз створює фрагмент, який включає елементи з 1 по 3 масиву `a`:
+The following expression creates a slice which includes
+elements 1 through 3 of `a`:
 
 	a[1:4]
 
 .play moretypes/slices.go
 
 
-* Зрізи схожі на вказівники на масиви
+* Slices are like references to arrays
 
-Зріз не зберігає жодних даних,
-він просто описує розділ основного масиву.
+A slice does not store any data,
+it just describes a section of an underlying array.
 
-Зміна елементів зрізу змінює відповідні
-елементи його основного масиву.
+Changing the elements of a slice modifies the
+corresponding elements of its underlying array.
 
-Інші зрізи, які мають той самий базовий масив, побачать ці зміни.
+Other slices that share the same underlying array will see those changes.
 
 .play moretypes/slices-pointers.go
 
 
-* Літерали зрізів
+* Slice literals
 
-Літерал зрізу схожий на літерал масиву без довжини.
+A slice literal is like an array literal without the length.
 
-Це літерал масиву:
+This is an array literal:
 
 	[3]bool{true, true, false}
 
-Наступний вираз створює той самий масив, що й вище, а 
-потім будує зріз, який посилається на нього:
+And this creates the same array as above,
+then builds a slice that references it:
 
 	[]bool{true, true, false}
 
 .play moretypes/slice-literals.go
 
 
-* Зріз за замовчуванням
+* Slice defaults
 
-Під час створення зрізу ви можете не зазначати верхню або нижню межі, щоб замість них використовувати стандартні значення.
+When slicing, you may omit the high or low bounds to use their defaults instead.
 
-За замовчуванням для нижньої межі встановлено нуль, а для верхньої – довжина зрізу.
+The default is zero for the low bound and the length of the slice for the high bound.
 
-Для масиву
+For the array
 
 	var a [10]int
 
-ці вирази зрізу еквівалентні:
+these slice expressions are equivalent:
 
 	a[0:10]
 	a[:10]
@@ -153,47 +154,47 @@ Go забезпечує зручний спосіб роботи з масива
 .play moretypes/slice-bounds.go
 
 
-* Довжина і ємність зрізу
+* Slice length and capacity
 
-Зріз має як _довжину_, так і _ємність_.
+A slice has both a _length_ and a _capacity_.
 
-Довжина зрізу (англ. length) - це кількість елементів, які він містить.
+The length of a slice is the number of elements it contains.
 
-Ємність зрізу (англ. capacity) — це кількість елементів у базовому масиві,
-починаючи з першого елемента фрагмента.
+The capacity of a slice is the number of elements in the underlying array,
+counting from the first element in the slice.
 
-Довжину та ємність зрізу `s` можна отримати за допомогою виразів 
-`len(s)` і `cap(s)`.
+The length and capacity of a slice `s` can be obtained using the expressions
+`len(s)` and `cap(s)`.
 
-Ви можете збільшити довжину зрізу, зробивши зріз повторно, 
-за умови, що він має достатню ємність. 
-Спробуйте змінити одну з операцій зрізу в прикладі програми, щоб розширити його 
-за межі його можливостей, і подивіться, що станеться.
+You can extend a slice's length by re-slicing it,
+provided it has sufficient capacity.
+Try changing one of the slice operations in the example program to extend it
+beyond its capacity and see what happens.
 
 .play moretypes/slice-len-cap.go
 
 
-* Нульові зрізи
+* Nil slices
 
-Нульове значення зрізу дорівнює `nil`.
+The zero value of a slice is `nil`.
 
-Нульовий фрагмент має довжину та ємність 0
-і не має під собою масиву.
+A nil slice has a length and capacity of 0
+and has no underlying array.
 
 .play moretypes/nil-slices.go
 
 
-* Створення зрізу за допомогою make
+* Creating a slice with make
 
-Зрізи можна створювати за допомогою вбудованої функції `make`;
-таким чином ви створюєте масиви динамічного розміру.
+Slices can be created with the built-in `make` function;
+this is how you create dynamically-sized arrays.
 
-Функція `make` виділяє обнулений масив 
-і повертає зріз, який посилається на цей масив:
+The `make` function allocates a zeroed array
+and returns a slice that refers to that array:
 
 	a := make([]int, 5)  // len(a)=5
 
-Щоб указати ємність, передайте третій аргумент функції `make`:
+To specify a capacity, pass a third argument to `make`:
 
 	b := make([]int, 0, 5) // len(b)=0, cap(b)=5
 
@@ -203,158 +204,158 @@ Go забезпечує зручний спосіб роботи з масива
 .play moretypes/making-slices.go
 
 
-* Зрізи зрізів
+* Slices of slices
 
-Зрізи можуть вміщати будь-який тип, включаючи інші зрізи
+Slices can contain any type, including other slices.
 
 .play moretypes/slices-of-slice.go
 
 
-* Додавання до зрізу
+* Appending to a slice
 
-Зазвичай до зрізу додаються нові елементи, тому Go надає вбудовану
-функцію `append`. [[https://go.dev/pkg/builtin/#append][Документація]]
-вбудованого пакету описує `append`.
+It is common to append new elements to a slice, and so Go provides a built-in
+`append` function. The [[https://golang.org/pkg/builtin/#append][documentation]]
+of the built-in package describes `append`.
 
 	func append(s []T, vs ...T) []T
 
-Перший параметр `s` функції `append` це зріз типу `T`, а решта - це значення
-`T`, які необхідно додати до зрізу.
+The first parameter `s` of `append` is a slice of type `T`, and the rest are
+`T` values to append to the slice.
 
-Отримане значення функції `append` це зріз, який вміщає всі елементи
-вихідного зрізу плюс додані значення.
+The resulting value of `append` is a slice containing all the elements of the
+original slice plus the provided values.
 
-Якщо масив, на який посилається зріз `s` занадто малий, щоб вмістити додані елементи, виділяється 
-більший масив. Зріз, який повертається функцією, буде посилатись на щойно виділений 
-масив.
+If the backing array of `s` is too small to fit all the given values a bigger
+array will be allocated. The returned slice will point to the newly allocated
+array.
 
-(Щоб дізнатись більше про зрізи, прочитайте статтю [[https://go.dev/blog/go-slices-usage-and-internals][Slices: usage and internals]].)
+(To learn more about slices, read the [[https://golang.org/blog/go-slices-usage-and-internals][Slices: usage and internals]] article.)
 
 .play moretypes/append.go
 
 
-* Діапазон (англ. range)
+* Range
 
-Форма `range` з циклу `for` дозволяє пройти (ітеруватись) по елементам зрізу чи мапи.
+The `range` form of the `for` loop iterates over a slice or map.
 
-Під час застосування `range` до зрізу для кожної ітерації повертаються два значення.
-Перше — це індекс, а друге — копія елемента за цим індексом.
+When ranging over a slice, two values are returned for each iteration.
+The first is the index, and the second is a copy of the element at that index.
 
 .play moretypes/range.go
 
-* Діапазон: продовження
+* Range continued
 
-Ви можете пропустити індекс або значення, вказавши `_` замість змінної.
+You can skip the index or value by assigning to `_`.
 
     for i, _ := range pow
     for _, value := range pow
 
-Якщо вам потрібен лише індекс, ви можете опустити другу змінну.
+If you only want the index, you can omit the second variable.
 
     for i := range pow
 
 .play moretypes/range-continued.go
 
-* Вправа: зрізи
+* Exercise: Slices
 
-Реалізуйте функцію `Pic`. Вона повинна повертати відрізок довжини `dy`, кожен елемент якого є відрізком `dx` 8-бітних цілих беззнакових чисел. Коли ви запустите програму, вона виведе на екран ваше зображення, інтерпретуючи цілі числа як значення у відтінках сірого (ну, або синього).
+Implement `Pic`. It should return a slice of length `dy`, each element of which is a slice of `dx` 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
 
-Вибір зображення залишається за вами. Цікавими функціями є `(x+y)/2`, `x*y` та `x^y`.
+The choice of image is up to you. Interesting functions include `(x+y)/2`, `x*y`, and `x^y`.
 
-(Для виділення кожного `[]uint8` всередині `[][]uint8` потрібно використовувати цикл).
+(You need to use a loop to allocate each `[]uint8` inside the `[][]uint8`.)
 
-(Використовуйте `uint8(intValue)` для конвертації між типами.)
+(Use `uint8(intValue)` to convert between types.)
 
 .play moretypes/exercise-slices.go
 
-* Мапи (англ. maps)
+* Maps
 
-Мапа (карта або хеш-таблиця) відображає ключі на значення.
+A map maps keys to values.
 
-Нульовим значенням мапи є `nil`.
-Така мапа не має ключів і в неї не можна їх додавати.
+The zero value of a map is `nil`.
+A `nil` map has no keys, nor can keys be added.
 
-Функція `make` повертає мапу заданого типу, 
-ініціалізовану та готову до використання.
+The `make` function returns a map of the given type,
+initialized and ready for use.
 
 .play moretypes/maps.go
 
-* Літерали мап
+* Map literals
 
-Літерали мапи подібні до структурних літералів, але з обов'язковим використанням ключів.
+Map literals are like struct literals, but the keys are required.
 
 .play moretypes/map-literals.go
 
-* Літерали мап: продовження
+* Map literals continued
 
-Якщо тип верхнього рівня є просто ім'ям типу, то його можна не включати в елементи літералу.
+If the top-level type is just a type name, you can omit it from the elements of the literal.
 
 .play moretypes/map-literals-continued.go
 
-* Зміна мап
+* Mutating Maps
 
-Вставка або оновлення елементу в мапі `m`:
+Insert or update an element in map `m`:
 
 	m[key] = elem
 
-Отримати елемент:
+Retrieve an element:
 
 	elem = m[key]
 
-Видалити елемент:
+Delete an element:
 
 	delete(m, key)
 
-Перевірити наявність ключа з допомогою присвоєння двох значень:
+Test that a key is present with a two-value assignment:
 
 	elem, ok = m[key]
 
-Якщо `key` є в `m`, то `ok` рівне `true`. Якщо ні, то `ok` рівне `false`.
+If `key` is in `m`, `ok` is `true`. If not, `ok` is `false`.
 
-Якщо `key` відсутній у мапі, то `elem` є нульовим значенням для типу елементу мапи.
+If `key` is not in the map, then `elem` is the zero value for the map's element type.
 
-*Зауваження:* якщо `elem` або `ok` ще не були оголошені, можна використати коротку форму оголошення:
+*Note:* If `elem` or `ok` have not yet been declared you could use a short declaration form:
 
 	elem, ok := m[key]
 
 .play moretypes/mutating-maps.go
 
-* Вправа: Мапи
+* Exercise: Maps
 
-Реалізуйте функцію `WordCount`.  Вона повинна повертати мапу підрахунку кожного "слова" у рядку `s`. Функція `wc.Test` виконує набір тестів для заданої функції і виводить успіх або невдачу.
+Implement `WordCount`.  It should return a map of the counts of each “word” in the string `s`. The `wc.Test` function runs a test suite against the provided function and prints success or failure.
 
-Вам може бути корисною функція [[https://go.dev/pkg/strings/#Fields][strings.Fields]].
+You might find [[https://golang.org/pkg/strings/#Fields][strings.Fields]] helpful.
 
 .play moretypes/exercise-maps.go
 
-* Значення функцій
+* Function values
 
-Функції - це теж значення. Їх можна передавати так само як і інші значення.
+Functions are values too. They can be passed around just like other values.
 
-Значення функції можуть використовуватися як аргументи функції та як значення, що повертаються.
+Function values may be used as function arguments and return values.
 
 .play moretypes/function-values.go
 
-* Закриття функцій (англ. function closures)
+* Function closures
 
-Функції в Go можуть бути закриттями. Закриття - це значення функції, яке посилається на змінні ззовні її тіла. Функція може отримувати доступ до змінних, на які вона посилається, і присвоювати їм значення; в цьому сенсі функція "прив'язана" до змінних.
+Go functions may be closures. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
 
-Наприклад, функція `adder` повертає замикання. Кожне закриття пов'язане з власною змінною `sum`.
+For example, the `adder` function returns a closure. Each closure is bound to its own `sum` variable.
 
 .play moretypes/function-closures.go
 
-* Вправа: Замикання Фібоначчі
+* Exercise: Fibonacci closure
 
-Нумо пограємось з функціями.
+Let's have some fun with functions.
 
-Реалізуйте функцію `fibonacci`, яка повертає функцію (замикання), що 
-повертає послідовні [[https://en.wikipedia.org/wiki/Fibonacci_number][числа Фібоначчі]]
+Implement a `fibonacci` function that returns a function (a closure) that
+returns successive [[https://en.wikipedia.org/wiki/Fibonacci_number][fibonacci numbers]]
 (0, 1, 1, 2, 3, 5, ...).
 
 .play moretypes/exercise-fibonacci-closure.go
 
-* Вітаємо!
+* Congratulations!
 
-Ви закінчили цей урок!
+You finished this lesson!
 
-Ви можете повернутись назад до списку [[/tour/list][модулів]], щоб вибрати, що вчити далі або продовжити навчання з [[javascript:click('.next-page')][наступним уроком]].
+You can go back to the list of [[/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].

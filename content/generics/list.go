@@ -1,7 +1,9 @@
+//go:build OMIT
+
 package main
 
-// List являє собою одиночний зв'язаний список, який містить
-// у собі значення будь якого (any) типу.
+// List represents a singly-linked list that holds
+// values of any type.
 type List[T any] struct {
 	next *List[T]
 	val  T

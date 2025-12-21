@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -8,15 +8,15 @@ func main() {
 	s := []int{2, 3, 5, 7, 11, 13}
 	printSlice(s)
 
-	// Здійснити зріз зрізу, щоб встановити йому нульову довжину.
+	// Slice the slice to give it zero length.
 	s = s[:0]
 	printSlice(s)
 
-	// Збільшити його довжину.
+	// Extend its length.
 	s = s[:4]
 	printSlice(s)
 
-	// Відкинути перші два значення.
+	// Drop its first two values.
 	s = s[2:]
 	printSlice(s)
 }

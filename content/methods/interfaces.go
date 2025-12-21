@@ -1,5 +1,4 @@
-//go:build ignore || OMIT
-// +build ignore OMIT
+//go:build nobuild || OMIT
 
 package main
 
@@ -17,13 +16,11 @@ func main() {
 	f := MyFloat(-math.Sqrt2)
 	v := Vertex{3, 4}
 
-	a = f  // тип MyFloat реалізовує інтерфейс Abser
-	a = &v // тип *Vertex реалізовує інтерфейс Abser
+	a = f  // a MyFloat implements Abser
+	a = &v // a *Vertex implements Abser
 
-	// Наступний рядок коду є невірним, на що компілятор видасть помилку.
-	// Змінна v має тип Vertex (не *Vertex) і таким чином не реалізовує
-	// інтерфейс Abser, тому неможливо виконати присвоювання до змінної а,
-	// яка має інтерфейсний тип Abser.
+	// In the following line, v is a Vertex (not *Vertex)
+	// and does NOT implement Abser.
 	a = v
 
 	fmt.Println(a.Abs())

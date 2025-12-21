@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -12,7 +11,7 @@ func fibonacci(c, quit chan int) {
 		case c <- x:
 			x, y = y, x+y
 		case <-quit:
-			fmt.Println("Вихід")
+			fmt.Println("quit")
 			return
 		}
 	}

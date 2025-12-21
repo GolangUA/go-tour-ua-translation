@@ -1,11 +1,11 @@
-// +build no-build OMIT
+//go:build nobuild || OMIT
 
 package main
 
 import "fmt"
 
-// fibonacci це функція, що повертає
-// функцію, що повертає int.
+// fibonacci is a function that returns
+// a function that returns an int.
 func fibonacci() func() int {
 }
 

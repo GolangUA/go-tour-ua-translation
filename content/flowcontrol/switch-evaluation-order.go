@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -9,16 +8,16 @@ import (
 )
 
 func main() {
-	fmt.Println("Коли Субота?")
+	fmt.Println("When's Saturday?")
 	today := time.Now().Weekday()
 	switch time.Saturday {
 	case today + 0:
-		fmt.Println("Сьогодні.")
+		fmt.Println("Today.")
 	case today + 1:
-		fmt.Println("Завтра.")
+		fmt.Println("Tomorrow.")
 	case today + 2:
-		fmt.Println("Через два дні.")
+		fmt.Println("In two days.")
 	default:
-		fmt.Println("Колись буде..")
+		fmt.Println("Too far away.")
 	}
 }

@@ -19,7 +19,6 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/tools/godoc/static"
 	"golang.org/x/tools/present"
 )
 
@@ -67,7 +66,7 @@ func initTour(root, transport string) error {
 	}
 	uiContent = buf.Bytes()
 
-	return initScript(root)
+	return initScript(root, socketAddr(), transport)
 }
 
 // initLessonss finds all the lessons in the passed directory, renders them,
@@ -225,18 +224,13 @@ func renderUI(w io.Writer) error {
 
 // initScript concatenates all the javascript files needed to render
 // the tour UI and serves the result on /script.js.
-func initScript(root string) error {
+func initScript(root, socketAddr, transport string) error {
 	modTime := time.Now()
 	b := new(bytes.Buffer)
 
-	content, ok := static.Files["playground.js"]
-	if !ok {
-		return fmt.Errorf("playground.js not found in static files")
-	}
-	b.WriteString(content)
-
 	// Keep this list in dependency order
 	files := []string{
+		"static/js/playground.js",
 		"static/lib/jquery.min.js",
 		"static/lib/jquery-ui.min.js",
 		"static/lib/angular.min.js",
@@ -260,6 +254,15 @@ func initScript(root string) error {
 			return fmt.Errorf("error concatenating %v: %v", file, err)
 		}
 	}
+
+	f, err := ioutil.ReadFile(filepath.Join(root, "static/js/page.js"))
+	if err != nil {
+		return fmt.Errorf("couldn't open static/js/page.js: %v", err)
+	}
+	s := string(f)
+	s = strings.ReplaceAll(s, "{{.SocketAddr}}", socketAddr)
+	s = strings.ReplaceAll(s, "{{.Transport}}", transport)
+	b.WriteString(s)
 
 	http.HandleFunc("/script.js", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-type", "application/javascript")

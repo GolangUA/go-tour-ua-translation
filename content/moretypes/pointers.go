@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -7,12 +7,12 @@ import "fmt"
 func main() {
 	i, j := 42, 2701
 
-	p := &i         // вказівник на i
-	fmt.Println(*p) // читання i через вказівник
-	*p = 21         // задати i через вказівник
-	fmt.Println(i)  // вивести нове значення i
+	p := &i         // point to i
+	fmt.Println(*p) // read i through the pointer
+	*p = 21         // set i through the pointer
+	fmt.Println(i)  // see the new value of i
 
-	p = &j         // вказівник на j
-	*p = *p / 37   // ділення j через вказівник
-	fmt.Println(j) // вивести нове значення j
+	p = &j         // point to j
+	*p = *p / 37   // divide j through the pointer
+	fmt.Println(j) // see the new value of j
 }

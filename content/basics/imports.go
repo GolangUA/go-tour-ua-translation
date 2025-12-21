@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -9,5 +8,5 @@ import (
 )
 
 func main() {
-	fmt.Printf("Тепер ви маєте %g проблем.\n", math.Sqrt(7))
+	fmt.Printf("Now you have %g problems.\n", math.Sqrt(7))
 }

@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -10,7 +9,8 @@ import (
 )
 
 func main() {
-	r := strings.NewReader("Привіт, Reader!")
+	r := strings.NewReader("Hello, Reader!")
+
 	b := make([]byte, 8)
 	for {
 		n, err := r.Read(b)

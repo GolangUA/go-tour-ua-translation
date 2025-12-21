@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -7,17 +7,17 @@ import (
 )
 
 type Fetcher interface {
-	// Fetch повертає тіло сторінки `body` отриманої за адресою `url`
-	// та зріз `urls` з усіма адресами які були знайдені на сторінці.
+	// Fetch returns the body of URL and
+	// a slice of URLs found on that page.
 	Fetch(url string) (body string, urls []string, err error)
 }
 
-// Crawl використовує переданий fetcher щоб рекурсивно пройти
-// по всім сторінкам починаючи з адреси `url`, до максимальної глибини `depth`.
+// Crawl uses fetcher to recursively crawl
+// pages starting with url, to a maximum of depth.
 func Crawl(url string, depth int, fetcher Fetcher) {
-	// TODO: Отримати сторінки для вкладених адрес паралельно.
-	// TODO: Не отримувати сторінку з тією ж адресою двічі.
-	// Наступне рішення не робить ні те ні інше:
+	// TODO: Fetch URLs in parallel.
+	// TODO: Don't fetch the same URL twice.
+	// This implementation doesn't do either:
 	if depth <= 0 {
 		return
 	}
@@ -26,7 +26,7 @@ func Crawl(url string, depth int, fetcher Fetcher) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("знайдено: %s %q\n", url, body)
+	fmt.Printf("found: %s %q\n", url, body)
 	for _, u := range urls {
 		Crawl(u, depth-1, fetcher)
 	}
@@ -37,7 +37,7 @@ func main() {
 	Crawl("https://golang.org/", 4, fetcher)
 }
 
-// fakeFetcher це Fetcher який повертає заздалегідь створені данні.
+// fakeFetcher is Fetcher that returns canned results.
 type fakeFetcher map[string]*fakeResult
 
 type fakeResult struct {
@@ -49,10 +49,10 @@ func (f fakeFetcher) Fetch(url string) (string, []string, error) {
 	if res, ok := f[url]; ok {
 		return res.body, res.urls, nil
 	}
-	return "", nil, fmt.Errorf("не знайдено: %s", url)
+	return "", nil, fmt.Errorf("not found: %s", url)
 }
 
-// fetcher це заповнена структура fakeFetcher.
+// fetcher is a populated fakeFetcher.
 var fetcher = fakeFetcher{
 	"https://golang.org/": &fakeResult{
 		"The Go Programming Language",

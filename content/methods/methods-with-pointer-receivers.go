@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -22,7 +22,7 @@ func (v *Vertex) Abs() float64 {
 
 func main() {
 	v := &Vertex{3, 4}
-	fmt.Printf("Перед масштабуванням: %+v, Abs: %v\n", v, v.Abs())
+	fmt.Printf("Before scaling: %+v, Abs: %v\n", v, v.Abs())
 	v.Scale(5)
-	fmt.Printf("Після масштабування: %+v, Abs: %v\n", v, v.Abs())
+	fmt.Printf("After scaling: %+v, Abs: %v\n", v, v.Abs())
 }

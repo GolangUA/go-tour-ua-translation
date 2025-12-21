@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -8,14 +8,14 @@ import (
 )
 
 func main() {
-	// Створення дошки для гри в хрестики-нулики.
+	// Create a tic-tac-toe board.
 	board := [][]string{
 		[]string{"_", "_", "_"},
 		[]string{"_", "_", "_"},
 		[]string{"_", "_", "_"},
 	}
 
-	// Гравці ходять по черзі.
+	// The players take turns.
 	board[0][0] = "X"
 	board[2][2] = "O"
 	board[1][2] = "X"

@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -10,11 +10,11 @@ type Person struct {
 }
 
 func (p Person) String() string {
-	return fmt.Sprintf("%v (%v років)", p.Name, p.Age)
+	return fmt.Sprintf("%v (%v years)", p.Name, p.Age)
 }
 
 func main() {
-	a := Person{"Нестор Махно", 45}
-	z := Person{"Леся Українка", 42}
+	a := Person{"Arthur Dent", 42}
+	z := Person{"Zaphod Beeblebrox", 9001}
 	fmt.Println(a, z)
 }

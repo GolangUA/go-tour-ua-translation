@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -28,7 +28,7 @@ func main() {
 	describe(i)
 	i.M()
 
-	i = &T{"Вітаю!"}
+	i = &T{"hello"}
 	describe(i)
 	i.M()
 }
