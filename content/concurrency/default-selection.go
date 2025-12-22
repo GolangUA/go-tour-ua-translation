@@ -17,12 +17,12 @@ func main() {
 	for {
 		select {
 		case <-tick:
-			fmt.Printf("[%6s] tick.\n", elapsed())
+			fmt.Printf("[%6s] цок.\n", elapsed())
 		case <-boom:
-			fmt.Printf("[%6s] BOOM!\n", elapsed())
+			fmt.Printf("[%6s] БАЦ!\n", elapsed())
 			return
 		default:
-			fmt.Printf("[%6s]     .\n", elapsed())
+			fmt.Printf("[%6s]     чекання.\n", elapsed())
 			time.Sleep(50 * time.Millisecond)
 		}
 	}

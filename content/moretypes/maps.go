@@ -11,9 +11,10 @@ type Vertex struct {
 var m map[string]Vertex
 
 func main() {
+	// Створюємо map і додаємо в неї елемент за ключем-рядком.
 	m = make(map[string]Vertex)
-	m["Bell Labs"] = Vertex{
+	m["Лабораторії Белла"] = Vertex{
 		40.68433, -74.39967,
 	}
-	fmt.Println(m["Bell Labs"])
+	fmt.Println(m["Лабораторії Белла"])
 }

@@ -2,8 +2,8 @@
 
 package main
 
-// List represents a singly-linked list that holds
-// values of any type.
+// List представляє однозв’язний список, що зберігає
+// значення будь-якого типу.
 type List[T any] struct {
 	next *List[T]
 	val  T

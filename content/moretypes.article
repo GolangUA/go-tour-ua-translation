@@ -1,104 +1,100 @@
-More types: structs, slices, and maps.
-Learn how to define types based on existing ones: this lesson covers structs, arrays, slices, and maps.
+Більше типів: struct, slice і map.
+Дізнайтеся, як визначати типи на основі вже існуючих: цей урок охоплює struct, масиви, слайси (`slice`) та мапи (`map`).
 
-The Go Authors
+Автори Go
 https://golang.org
 
 * Pointers
 
-Go has pointers.
-A pointer holds the memory address of a value.
+У Go є вказівники.
+Вказівник зберігає адресу в пам’яті, за якою лежить значення.
 
-The type `*T` is a pointer to a `T` value. Its zero value is `nil`.
+Тип `*T` — це вказівник на значення типу `T`. Його нульове значення — `nil`.
 
 	var p *int
 
-The `&` operator generates a pointer to its operand.
+Оператор `&` створює вказівник на свій операнд.
 
 	i := 42
 	p = &i
 
-The `*` operator denotes the pointer's underlying value.
+Оператор `*` означає значення, на яке вказує вказівник.
 
-	fmt.Println(*p) // read i through the pointer p
-	*p = 21         // set i through the pointer p
+	fmt.Println(*p) // читаємо i через вказівник p
+	*p = 21         // змінюємо i через вказівник p
 
-This is known as "dereferencing" or "indirecting".
+Це називають “розіменуванням” (dereferencing) або “непрямим доступом” (indirecting).
 
-Unlike C, Go has no pointer arithmetic.
+На відміну від C, у Go немає арифметики вказівників.
 
 .play moretypes/pointers.go
 
 * Structs
 
-A `struct` is a collection of fields.
+`struct` — це набір полів.
 
 .play moretypes/structs.go
 
 * Struct Fields
 
-Struct fields are accessed using a dot.
+До полів struct звертаються через крапку.
 
 .play moretypes/struct-fields.go
 
 * Pointers to structs
 
-Struct fields can be accessed through a struct pointer.
+До полів struct можна звертатися і через вказівник на struct.
 
-To access the field `X` of a struct when we have the struct pointer `p` we could
-write `(*p).X`.
-However, that notation is cumbersome, so the language permits us instead to
-write just `p.X`, without the explicit dereference.
+Щоб отримати поле `X` struct через вказівник `p`, можна написати `(*p).X`.
+Але це незручно, тому мова дозволяє писати просто `p.X` — без явного розіменування.
 
 .play moretypes/struct-pointers.go
 
 * Struct Literals
 
-A struct literal denotes a newly allocated struct value by listing the values of its fields.
+Літерал struct задає нове значення struct, перелічуючи значення його полів.
 
-You can list just a subset of fields by using the `Name:` syntax. (And the order of named fields is irrelevant.)
+Можна вказати лише частину полів за допомогою синтаксису `Name:`. (Порядок іменованих полів неважливий.)
 
-The special prefix `&` returns a pointer to the struct value.
+Спеціальний префікс `&` повертає вказівник на значення struct.
 
 .play moretypes/struct-literals.go
 
 
 * Arrays
 
-The type `[n]T` is an array of `n` values of type `T`.
+Тип `[n]T` — це масив із `n` значень типу `T`.
 
-The expression
+Вираз
 
 	var a [10]int
 
-declares a variable `a` as an array of ten integers.
+оголошує змінну `a` як масив із десяти цілих чисел.
 
-An array's length is part of its type, so arrays cannot be resized.
-This seems limiting, but don't worry;
-Go provides a convenient way of working with arrays.
+Довжина масиву є частиною його типу, тому масиви не можна змінювати за розміром.
+Це може здаватися обмеженням, але не хвилюйтеся:
+у Go є зручний спосіб працювати з масивами.
 
 .play moretypes/array.go
 
 
 * Slices
 
-An array has a fixed size.
-A slice, on the other hand, is a dynamically-sized,
-flexible view into the elements of an array.
-In practice, slices are much more common than arrays.
+Масив має фіксований розмір.
+Слайс (`slice`) — це динамічний, гнучкий “вид” на елементи масиву.
+На практиці `slice` трапляються значно частіше за масиви.
 
-The type `[]T` is a slice with elements of type `T`.
+Тип `[]T` — це `slice` з елементами типу `T`.
 
-A slice is formed by specifying two indices, a low and
-high bound, separated by a colon:
+`slice` утворюють, задаючи два індекси — нижню (low) та верхню (high) межі,
+розділені двокрапкою:
 
 	a[low : high]
 
-This selects a half-open range which includes the first
-element, but excludes the last one.
+Це вибирає напіввідкритий діапазон: він включає перший елемент,
+але не включає останній.
 
-The following expression creates a slice which includes
-elements 1 through 3 of `a`:
+Наступний вираз створює `slice`, який містить елементи `a` з 1 по 3:
 
 	a[1:4]
 
@@ -107,27 +103,25 @@ elements 1 through 3 of `a`:
 
 * Slices are like references to arrays
 
-A slice does not store any data,
-it just describes a section of an underlying array.
+`slice` не зберігає дані,
+він лише описує ділянку базового (underlying) масиву.
 
-Changing the elements of a slice modifies the
-corresponding elements of its underlying array.
+Зміна елементів `slice` змінює відповідні елементи його базового масиву.
 
-Other slices that share the same underlying array will see those changes.
+Інші `slice`, які поділяють той самий базовий масив, побачать ці зміни.
 
 .play moretypes/slices-pointers.go
 
 
 * Slice literals
 
-A slice literal is like an array literal without the length.
+Літерал `slice` схожий на літерал масиву, але без довжини.
 
-This is an array literal:
+Ось літерал масиву:
 
 	[3]bool{true, true, false}
 
-And this creates the same array as above,
-then builds a slice that references it:
+А цей вираз створює такий самий масив, а потім будує `slice`, який посилається на нього:
 
 	[]bool{true, true, false}
 
@@ -136,15 +130,15 @@ then builds a slice that references it:
 
 * Slice defaults
 
-When slicing, you may omit the high or low bounds to use their defaults instead.
+Під час нарізання можна пропускати верхню або нижню межу, використовуючи значення за замовчуванням.
 
-The default is zero for the low bound and the length of the slice for the high bound.
+За замовчуванням нижня межа дорівнює нулю, а верхня — довжині `slice`.
 
-For the array
+Для масиву
 
 	var a [10]int
 
-these slice expressions are equivalent:
+ці вирази рівнозначні:
 
 	a[0:10]
 	a[:10]
@@ -156,45 +150,44 @@ these slice expressions are equivalent:
 
 * Slice length and capacity
 
-A slice has both a _length_ and a _capacity_.
+`slice` має і _довжину_ (length), і _місткість_ (capacity).
 
-The length of a slice is the number of elements it contains.
+Довжина `slice` — це кількість елементів, які він містить.
 
-The capacity of a slice is the number of elements in the underlying array,
-counting from the first element in the slice.
+Місткість `slice` — це кількість елементів у базовому масиві,
+починаючи з першого елемента `slice`.
 
-The length and capacity of a slice `s` can be obtained using the expressions
-`len(s)` and `cap(s)`.
+Довжину й місткість `slice` `s` можна отримати виразами `len(s)` і `cap(s)`.
 
-You can extend a slice's length by re-slicing it,
-provided it has sufficient capacity.
-Try changing one of the slice operations in the example program to extend it
-beyond its capacity and see what happens.
+Можна збільшити довжину `slice`, повторно “нарізавши” його,
+якщо в нього достатньо місткості.
+Спробуйте змінити одну з операцій нарізання в прикладі, щоб розширити `slice`
+поза його місткість, і подивіться, що станеться.
 
 .play moretypes/slice-len-cap.go
 
 
 * Nil slices
 
-The zero value of a slice is `nil`.
+Нульове значення `slice` — `nil`.
 
-A nil slice has a length and capacity of 0
-and has no underlying array.
+`nil`-`slice` має довжину і місткість 0
+і не має базового масиву.
 
 .play moretypes/nil-slices.go
 
 
 * Creating a slice with make
 
-Slices can be created with the built-in `make` function;
-this is how you create dynamically-sized arrays.
+`slice` можна створювати вбудованою функцією `make`;
+так зазвичай створюють динамічні масиви.
 
-The `make` function allocates a zeroed array
-and returns a slice that refers to that array:
+`make` виділяє нульовий (zeroed) масив
+і повертає `slice`, який посилається на цей масив:
 
 	a := make([]int, 5)  // len(a)=5
 
-To specify a capacity, pass a third argument to `make`:
+Щоб задати місткість, передайте третій аргумент у `make`:
 
 	b := make([]int, 0, 5) // len(b)=0, cap(b)=5
 
@@ -206,51 +199,49 @@ To specify a capacity, pass a third argument to `make`:
 
 * Slices of slices
 
-Slices can contain any type, including other slices.
+`slice` може містити будь-який тип, зокрема й інші `slice`.
 
 .play moretypes/slices-of-slice.go
 
 
 * Appending to a slice
 
-It is common to append new elements to a slice, and so Go provides a built-in
-`append` function. The [[https://golang.org/pkg/builtin/#append][documentation]]
-of the built-in package describes `append`.
+Часто потрібно додавати нові елементи в `slice`, тому в Go є вбудована функція `append`.
+Опис `append` наведено в [[https://golang.org/pkg/builtin/#append][документації]] до built-in пакета.
 
 	func append(s []T, vs ...T) []T
 
-The first parameter `s` of `append` is a slice of type `T`, and the rest are
-`T` values to append to the slice.
+Перший параметр `s` функції `append` — це `slice` типу `T`, а решта — значення типу `T`,
+які потрібно додати в `slice`.
 
-The resulting value of `append` is a slice containing all the elements of the
-original slice plus the provided values.
+Результат `append` — це `slice`, який містить усі елементи вихідного `slice`,
+плюс додані значення.
 
-If the backing array of `s` is too small to fit all the given values a bigger
-array will be allocated. The returned slice will point to the newly allocated
-array.
+Якщо базовий масив `s` замалий, щоб умістити всі додані значення, буде виділено більший масив.
+Повернений `slice` посилатиметься на щойно виділений масив.
 
-(To learn more about slices, read the [[https://golang.org/blog/go-slices-usage-and-internals][Slices: usage and internals]] article.)
+(Щоб дізнатися більше про `slice`, прочитайте статтю [[https://golang.org/blog/go-slices-usage-and-internals][Slices: usage and internals]].)
 
 .play moretypes/append.go
 
 
 * Range
 
-The `range` form of the `for` loop iterates over a slice or map.
+Форма `range` циклу `for` ітерується по `slice` або `map`.
 
-When ranging over a slice, two values are returned for each iteration.
-The first is the index, and the second is a copy of the element at that index.
+Під час ітерації по `slice` на кожному кроці повертаються два значення.
+Перше — індекс, друге — копія елемента за цим індексом.
 
 .play moretypes/range.go
 
 * Range continued
 
-You can skip the index or value by assigning to `_`.
+Можна пропустити індекс або значення, присвоївши їх у `_`.
 
     for i, _ := range pow
     for _, value := range pow
 
-If you only want the index, you can omit the second variable.
+Якщо вам потрібен лише індекс, можна пропустити другу змінну.
 
     for i := range pow
 
@@ -258,63 +249,63 @@ If you only want the index, you can omit the second variable.
 
 * Exercise: Slices
 
-Implement `Pic`. It should return a slice of length `dy`, each element of which is a slice of `dx` 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+Реалізуйте `Pic`. Вона має повернути `slice` довжини `dy`, кожен елемент якого — це `slice` з `dx` 8-бітних беззнакових цілих чисел. Коли ви запустите програму, вона покаже ваше зображення, інтерпретуючи числа як значення шкали сірого (ну, скоріше — синього).
 
-The choice of image is up to you. Interesting functions include `(x+y)/2`, `x*y`, and `x^y`.
+Яке саме зображення будувати — вирішувати вам. Цікавими можуть бути функції `(x+y)/2`, `x*y` та `x^y`.
 
-(You need to use a loop to allocate each `[]uint8` inside the `[][]uint8`.)
+(Вам потрібно використати цикл, щоб виділити кожен `[]uint8` усередині `[][]uint8`.)
 
-(Use `uint8(intValue)` to convert between types.)
+(Використовуйте `uint8(intValue)`, щоб перетворювати значення між типами.)
 
 .play moretypes/exercise-slices.go
 
 * Maps
 
-A map maps keys to values.
+`map` відображає ключі на значення.
 
-The zero value of a map is `nil`.
-A `nil` map has no keys, nor can keys be added.
+Нульове значення `map` — `nil`.
+`nil`-`map` не має ключів, і в неї не можна додавати значення.
 
-The `make` function returns a map of the given type,
-initialized and ready for use.
+Функція `make` повертає `map` потрібного типу,
+ініціалізовану й готову до використання.
 
 .play moretypes/maps.go
 
 * Map literals
 
-Map literals are like struct literals, but the keys are required.
+Літерали `map` схожі на літерали struct, але ключі є обов’язковими.
 
 .play moretypes/map-literals.go
 
 * Map literals continued
 
-If the top-level type is just a type name, you can omit it from the elements of the literal.
+Якщо тип верхнього рівня — це просто назва типу, її можна пропустити для елементів літерала.
 
 .play moretypes/map-literals-continued.go
 
 * Mutating Maps
 
-Insert or update an element in map `m`:
+Додайте або оновіть елемент у `map` `m`:
 
 	m[key] = elem
 
-Retrieve an element:
+Отримайте елемент:
 
 	elem = m[key]
 
-Delete an element:
+Видаліть елемент:
 
 	delete(m, key)
 
-Test that a key is present with a two-value assignment:
+Перевірте, чи є ключ, за допомогою присвоєння з двома значеннями:
 
 	elem, ok = m[key]
 
-If `key` is in `m`, `ok` is `true`. If not, `ok` is `false`.
+Якщо `key` є в `m`, то `ok` дорівнює `true`. Якщо ні — `ok` дорівнює `false`.
 
-If `key` is not in the map, then `elem` is the zero value for the map's element type.
+Якщо `key` немає в `map`, тоді `elem` матиме нульове значення для типу елемента цієї `map`.
 
-*Note:* If `elem` or `ok` have not yet been declared you could use a short declaration form:
+*Примітка:* Якщо `elem` або `ok` ще не були оголошені, можна використати коротке оголошення:
 
 	elem, ok := m[key]
 
@@ -322,40 +313,40 @@ If `key` is not in the map, then `elem` is the zero value for the map's element 
 
 * Exercise: Maps
 
-Implement `WordCount`.  It should return a map of the counts of each “word” in the string `s`. The `wc.Test` function runs a test suite against the provided function and prints success or failure.
+Реалізуйте `WordCount`. Вона має повернути `map` з кількістю входжень кожного “слова” в рядку `s`. Функція `wc.Test` запускає набір тестів для вашої функції й виводить успіх або помилку.
 
-You might find [[https://golang.org/pkg/strings/#Fields][strings.Fields]] helpful.
+Може стати у пригоді [[https://golang.org/pkg/strings/#Fields][strings.Fields]].
 
 .play moretypes/exercise-maps.go
 
 * Function values
 
-Functions are values too. They can be passed around just like other values.
+Функції — це теж значення. Їх можна передавати так само, як і будь-які інші значення.
 
-Function values may be used as function arguments and return values.
+Function values можна використовувати як аргументи функцій і як повернені значення.
 
 .play moretypes/function-values.go
 
 * Function closures
 
-Go functions may be closures. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+Функції в Go можуть бути замиканнями (closures). Замикання — це значення-функція, яке посилається на змінні поза тілом функції. Функція може читати й змінювати ці змінні; у цьому сенсі кажуть, що функція “прив’язана” (bound) до змінних.
 
-For example, the `adder` function returns a closure. Each closure is bound to its own `sum` variable.
+Наприклад, функція `adder` повертає замикання. Кожне замикання “прив’язане” до власної змінної `sum`.
 
 .play moretypes/function-closures.go
 
 * Exercise: Fibonacci closure
 
-Let's have some fun with functions.
+Трохи розважимося з функціями.
 
-Implement a `fibonacci` function that returns a function (a closure) that
-returns successive [[https://en.wikipedia.org/wiki/Fibonacci_number][fibonacci numbers]]
+Реалізуйте `fibonacci`, яка повертає функцію (замикання), що
+повертає послідовні [[https://en.wikipedia.org/wiki/Fibonacci_number][числа Фібоначчі]]
 (0, 1, 1, 2, 3, 5, ...).
 
 .play moretypes/exercise-fibonacci-closure.go
 
-* Congratulations!
+* Вітаємо!
 
-You finished this lesson!
+Ви завершили цей урок!
 
-You can go back to the list of [[/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].
+Ви можете повернутися до списку [[/list][модулів]], щоб вибрати, що вивчати далі, або продовжити з [[javascript:click('.next-page')][наступним уроком]].

@@ -8,19 +8,19 @@ func main() {
 	s := []int{2, 3, 5, 7, 11, 13}
 	printSlice(s)
 
-	// Slice the slice to give it zero length.
+	// Обріжемо слайс до нульової довжини.
 	s = s[:0]
 	printSlice(s)
 
-	// Extend its length.
+	// Розширимо його довжину.
 	s = s[:4]
 	printSlice(s)
 
-	// Drop its first two values.
+	// Відкинемо перші два значення.
 	s = s[2:]
 	printSlice(s)
 }
 
 func printSlice(s []int) {
-	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+	fmt.Printf("довжина=%d місткість=%d %v\n", len(s), cap(s), s)
 }

@@ -8,24 +8,24 @@ import (
 	"time"
 )
 
-// SafeCounter is safe to use concurrently.
+// SafeCounter безпечний для одночасного використання.
 type SafeCounter struct {
 	mu sync.Mutex
 	v  map[string]int
 }
 
-// Inc increments the counter for the given key.
+// Inc збільшує лічильник для вказаного ключа.
 func (c *SafeCounter) Inc(key string) {
 	c.mu.Lock()
-	// Lock so only one goroutine at a time can access the map c.v.
+	// Блокування: лише одна ґорутина одночасно може працювати з map c.v.
 	c.v[key]++
 	c.mu.Unlock()
 }
 
-// Value returns the current value of the counter for the given key.
+// Value повертає поточне значення лічильника для вказаного ключа.
 func (c *SafeCounter) Value(key string) int {
 	c.mu.Lock()
-	// Lock so only one goroutine at a time can access the map c.v.
+	// Блокування: лише одна ґорутина одночасно може працювати з map c.v.
 	defer c.mu.Unlock()
 	return c.v[key]
 }
@@ -37,5 +37,5 @@ func main() {
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println(c.Value("somekey"))
+	fmt.Println("Значення для somekey:", c.Value("somekey"))
 }

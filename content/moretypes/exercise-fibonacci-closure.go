@@ -4,9 +4,10 @@ package main
 
 import "fmt"
 
-// fibonacci is a function that returns
-// a function that returns an int.
+// fibonacci — функція, яка повертає
+// функцію, що повертає int.
 func fibonacci() func() int {
+	// TODO: реалізуйте замикання, яке генерує послідовність Фібоначчі.
 }
 
 func main() {

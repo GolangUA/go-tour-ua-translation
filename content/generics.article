@@ -1,42 +1,33 @@
 Generics
-Go supports generic programming using type parameters. This lesson shows some examples for employing generics in your code.
+Go підтримує узагальнене програмування за допомогою параметрів типів. У цьому уроці показано приклади використання дженериків у вашому коді.
 
 The Go Authors
 https://golang.org
 
 * Type parameters
 
-Go functions can be written to work on multiple types using type parameters. The
-type parameters of a function appear between brackets, before the function's
-arguments.
+Функції Go можна писати так, щоб вони працювали з кількома типами, використовуючи параметри типів. Параметри типів функції вказуються в дужках перед аргументами функції.
 
   func Index[T comparable](s []T, x T) int
 
-This declaration means that `s` is a slice of any type `T` that fulfills the
-built-in constraint `comparable`. `x` is also a value of the same type.
+Це оголошення означає, що `s` — зріз будь-якого типу `T`, який задовольняє вбудоване обмеження `comparable`. `x` також є значенням того самого типу.
 
-`comparable` is a useful constraint that makes it possible to use the `==` and
-`!=` operators on values of the type. In this example, we use it to compare a
-value to all slice elements until a match is found. This `Index` function works
-for any type that supports comparison.
+`comparable` — корисне обмеження, що дозволяє використовувати оператори `==` та `!=` для значень цього типу. У цьому прикладі ми використовуємо його, щоб порівнювати значення з усіма елементами зрізу, доки не знайдемо збіг. Функція `Index` працює для будь-якого типу, що підтримує порівняння.
 
 .play generics/index.go
 
 * Generic types
 
-In addition to generic functions, Go also supports generic types. A type can
-be parameterized with a type parameter, which could be useful for implementing
-generic data structures.
+Окрім узагальнених функцій, Go підтримує й узагальнені типи. Тип можна параметризувати параметром типу, що корисно для реалізації узагальнених структур даних.
 
-This example demonstrates a simple type declaration for a singly-linked list
-holding any type of value.
+У цьому прикладі продемонстровано просте оголошення типу для однозв’язного списку, який зберігає значення будь-якого типу.
 
-As an exercise, add some functionality to this list implementation.
+Як вправу, додайте функціональність до цієї реалізації списку.
 
 .play generics/list.go
 
 * Congratulations!
 
-You finished this lesson!
+Ви завершили цей урок!
 
-You can go back to the list of [[/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].
+Можете повернутися до списку [[/list][модулів]], щоб вибрати наступну тему, або продовжити з [[javascript:click('.next-page')][наступним уроком]].

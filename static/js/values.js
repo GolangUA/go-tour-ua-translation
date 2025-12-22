@@ -10,70 +10,71 @@ angular
   .value("tableOfContents", [
     {
       id: "mechanics",
-      title: "Using the tour",
+      title: "Як користуватися туром",
       description:
-        '<p>Welcome to a tour of the <a href="https://go.dev">Go programming language</a>. The tour covers the most important features of the language, mainly:</p>',
+        '<p>Ласкаво просимо до туру мовою програмування <a href="https://go.dev">Go</a>. У турі розглядаються найважливіші можливості мови, зокрема:</p>',
       lessons: ["welcome"],
     },
     {
       id: "basics",
-      title: "Basics",
+      title: "Основи",
       description:
-        "<p>The starting point, learn all the basics of the language.</p><p>Declaring variables, calling functions, and all the things you need to know before moving to the next lessons.</p>",
+        "<p>Стартова точка: вивчіть базові речі про мову.</p><p>Оголошення змінних, виклик функцій та все, що потрібно знати перед тим, як переходити до наступних уроків.</p>",
       lessons: ["basics", "flowcontrol", "moretypes"],
     },
     {
       id: "methods",
-      title: "Methods and interfaces",
+      title: "Методи та інтерфейси",
       description:
-        "<p>Learn how to define methods on types, how to declare interfaces, and how to put everything together.</p>",
+        "<p>Дізнайтеся, як визначати методи для типів, як оголошувати інтерфейси та як поєднувати все це разом.</p>",
       lessons: ["methods"],
     },
     {
       id: "generics",
-      title: "Generics",
+      title: "Дженеріки",
       description:
-        "<p>Learn how to use type parameters in Go functions and structs.</p>",
+        "<p>Дізнайтеся, як використовувати параметри типів у функціях і структурах Go.</p>",
       lessons: ["generics"],
     },
     {
       id: "concurrency",
-      title: "Concurrency",
+      title: "Конкурентність",
       description:
-        "<p>Go provides concurrency features as part of the core language.</p><p>This module goes over goroutines and channels, and how they are used to implement different concurrency patterns.</p>",
+        "<p>Go надає можливості конкурентності як частину ядра мови.</p><p>У цьому модулі розглядаються goroutine і канали, а також те, як їх використовують для реалізації різних шаблонів конкурентності.</p>",
       lessons: ["concurrency"],
     },
   ])
   // translation
   .value("translation", {
-    off: "off",
-    on: "on",
-    syntax: "Syntax-Highlighting",
-    lineno: "Line-Numbers",
-    reset: "Reset Slide",
-    format: "Format Source Code",
-    kill: "Kill Program",
-    run: "Run",
-    compile: "Compile and Run",
-    more: "Options",
-    toc: "Table of Contents",
-    prev: "Previous",
-    next: "Next",
-    waiting: "Waiting for remote server...",
-    errcomm: "Error communicating with remote server.",
-    "submit-feedback": "Send feedback about this page",
+    off: "вимк",
+    on: "увімк",
+    syntax: "Підсвічування синтаксису",
+    lineno: "Номери рядків",
+    reset: "Скинути слайд",
+    format: "Форматувати код",
+    kill: "Зупинити програму",
+    run: "Запустити",
+    compile: "Скомпілювати і запустити",
+    more: "Параметри",
+    toc: "Зміст",
+    prev: "Попередня",
+    next: "Наступна",
+    waiting: "Очікування відповіді від віддаленого сервера…",
+    errcomm: "Помилка зв’язку з віддаленим сервером.",
+    "submit-feedback": "Надіслати відгук про цю сторінку",
 
     // GitHub issue template: update repo and messaging when translating.
     // If a custom-feedback-url is set, it takes higher precedence over other fields.
-    'custom-feedback-url': '/doc/contribute#check_tracker',
-    'github-repo': 'github.com/golang/go',
-    'issue-title': 'x/website/_content/tour: [REPLACE WITH SHORT DESCRIPTION]',
-    'issue-message': 'Change the title above to describe your issue and add your feedback here, including code if necessary',
-    'context': 'Context',
-}).
-
-// Config for codemirror plugin
-value('ui.config', {
+    "custom-feedback-url":
+      "https://github.com/GolangUA/go-tour-ua-translation/issues/new",
+    "github-repo": "github.com/golang/go",
+    "issue-title": "x/website/_content/tour: [ЗАМІНІТЬ НА КОРОТКИЙ ОПИС]",
+    "issue-message":
+      "Змініть заголовок вище, опишіть проблему та додайте відгук тут (за потреби додайте код)",
+    context: "Контекст",
+  })
+  // Config for codemirror plugin
+  .value("ui.config", {
     codemirror: {
       mode: "text/x-go",
       matchBrackets: true,

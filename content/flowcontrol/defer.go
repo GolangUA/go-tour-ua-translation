@@ -5,7 +5,8 @@ package main
 import "fmt"
 
 func main() {
-	defer fmt.Println("world")
+	// Інструкція `defer` відкладає виконання виклику до моменту, коли поточна функція завершиться.
+	defer fmt.Println("світе")
 
-	fmt.Println("hello")
+	fmt.Println("привіт")
 }

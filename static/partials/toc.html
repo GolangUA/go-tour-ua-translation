@@ -19,7 +19,7 @@
                             ng-class="{active: l==params.lessonId && $index+1==params.pageNumber}"
                         >
                             <a
-                                href="/{{l}}/{{$index+1}}"
+                                ng-href="/{{l}}/{{$index+1}}"
                                 ng-click="hideTOC(true)"
                                 >{{p.Title}}</a
                             >

@@ -6,10 +6,10 @@ import "fmt"
 
 func main() {
 	names := [4]string{
-		"John",
-		"Paul",
-		"George",
-		"Ringo",
+		"Іван",
+		"Павло",
+		"Георгій",
+		"Рінго",
 	}
 	fmt.Println(names)
 
@@ -17,7 +17,7 @@ func main() {
 	b := names[1:3]
 	fmt.Println(a, b)
 
-	b[0] = "XXX"
+	b[0] = "ХХХ"
 	fmt.Println(a, b)
 	fmt.Println(names)
 }

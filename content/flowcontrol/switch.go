@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Print("Go runs on ")
+	fmt.Print("Go працює на ")
 	switch os := runtime.GOOS; os {
 	case "darwin":
 		fmt.Println("macOS.")
@@ -17,6 +17,7 @@ func main() {
 	default:
 		// freebsd, openbsd,
 		// plan9, windows...
+		// (та інші)
 		fmt.Printf("%s.\n", os)
 	}
 }

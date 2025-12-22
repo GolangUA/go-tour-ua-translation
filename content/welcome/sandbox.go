@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	fmt.Println("Welcome to the playground!")
+	// Виводимо привітання і поточний час.
+	fmt.Println("Вітаємо в Playground!")
 
-	fmt.Println("The time is", time.Now())
+	fmt.Println("Час:", time.Now())
 }

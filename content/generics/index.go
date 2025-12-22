@@ -4,11 +4,11 @@ package main
 
 import "fmt"
 
-// Index returns the index of x in s, or -1 if not found.
+// Index повертає індекс x у s або -1, якщо не знайдено.
 func Index[T comparable](s []T, x T) int {
 	for i, v := range s {
-		// v and x are type T, which has the comparable
-		// constraint, so we can use == here.
+		// v і x мають тип T з обмеженням comparable,
+		// тож можна використовувати оператор ==.
 		if v == x {
 			return i
 		}
@@ -17,11 +17,11 @@ func Index[T comparable](s []T, x T) int {
 }
 
 func main() {
-	// Index works on a slice of ints
+	// Index працює зі зрізом int
 	si := []int{10, 20, 15, -10}
 	fmt.Println(Index(si, 15))
 
-	// Index also works on a slice of strings
+	// Index також працює зі зрізом string
 	ss := []string{"foo", "bar", "baz"}
-	fmt.Println(Index(ss, "hello"))
+	fmt.Println(Index(ss, "привіт"))
 }
