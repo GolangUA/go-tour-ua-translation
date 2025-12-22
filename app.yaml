@@ -1,4 +1,4 @@
-runtime: go120
+runtime: go122
 
 default_expiration: "7d"
 
