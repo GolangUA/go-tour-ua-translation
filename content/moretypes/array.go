@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -7,7 +7,7 @@ import "fmt"
 func main() {
 	var a [2]string
 	a[0] = "Привіт"
-	a[1] = "Світ"
+	a[1] = "світе"
 	fmt.Println(a[0], a[1])
 	fmt.Println(a)
 

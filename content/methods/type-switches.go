@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -7,11 +7,11 @@ import "fmt"
 func do(i interface{}) {
 	switch v := i.(type) {
 	case int:
-		fmt.Printf("Подвоюємо %v отримуємо %v\n", v, v*2)
+		fmt.Printf("Двічі %v дорівнює %v\n", v, v*2)
 	case string:
-		fmt.Printf("%q має довжину %v байт\n", v, len(v))
+		fmt.Printf("%q має довжину %v байтів\n", v, len(v))
 	default:
-		fmt.Printf("Нічого не знаю про тип %T!\n", v)
+		fmt.Printf("Не знаю, що це за тип %T!\n", v)
 	}
 }
 

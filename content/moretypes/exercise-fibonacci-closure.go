@@ -1,12 +1,13 @@
-// +build no-build OMIT
+//go:build nobuild || OMIT
 
 package main
 
 import "fmt"
 
-// fibonacci це функція, що повертає
+// fibonacci — функція, яка повертає
 // функцію, що повертає int.
 func fibonacci() func() int {
+	// TODO: реалізуйте замикання, яке генерує послідовність Фібоначчі.
 }
 
 func main() {

@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -13,14 +13,14 @@ type MyError struct {
 }
 
 func (e *MyError) Error() string {
-	return fmt.Sprintf("at %v, %s",
+	return fmt.Sprintf("о %v, %s",
 		e.When, e.What)
 }
 
 func run() error {
 	return &MyError{
 		time.Now(),
-		"Упс, не спрацювало!",
+		"не спрацювало",
 	}
 }
 

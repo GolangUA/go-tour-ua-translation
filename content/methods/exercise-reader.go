@@ -1,4 +1,4 @@
-// +build no-build OMIT
+//go:build nobuild || OMIT
 
 package main
 
@@ -6,7 +6,7 @@ import "golang.org/x/tour/reader"
 
 type MyReader struct{}
 
-// TODO: Створіть функцію-метод Read([]byte) (int, error) для структурного типу MyReader.
+// TODO: Додайте метод Read([]byte) (int, error) до MyReader.
 
 func main() {
 	reader.Validate(MyReader{})

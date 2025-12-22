@@ -58,6 +58,11 @@ func isRoot(path string) bool {
 //
 // TODO: Delete after Go 1.17 is out and we can just use embed; see CL 291849.
 func findRoot() (string, bool) {
+	// Check if the current directory is the root.
+	if isRoot(".") {
+		return ".", true
+	}
+
 	// Try finding the golang.org/x/tour package in the
 	// legacy GOPATH mode workspace or in build list.
 	p, err := build.Import("golang.org/x/tour", "", build.FindOnly)
@@ -149,9 +154,9 @@ func main() {
 func registerStatic(root string) {
 	// Keep these static file handlers in sync with app.yaml.
 	http.Handle("/favicon.ico", http.FileServer(http.Dir(filepath.Join(root, "static", "img"))))
-	static := http.FileServer(http.Dir(root))
-	http.Handle("/content/img/", static)
-	http.Handle("/static/", static)
+	static := http.FileServer(http.Dir(filepath.Join(root, "static")))
+	http.Handle("/static/", http.StripPrefix("/static/", static))
+	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir(filepath.Join(root, "static", "images")))))
 }
 
 // rootHandler returns a handler for all the requests except the ones for lessons.

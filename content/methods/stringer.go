@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -14,7 +14,7 @@ func (p Person) String() string {
 }
 
 func main() {
-	a := Person{"Нестор Махно", 45}
-	z := Person{"Леся Українка", 42}
+	a := Person{"Arthur Dent", 42}
+	z := Person{"Zaphod Beeblebrox", 9001}
 	fmt.Println(a, z)
 }

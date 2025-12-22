@@ -1,105 +1,103 @@
-Огляд туру
-Дізнайтеся, як користуватися цим туром, переміщатися по різних уроках і запускати код.
+Ласкаво просимо!
+Дізнайтеся, як користуватися цим туром: як переходити між різними уроками та як запускати код.
 
 Автори Go
 https://golang.org
 
+* Hello, 世界
 
-* Вітаємо!
+Ласкаво просимо до туру мовою програмування [[/][Go]].
 
-Ласкаво просимо на тур з [[/][мови програмування Go]].
+Тур поділено на модулі. Ви можете відкрити список модулів, натиснувши
+[[javascript:highlight(".logo")][A Tour of Go]] у верхньому лівому куті сторінки.
 
-Тур розділений на модулі, до яких ви можете
-перейти, натиснувши
-[[javascript:highlight(".logo")][A Tour of Go]] у лівому кутку сторінки.
+Також ви можете будь-коли відкрити зміст, натиснувши на [[javascript:highlightAndClick(".nav")][меню]] у верхньому правому куті сторінки.
 
-Ви також можете переглянути зміст у будь-який час, натиснувши на кнопку [[javascript:highlightAndClick(".nav")][Menu]] у верхньому правому куту сторінки.
+Упродовж туру ви побачите слайди та вправи, які потрібно виконати.
 
-Впродовж туру на вас чекає низка слайдів та вправ, які ви маєте виконати.
+Перемикатися між ними можна так:
 
-Перемикати слайди можна за допомогою
+- [[javascript:highlight(".prev-page")]["попередня"]] або `PageUp`, щоб перейти до попередньої сторінки,
 
-- [[javascript:highlight(".prev-page")]["previous"]] або `PageUp`, щоб повернутись на минулий слайд,
+- [[javascript:highlight(".next-page")]["наступна"]] або `PageDown`, щоб перейти до наступної сторінки.
 
-- [[javascript:highlight(".next-page")]["next"]] або `PageDown`, щоб перейти на наступний слайд.
-
-
-Тур - інтерактивний. Натисніть на
-кнопку [[javascript:highlightAndClick("#run")][Run]]
-(або натисніть `Shift` + `Enter`) скомпілювати і запустити програму на
+Тур — інтерактивний. Натисніть кнопку
+[[javascript:highlightAndClick("#run")][Запустити]] зараз
+(або натисніть `Shift` + `Enter`), щоб скомпілювати та запустити програму на
 #appengine: віддаленому сервері.
 вашому комп'ютері.
-Результат відображається під кодом.
+Результат буде показано під кодом.
 
-Ці приклади програм демонструють різні аспекти Go. Програми в турі призначені для того, щоб стати відправною точкою для ваших власних експериментів.
+Ці приклади демонструють різні аспекти Go. Програми в турі — це стартові точки для ваших власних експериментів.
 
-Відредагуйте програму та запустіть її ще раз.
+Змініть програму та запустіть її ще раз.
 
-Коли ви натискаєте на [[javascript:highlightAndClick("#format")][Format]]
-(швидкий доступ: `Ctrl` + `Enter`), текст в редакторі форматується за допомогою
-інструменту [[https://go.dev/cmd/gofmt/][gofmt]]. Ви можете вмикати та вимикати підсвічування синтаксису,
-натиснувши на кнопку [[javascript:highlightAndClick(".syntax-checkbox")][syntax]].
+Коли ви натискаєте [[javascript:highlightAndClick("#format")][Форматувати]]
+(скорочення: `Ctrl` + `Enter`), текст в редакторі форматуються за допомогою інструмента
+[[https://golang.org/cmd/gofmt/][gofmt]]. Ви можете вмикати/вимикати підсвічування синтаксису, натискаючи кнопку
+[[javascript:highlightAndClick(".syntax-checkbox")][Синтаксис]].
 
-Коли будете готові рушати далі, натисніть на кнопку [[javascript:highlightAndClick(".next-page")][right arrow]] нижче або натисніть кнопку `PageDown`.
+Коли будете готові рухатися далі, натисніть [[javascript:highlightAndClick(".next-page")][стрілку праворуч]] унизу або клавішу `PageDown`.
 
 .play welcome/hello.go
 
-* Переклади туру
+* Go local
 
-Цей тур доступний на інших мовах:
+Цей тур доступний іншими мовами:
 
-- [[https://go-tour-br.appspot.com/][Brazilian Portuguese — Português do Brasil]]
-- [[https://go-tour-ca.appspot.com/][Catalan — Català]]
-- [[https://tour.go-zh.org/][Simplified Chinese — 中文（简体）]]
-- [[https://go-tour-cz.appspot.com/][Czech — Česky]]
-- [[https://go.dev/tour/][English - English]]
-- [[https://go-tour-id2.appspot.com/][Indonesian — Bahasa Indonesia]]
-- [[https://go-tour-jp.appspot.com/][Japanese — 日本語]]
-- [[https://go-tour-ko.appspot.com/][Korean — 한국어]]
-- [[https://go-tour-pl1.appspot.com/][Polish — Polski]]
-- [[https://go-tour-th.appspot.com/][Thai — ภาษาไทย]]
+- [[https://go-tour-br.appspot.com/][Бразильська португальська — Português do Brasil]]
+- [[https://go-tour-ca.appspot.com/][Каталанська — Català]]
+- [[https://tour.go-zh.org/][Спрощена китайська — 中文（简体）]]
+- [[https://go-tour-cz.appspot.com/][Чеська — Česky]]
+- [[https://go-tour-id2.appspot.com/][Індонезійська — Bahasa Indonesia]]
+- [[https://go-tour-jp.appspot.com/][Японська — 日本語]]
+- [[https://go-tour-pl1.appspot.com/][Польська — Polski]]
+- [[https://go-tour-lat.appspot.com/][Іспанська — Español]]
+- [[https://go-tour-th.appspot.com/][Тайська — ภาษาไทย]]
+- [[https://go-tour-ua-translation.lm.r.appspot.com/][Українська — Українською]]
 
-Натисніть на кнопку [[javascript:highlightAndClick(".next-page")]["next"]] або `PageDown`, щоб продовжити.
+Натисніть кнопку [[javascript:highlightAndClick(".next-page")]["далі"]], або клавішу `PageDown`, щоб продовжити.
 
-#appengine: * Офлайн режим (за бажанням)
+#appengine: * Go offline (optional)
 #appengine:
-#appengine: Цей тур також доступний як окрема програма, якою ви можете скористатися
-#appengine: без доступу до інтернету. Він збирає та запускає зразки коду на
-#appengine: вашому комп'ютері.
+#appengine: Цей тур також доступний як окрема програма, яку можна використовувати
+#appengine: без доступу до інтернету. Вона компілює та запускає приклади коду на
+#appengine: вашій машині.
 #appengine:
-#appengine: Щоб запустити тур локально, вам потрібно спочатку
-#appengine: [[https://go.dev/doc/install][встановити Go]] а потім виконати:
+#appengine: Щоб запустити тур локально, спершу потрібно
+#appengine: [[https://golang.org/doc/install][встановити Go]], а тоді виконати:
 #appengine:
 #appengine:   go install golang.org/x/website/tour@latest
 #appengine:
-#appengine: Ця команда розмістить бінарний файл `tour` в папці `bin`,
-#appengine: що знаходиться в [[/cmd/go/#hdr-GOPATH_and_Modules][GOPATH]].
-#appengine: Під час запуску програми відкриється веб-браузер, в якому відобразиться
-#appengine: ваша локальна версія туру.
+#appengine: Після цього бінарник `tour` з’явиться у каталозі `bin` вашого
+#appengine: [[https://golang.org/cmd/go/#hdr-GOPATH_and_Modules][GOPATH]].
+#appengine: Коли ви запустите програму `tour`, вона відкриє вебпереглядач з
+#appengine: локальною версією туру.
 #appengine:
-#appengine: Звичайно, ви можете продовжити тур на цьому сайті.
+#appengine: Звісно, ви можете продовжувати проходити тур і на цьому вебсайті.
 
-#appengine: * Майданчик Go
+#appengine: * The Go Playground
 #appengine:
-#appengine: Цей тур створений на базі [[https://play.golang.org/][Go Playground]] -
-#appengine: веб сервісу, що запускається на серверах [[/][golang.org]].
+#appengine: Цей тур побудовано на базі [[https://play.golang.org/][Go Playground]] — вебсервісу,
+#appengine: який працює на серверах [[/][golang.org]].
 #appengine:
-#appengine: Сервіс отримує Go програму, компілює її та запускає в ізольованому середовищі, повертаючи результат.
+#appengine: Сервіс отримує програму Go, компілює, лінкує та запускає її в пісочниці (sandbox),
+#appengine: а потім повертає результат.
 #appengine:
-#appengine: Існують обмеження щодо програм, які можна запускати:
+#appengine: Playground має обмеження на програми, які в ньому можна запускати:
 #appengine:
-#appengine: - Час починається з 2009-11-10 23:00:00 UTC (визначення значення цієї дати залишимо вам як завдання). Це полегшує кешування програм, надаючи їм детермінований (однаковий) результат.
+#appengine: - У Playground час починається з 2009-11-10 23:00:00 UTC (визначити значення цієї дати — вправа для читача). Це полегшує кешування програм, бо їхній вивід стає детермінованим.
 #appengine:
-#appengine: - Існують обмеження на час виконання та використання процесора і пам'яті. Також програма не може отримати доступ до зовнішньої мережі.
+#appengine: - Також є обмеження на час виконання та на використання CPU і пам’яті, а програма не може звертатися до зовнішніх мережевих хостів.
 #appengine:
-#appengine: На майданчику використовується остання стабільна версія Go.
+#appengine: Playground використовує останній стабільний реліз Go.
 #appengine:
-#appengine: Щоб дізнатися більше, прочитайте "[[https://go.dev/blog/playground][Inside the Go Playground]]".
+#appengine: Прочитайте "[[https://golang.org/blog/playground][Inside the Go Playground]]", щоб дізнатися більше.
 #appengine:
 #appengine: .play welcome/sandbox.go
 
-* Вітаємо!
+* Вітаємо
 
 Ви завершили перший модуль туру!
 
-Тепер натисніть [[javascript:highlightAndClick(".logo")][Go Тур]], щоб дізнатися більше про тур, або перейти безпосередньо до [[javascript:click('.next-page')][наступного уроку]].
+Тепер натисніть [[javascript:highlightAndClick(".logo")][A Tour of Go]], щоб побачити, що ще можна вивчити про Go, або одразу перейдіть до [[javascript:click('.next-page')][наступного уроку]].

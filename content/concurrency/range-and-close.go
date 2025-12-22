@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -8,6 +8,7 @@ import (
 
 func fibonacci(n int, c chan int) {
 	x, y := 0, 1
+	// Надсилаємо n чисел Фібоначчі й закриваємо канал після завершення.
 	for i := 0; i < n; i++ {
 		c <- x
 		x, y = y, x+y
@@ -18,6 +19,7 @@ func fibonacci(n int, c chan int) {
 func main() {
 	c := make(chan int, 10)
 	go fibonacci(cap(c), c)
+	// range читає з каналу, доки він не буде закритий.
 	for i := range c {
 		fmt.Println(i)
 	}

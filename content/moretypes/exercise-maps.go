@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -7,6 +7,7 @@ import (
 )
 
 func WordCount(s string) map[string]int {
+	// TODO: поверніть map, де ключі — слова з s, а значення — кількість появ.
 	return map[string]int{"x": 1}
 }
 

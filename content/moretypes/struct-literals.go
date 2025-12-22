@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -10,8 +10,8 @@ type Vertex struct {
 
 var (
 	v1 = Vertex{1, 2}  // має тип Vertex
-	v2 = Vertex{X: 1}  // Y:0 є неявним
-	v3 = Vertex{}      // X:0 та Y:0
+	v2 = Vertex{X: 1}  // Y:0 додається неявно
+	v3 = Vertex{}      // X:0 і Y:0
 	p  = &Vertex{1, 2} // має тип *Vertex
 )
 

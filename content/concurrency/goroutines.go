@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -16,6 +15,6 @@ func say(s string) {
 }
 
 func main() {
-	go say("Привіт")
-	say("світе")
+	go say("світ")
+	say("привіт")
 }

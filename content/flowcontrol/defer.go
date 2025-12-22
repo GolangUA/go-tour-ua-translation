@@ -1,12 +1,12 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
 import "fmt"
 
 func main() {
-	defer fmt.Println("світ")
+	// Інструкція `defer` відкладає виконання виклику до моменту, коли поточна функція завершиться.
+	defer fmt.Println("світе")
 
-	fmt.Println("Привіт")
+	fmt.Println("привіт")
 }

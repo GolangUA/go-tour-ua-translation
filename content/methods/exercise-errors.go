@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -7,6 +7,8 @@ import (
 )
 
 func Sqrt(x float64) (float64, error) {
+	// TODO: реалізуйте Sqrt: для від’ємних x повертайте ErrNegativeSqrt.
+	// Поверніть значення кореня та помилку (nil у випадку успіху).
 	return 0, nil
 }
 

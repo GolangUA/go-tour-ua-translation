@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// Створення дошки для гри в хрестики-нулики.
+	// Створимо поле для гри в хрестики-нулики.
 	board := [][]string{
 		[]string{"_", "_", "_"},
 		[]string{"_", "_", "_"},

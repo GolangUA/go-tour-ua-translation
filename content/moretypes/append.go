@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -8,19 +8,19 @@ func main() {
 	var s []int
 	printSlice(s)
 
-	// append працює на 'nil' зрізах.
+	// append працює з nil-слайсами.
 	s = append(s, 0)
 	printSlice(s)
 
-	//  Зріз росте за потреби.
+	// Слайс збільшується за потреби.
 	s = append(s, 1)
 	printSlice(s)
 
-	// Можна додавати більше одного елемента за раз.
+	// Можна додати більше ніж один елемент за раз.
 	s = append(s, 2, 3, 4)
 	printSlice(s)
 }
 
 func printSlice(s []int) {
-	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+	fmt.Printf("довжина=%d місткість=%d %v\n", len(s), cap(s), s)
 }

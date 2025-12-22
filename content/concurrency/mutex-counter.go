@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -8,24 +8,24 @@ import (
 	"time"
 )
 
-// SafeCounter безпечний для конкурентного використання лічильник.
+// SafeCounter безпечний для одночасного використання.
 type SafeCounter struct {
 	mu sync.Mutex
 	v  map[string]int
 }
 
-// Inc збільшує лічільник для ключа `key`.
+// Inc збільшує лічильник для вказаного ключа.
 func (c *SafeCounter) Inc(key string) {
 	c.mu.Lock()
-	// Lock в цьому місці забезпечує доступ до словника `c.v` лише однієї goroutine за раз.
+	// Блокування: лише одна ґорутина одночасно може працювати з map c.v.
 	c.v[key]++
 	c.mu.Unlock()
 }
 
-// Value повертає поточне значення лічильника для ключа `key`.
+// Value повертає поточне значення лічильника для вказаного ключа.
 func (c *SafeCounter) Value(key string) int {
 	c.mu.Lock()
-	// Lock в цьому місці забезпечує доступ до словника `c.v` лише однієї goroutine за раз.
+	// Блокування: лише одна ґорутина одночасно може працювати з map c.v.
 	defer c.mu.Unlock()
 	return c.v[key]
 }
@@ -33,9 +33,9 @@ func (c *SafeCounter) Value(key string) int {
 func main() {
 	c := SafeCounter{v: make(map[string]int)}
 	for i := 0; i < 1000; i++ {
-		go c.Inc("якийсьключ")
+		go c.Inc("somekey")
 	}
 
 	time.Sleep(time.Second)
-	fmt.Println(c.Value("якийсьключ"))
+	fmt.Println("Значення для somekey:", c.Value("somekey"))
 }

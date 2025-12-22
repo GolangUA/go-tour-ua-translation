@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -10,6 +9,6 @@ func swap(x, y string) (string, string) {
 }
 
 func main() {
-	a, b := swap("Привіт", "світ")
+	a, b := swap("hello", "world")
 	fmt.Println(a, b)
 }

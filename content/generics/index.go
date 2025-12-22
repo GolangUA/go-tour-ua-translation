@@ -1,15 +1,14 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
 import "fmt"
 
-// Index повертає індекс змінної x у слайсі s, або -1 якщо значення х не було знайдено.
+// Index повертає індекс x у s або -1, якщо не знайдено.
 func Index[T comparable](s []T, x T) int {
 	for i, v := range s {
-		// "v" та "x" є параметризованими типами T, які мають обмеження 'comparable',
-		// тож в данному випадку ми можемо використовувати порівняння через ==.
+		// v і x мають тип T з обмеженням comparable,
+		// тож можна використовувати оператор ==.
 		if v == x {
 			return i
 		}
@@ -18,11 +17,11 @@ func Index[T comparable](s []T, x T) int {
 }
 
 func main() {
-	// Index працює зі слайсом типу int
+	// Index працює зі зрізом int
 	si := []int{10, 20, 15, -10}
 	fmt.Println(Index(si, 15))
 
-	// Index також працює зі слайсом типу string
+	// Index також працює зі зрізом string
 	ss := []string{"foo", "bar", "baz"}
-	fmt.Println(Index(ss, "hello"))
+	fmt.Println(Index(ss, "привіт"))
 }

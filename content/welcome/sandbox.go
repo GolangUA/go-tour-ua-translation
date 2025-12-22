@@ -1,5 +1,4 @@
 //go:build OMIT
-// +build OMIT
 
 package main
 
@@ -9,7 +8,8 @@ import (
 )
 
 func main() {
-	fmt.Println("Ласкаво просимо на майданчик!")
+	// Виводимо привітання і поточний час.
+	fmt.Println("Вітаємо в Playground!")
 
-	fmt.Println("Час -", time.Now())
+	fmt.Println("Час:", time.Now())
 }

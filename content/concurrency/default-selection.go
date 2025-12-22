@@ -1,4 +1,4 @@
-// +build OMIT
+//go:build OMIT
 
 package main
 
@@ -8,17 +8,21 @@ import (
 )
 
 func main() {
+	start := time.Now()
 	tick := time.Tick(100 * time.Millisecond)
 	boom := time.After(500 * time.Millisecond)
+	elapsed := func() time.Duration {
+		return time.Since(start).Round(time.Millisecond)
+	}
 	for {
 		select {
 		case <-tick:
-			fmt.Println("клац.")
+			fmt.Printf("[%6s] цок.\n", elapsed())
 		case <-boom:
-			fmt.Println("БАБАХ!")
+			fmt.Printf("[%6s] БАЦ!\n", elapsed())
 			return
 		default:
-			fmt.Println("    .")
+			fmt.Printf("[%6s]     чекання.\n", elapsed())
 			time.Sleep(50 * time.Millisecond)
 		}
 	}
